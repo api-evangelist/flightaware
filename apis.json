@@ -1,0 +1,56 @@
+{
+    "name": "FlightAware",
+    "description": "Best Flight Tracker: Live Tracking Maps, Flight Status, and Airport Delays for airline flights, private\/GA flights, and airports.",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28260-flightaware.jpg",
+    "tags": [
+        "api provider",
+        "have api"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/flightaware\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "FlightAware",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28260-flightaware.jpg",
+            "humanURL": "https:\/\/flightaware.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/flightaware-openapi.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/flightaware"
+        },
+        {
+            "type": "Email",
+            "url": "support@flightaware.com"
+        },
+        {
+            "type": "Email",
+            "url": "contact@flightaware.com"
+        },
+        {
+            "type": "Email",
+            "url": "careers@flightaware.com"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/flightaware"
+        },
+        {
+            "type": "Website",
+            "url": "https:\/\/flightaware.com"
+        }
+    ]
+}
