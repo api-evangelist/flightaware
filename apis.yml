@@ -50,3 +50,8 @@ maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
 specificationVersion: '0.19'
+common:
+  - name: FlightAware - Flight Tracker / Flight Status
+    description: 'null'
+    url: https://www.flightaware.com/
+    type: Website
