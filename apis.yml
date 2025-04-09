@@ -11,9 +11,9 @@ apis:
       - Traffic Control
       - Radar Systems
       - Satellites
-    humanURL: ' https://www.flightaware.com/commercial/data/'
+    humanURL: https://www.flightaware.com/commercial/data/
     properties:
-      - url: ' https://www.flightaware.com/commercial/data/'
+      - url: https://www.flightaware.com/commercial/data/
         type: Documentation
     description: >-
       We offer fully customizable APIs that let you integrate the power of
@@ -32,7 +32,7 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2025-02-24'
-modified: '2025-04-07'
+modified: '2025-04-09'
 position: Consumer
 description: >-
   FlightAware is a global flight tracking and data platform that provides
