@@ -11,12 +11,12 @@ created: '2025-02-24'
 modified: '2026-03-16'
 position: Consumer
 tags:
+  - Aviation
   - Flights
   - Mapping
-  - Aviation
-  - Traffic Control
   - Radar Systems
   - Satellites
+  - Traffic Control
 url: >-
   https://raw.githubusercontent.com/api-evangelist/flightaware/refs/heads/main/apis.yml
 specificationVersion: '0.19'
@@ -24,9 +24,9 @@ apis:
   - aid: flightaware:flightaware
     name: FlightAware
     tags:
+      - Aviation
       - Flights
       - Mapping
-      - Aviation
     humanURL: https://www.flightaware.com/commercial/data/
     properties:
       - url: https://www.flightaware.com/commercial/data/
