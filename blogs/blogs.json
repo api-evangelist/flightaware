@@ -1,0 +1,13 @@
+{
+  "repo": "flightaware",
+  "feeds": [
+    {
+      "source": "https://blog.flightaware.com/",
+      "feed_url": "https://blog.flightaware.com/rss.xml",
+      "saved": 10,
+      "title": "FlightAware Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:27:58Z"
+}
