@@ -94,6 +94,12 @@ common:
     url: https://www.flightaware.com/about/termsofuse
   - type: GitHub
     url: https://github.com/flightaware
+  - type: Integrations
+    url: https://www.flightaware.com/apps
+integrations:
+  - name: FlightAware
+  - name: Small FlightAware airplane
+  - name: FlightAware FlightFeeders side-by-side.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
