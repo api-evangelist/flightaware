@@ -74,6 +74,8 @@ apis:
       - type: ProductPage
         url: https://www.flightaware.com/commercial/firehose/
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/flightaware
   - type: Website
     url: https://www.flightaware.com/
   - type: CommercialData
