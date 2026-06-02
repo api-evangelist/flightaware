@@ -2,12 +2,20 @@
   "repo": "flightaware",
   "feeds": [
     {
-      "source": "https://blog.flightaware.com/",
+      "source": "https://blog.flightaware.com/atom.xml",
       "feed_url": "https://blog.flightaware.com/atom.xml",
-      "title": "FlightAware Blog",
-      "saved": 2
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://www.flightaware.com/commercial/aeroapi/",
+      "feed_url": "https://www.flightaware.com/commercial/aeroapi/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 13,
-  "fetched": "2026-05-17T20:20:35Z"
+  "post_count": 14,
+  "fetched": "2026-06-01T23:35:02Z"
 }
