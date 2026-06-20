@@ -9,7 +9,7 @@ description: >-
   developers and commercial customers through its AeroAPI query-based
   REST API and its Firehose streaming feed.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 position: Consumer
 created: '2025-02-24'
