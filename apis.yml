@@ -74,6 +74,10 @@ apis:
       - type: ProductPage
         url: https://www.flightaware.com/commercial/firehose/
 common:
+  - type: DomainSecurity
+    url: security/flightaware-domain-security.yml
+  - type: Authentication
+    url: authentication/flightaware-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/flightaware
   - type: Website
