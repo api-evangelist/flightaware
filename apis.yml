@@ -9,7 +9,20 @@ description: >-
   developers and commercial customers through its AeroAPI query-based
   REST API and its Firehose streaming feed.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/flightaware.png
 access: 3rd-Party
 position: Consumer
 created: '2025-02-24'
@@ -26,53 +39,236 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/flightaware/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: flightaware:aeroapi
-    name: FlightAware AeroAPI
-    description: >-
-      AeroAPI is FlightAware's query-based REST API for accessing aviation
-      data on demand. It exposes 60+ endpoints across flights, airports,
-      operators, alerts, history, and Foresight predictive analytics, and
-      supports both real-time and historical flight tracking, status,
-      positions, routes, and notifications.
-    humanURL: https://www.flightaware.com/aeroapi/portal/
-    baseURL: https://aeroapi.flightaware.com/aeroapi
-    tags:
-      - Airports
-      - Alerts
-      - Aviation
-      - Flights
-      - Flight Tracking
-      - Foresight
-      - History
-      - Operators
-      - Predictive Analytics
-    properties:
-      - type: Documentation
-        url: https://www.flightaware.com/aeroapi/portal/documentation
-      - type: Portal
-        url: https://www.flightaware.com/aeroapi/portal/
-      - type: Pricing
-        url: https://www.flightaware.com/commercial/aeroapi/
-  - aid: flightaware:firehose
-    name: FlightAware Firehose
-    description: >-
-      Firehose is FlightAware's real-time streaming feed of global flight
-      data, delivering ADS-B, radar, and ATC-derived position, status,
-      and event messages over a persistent TLS connection for
-      enterprise-grade flight tracking, situational awareness, and
-      operations analytics.
-    humanURL: https://www.flightaware.com/commercial/firehose/
-    tags:
-      - ADS-B
-      - Aviation
-      - Flight Tracking
-      - Real-Time
-      - Streaming
-    properties:
-      - type: Documentation
-        url: https://www.flightaware.com/commercial/firehose/documentation
-      - type: ProductPage
-        url: https://www.flightaware.com/commercial/firehose/
+- aid: flightaware:aeroapi
+  name: FlightAware AeroAPI
+  description: >-
+    AeroAPI is FlightAware's query-based REST API for accessing aviation data on demand. It exposes 60+
+    endpoints across flights, airports, operators, alerts, history, and Foresight predictive analytics,
+    and supports both real-time and historical flight tracking, status, positions, routes, and notifications.
+  humanURL: https://www.flightaware.com/aeroapi/portal/
+  baseURL: https://aeroapi.flightaware.com/aeroapi
+  tags:
+  - Airports
+  - Alerts
+  - Aviation
+  - Flights
+  - Flight Tracking
+  - Foresight
+  - History
+  - Operators
+  - Predictive Analytics
+  properties:
+  - type: Documentation
+    url: https://www.flightaware.com/aeroapi/portal/documentation
+  - type: Portal
+    url: https://www.flightaware.com/aeroapi/portal/
+  - type: Pricing
+    url: https://www.flightaware.com/commercial/aeroapi/
+- aid: flightaware:firehose
+  name: FlightAware Firehose
+  description: >-
+    Firehose is FlightAware's real-time streaming feed of global flight data, delivering ADS-B, radar,
+    and ATC-derived position, status, and event messages over a persistent TLS connection for enterprise-grade
+    flight tracking, situational awareness, and operations analytics.
+  humanURL: https://www.flightaware.com/commercial/firehose/
+  tags:
+  - ADS-B
+  - Aviation
+  - Flight Tracking
+  - Real-Time
+  - Streaming
+  properties:
+  - type: Documentation
+    url: https://www.flightaware.com/commercial/firehose/documentation
+  - type: ProductPage
+    url: https://www.flightaware.com/commercial/firehose/
+- aid: flightaware:flightaware-airports-api
+  name: FlightAware airports API
+  description: The airports API from FlightAware — 17 operation(s) for airports.
+  humanURL: https://www.flightaware.com/aeroapi/portal/
+  baseURL: https://aeroapi.flightaware.com/aeroapi
+  tags:
+  - airports
+  properties:
+  - type: OpenAPI
+    url: openapi/flightaware-airports-api-openapi.yml
+- aid: flightaware:flightaware-alerts-api
+  name: FlightAware alerts API
+  description: >-
+    AeroAPI alerting can be used to configure and receive real-time alerts on key flight
+
+    events. With customizable alerting offered by our alert endpoints, AeroAPI empowers
+
+    users to selectively pick various types of events/filters to alert on. By doing so,
+
+    you can receive specially tailored alerts delivered to you for events such as flight plan
+
+    filed, flight departure (out and off), flight arrival (on and in), and more!
+
+
+    To get started with alerting, the **PUT /alerts/endpoint** endpoint must first be used
+
+    to set up the account-wide default URL that alerts will be delivered to. This step must
+
+    be done before any alerts can be configured and will serve as the fallback URL that all
+
+    alerts will be sent to for the account if a specific delivery URL is not designated on a
+
+    particular alert. If this is not performed before configuring alerts, then you will
+
+    receive a 400 error with an error message reminding you of this step when trying to interact
+
+    with the **POST /alerts** endpoint. Once a URL is set via the **PUT /alerts/endpoint** endpoint,
+
+    then alerts can be configured using the **POST /alerts** endpoint. The **GET /alerts** endpoint
+
+    can also be used to retrieve all currently configured alerts associated with your AeroAPI key.
+
+    The **GET /alerts** endpoint will allow you to easily retrieve the id of any specific alerts of
+
+    interest configured for the account which can let you use the **GET** **PUT** and **DELETE**
+
+    **/alerts/{id}** endpoints to retrieve, update, and delete specific alerts.
+
+
+    When configuring an individual alert, the *target_url* field can be set to a URL that’s
+
+    different than the account-wide target endpoint set via the **PUT /alerts/endpoint**. If
+
+    the *target_url* field is set on an alert, then that specific alert will be delivered to
+
+    the specified *target_url* rather than the default account-wide one. If this field is not
+
+    configured for the alert, then the alert will be delivered to the default account-wide endpoint.
+
+    By setting this field, one can easily target different alerts to be received by different endpoints
+
+    which can be useful for configuring per-application alerts or sending alerts to an alternate
+
+    development environment without having to adjust a production alert configuration.
+
+
+    For each alert configured, one-to-many ‘events’ can be set for alert delivery. While most
+
+    events will result in one alert delivery, both the *arrival* and the *departure* events can
+
+    result in multiple alerts delivered (referred to as bundled). The *departure* event bundles the
+
+    departure (actual OFF the ground) alert, along with the flight plan filed alert and up to 5
+
+    per-departure changes which can include alerts for significant departure delays of over
+
+    30 minutes, gate changes, and airport delays. FlightAware Global customers will
+
+    also receive *Power on* and *Ready to taxi* alerts as part of the departure bundle. The *arrival*
+    event
+
+    bundles the arrival (actual ON the ground) alert, along with up to 5 en-route changes (including delays
+
+    of over 30 minutes and excluding diversions) identified. FlightAware Global customers will also receive
+
+    *taxi stop* times as part of the *arrival* bundle. Setting a bundled type and unbundled type for an
+
+    On/Off will only result in a single alert in the case where events may overlap.
+
+
+    If there is a need to change the alert configurations, updating an alert using the **PUT /alerts/{id}**
+
+    endpoint and a unique alert identifier (id) is preferred rather than creating an additional alert.
+
+    By doing so, you can avoid duplicate alerts being delivered which could create unnecessary noise
+
+    if they are not of interest anymore.
+
+
+    If at any point there is a need to delete an alert, the **DELETE alerts/{id}** endpoint can be
+
+    leveraged to delete an alert so that it won’t be delivered anymore. As a reminder, specific alert
+
+    IDs can be retrieved from the **GET /alerts** endpoint.
+  humanURL: https://www.flightaware.com/aeroapi/portal/
+  baseURL: https://aeroapi.flightaware.com/aeroapi
+  tags:
+  - alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/flightaware-alerts-api-openapi.yml
+- aid: flightaware:flightaware-flights-api
+  name: FlightAware flights API
+  description: The flights API from FlightAware — 11 operation(s) for flights.
+  humanURL: https://www.flightaware.com/aeroapi/portal/
+  baseURL: https://aeroapi.flightaware.com/aeroapi
+  tags:
+  - flights
+  properties:
+  - type: OpenAPI
+    url: openapi/flightaware-flights-api-openapi.yml
+- aid: flightaware:flightaware-foresight-api
+  name: FlightAware foresight API
+  description: >-
+    Foresight endpoints provide access to FlightAware's Foresight predictive models and
+
+    predictions for key events. Our advanced machine learning (ML) models identify key
+
+    influencing factors for a flight to forecast future events in real-time, providing
+
+    unprecedented insight to improve operational efficiencies and facilitate better
+
+    decision-making in the air and on the ground. To learn more about the power of Foresight,
+
+    visit https://www.flightaware.com/commercial/foresight/
+
+
+    These endpoints each mirror a non-Foresight equivalent endpoint of similar functionality,
+
+    with the addition of all the ML 'predicted' values included in the Foresight response. The
+
+    respective non-Foresight endpoint response includes a flag, 'foresight_predictions_available',
+
+    which can optionally be used as a trigger to obtain and leverage Foresight predictions on an
+
+    as-needed basis and manage cost. Foresight is only available to Premium tier customers.
+
+    Contact integrationsales@flightaware.com for more information, pricing details, and to have
+
+    your account enabled for Foresight.
+  humanURL: https://www.flightaware.com/aeroapi/portal/
+  baseURL: https://aeroapi.flightaware.com/aeroapi
+  tags:
+  - foresight
+  properties:
+  - type: OpenAPI
+    url: openapi/flightaware-foresight-api-openapi.yml
+- aid: flightaware:flightaware-history-api
+  name: FlightAware history API
+  description: The history API from FlightAware — 5 operation(s) for history.
+  humanURL: https://www.flightaware.com/aeroapi/portal/
+  baseURL: https://aeroapi.flightaware.com/aeroapi
+  tags:
+  - history
+  properties:
+  - type: OpenAPI
+    url: openapi/flightaware-history-api-openapi.yml
+- aid: flightaware:flightaware-miscellaneous-api
+  name: FlightAware miscellaneous API
+  description: The miscellaneous API from FlightAware — 6 operation(s) for miscellaneous.
+  humanURL: https://www.flightaware.com/aeroapi/portal/
+  baseURL: https://aeroapi.flightaware.com/aeroapi
+  tags:
+  - miscellaneous
+  properties:
+  - type: OpenAPI
+    url: openapi/flightaware-miscellaneous-api-openapi.yml
+- aid: flightaware:flightaware-operators-api
+  name: FlightAware operators API
+  description: The operators API from FlightAware — 8 operation(s) for operators.
+  humanURL: https://www.flightaware.com/aeroapi/portal/
+  baseURL: https://aeroapi.flightaware.com/aeroapi
+  tags:
+  - operators
+  properties:
+  - type: OpenAPI
+    url: openapi/flightaware-operators-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/flightaware-agentic-access.yml
