@@ -1,0 +1,26 @@
+{
+  "provider": "flightaware",
+  "sources": [
+    "flightaware-airports-api-openapi.yml",
+    "flightaware-alerts-api-openapi.yml",
+    "flightaware-flights-api-openapi.yml",
+    "flightaware-foresight-api-openapi.yml",
+    "flightaware-history-api-openapi.yml",
+    "flightaware-miscellaneous-api-openapi.yml",
+    "flightaware-operators-api-openapi.yml"
+  ],
+  "outputs": [
+    "flightaware-airports-api-openapi.yml",
+    "flightaware-alerts-api-openapi.yml",
+    "flightaware-flights-api-openapi.yml",
+    "flightaware-foresight-api-openapi.yml",
+    "flightaware-history-api-openapi.yml",
+    "flightaware-miscellaneous-api-openapi.yml",
+    "flightaware-operators-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
