@@ -1,0 +1,1962 @@
+{
+  "item": [
+    {
+      "id": "4644dd1d-430b-4cea-8a90-0511165bc149",
+      "name": "operators",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7ba62d4c-3853-4d70-81e9-956b2e227637",
+          "name": "Get all operators.",
+          "request": {
+            "name": "Get all operators.",
+            "description": {
+              "content": "Returns list of operator references (ICAO/IATA codes and URLs to access\nmore information).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "operators"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "max_pages",
+                  "value": "1",
+                  "description": "Maximum number of pages to fetch. This is an upper limit and not a guarantee of how many pages will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque value used to get the next batch of data from a paged collection.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d43c7c3b-ff2a-4333-ba47-633e3d3bfbe2",
+              "name": "List of operators.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"next\": \"https://rtsLpATF.ualnwMkF7BVxM1gWg380qvn48dMRTwrOnPsNwQv39poBIUb.v5m3N-twFsN6WQgPGqndaZ,W2DhZ?usxdmn=kkVuI&lsyonum=Ee&\"\n  },\n  \"num_pages\": 5935,\n  \"operators\": [\n    {\n      \"code\": \"string\",\n      \"operator_info_url\": \"http://CPDow.rijiqcLKYaRpria9-KoNY5EKqy6qnsI,zE7yOz+thwJibPEkOPU2flXwoOfR\"\n    },\n    {\n      \"code\": \"string\",\n      \"operator_info_url\": \"https://sgMwjClScqKvDvoTztoeKi.zkyFrORY+hpgiXTW+VfxnqCdH93IAnK26HZqu15RhKpmbx4LGHESW7,O2HphnANz9qgwnquhNWNOXBmfE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31687a7b-f836-499b-bab9-6787b469c424",
+          "name": "Get static information for an operator.",
+          "request": {
+            "name": "Get static information for an operator.",
+            "description": {
+              "content": "Returns information for an operator such as their name, ICAO/IATA\ncodes, headquarter location, etc.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "operators",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aee49376-ea91-41d0-a884-fdce711c4b87",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"icao\": \"string\",\n  \"iata\": \"string\",\n  \"callsign\": \"string\",\n  \"name\": \"string\",\n  \"country\": \"string\",\n  \"location\": \"string\",\n  \"phone\": \"string\",\n  \"shortname\": \"string\",\n  \"url\": \"string\",\n  \"wiki_url\": \"string\",\n  \"alternatives\": [\n    {\n      \"icao\": \"string\",\n      \"iata\": \"string\",\n      \"callsign\": \"string\",\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"location\": \"string\",\n      \"phone\": \"string\",\n      \"shortname\": \"string\",\n      \"url\": \"string\",\n      \"wiki_url\": \"string\"\n    },\n    {\n      \"icao\": \"string\",\n      \"iata\": \"string\",\n      \"callsign\": \"string\",\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"location\": \"string\",\n      \"phone\": \"string\",\n      \"shortname\": \"string\",\n      \"url\": \"string\",\n      \"wiki_url\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "595a71a0-75e8-4ec0-add8-a25fc546842c",
+              "name": "Incorrect parameter (id). Id must be a valid operator code and cannot be empty.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9808\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "190d5487-00e6-4c46-8d02-298a50494dad",
+              "name": "No such operator exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9808\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ae21008-a353-4129-bbdf-c01e2ac0ea6d",
+          "name": "Get the canonical code of an operator for API usage.",
+          "request": {
+            "name": "Get the canonical code of an operator for API usage.",
+            "description": {
+              "content": "Returns all possible matches for a given operator code (ICAO or IATA).\nAn optional country code can be provided to refine ambiguous IATA codes\nto a single result. The country code should represent a country the\noperator operates within.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "operators",
+                ":id",
+                "canonical"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country_code",
+                  "value": "<string>",
+                  "description": "An ISO 3166-1 alpha-2 country code.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e14ea814-1b15-4983-92c7-5d457d42716f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "canonical"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"operators\": [\n    {\n      \"id\": \"string\",\n      \"id_type\": \"iata\"\n    },\n    {\n      \"id\": \"string\",\n      \"id_type\": \"iata\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56c45d06-88d3-40a0-a32c-d21d5dd30686",
+              "name": "Incorrect parameter (id or country_code). Id must be a valid operator code and cannot be empty.\nCountry code must represent a country the operator operates within.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "canonical"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9808\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac38b593-ecee-4b43-b1c4-aa0082484e54",
+              "name": "No such operator exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "canonical"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9808\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "edaa1485-162b-48ae-bc54-e3363714706a",
+          "name": "Get all of an operator's flights",
+          "request": {
+            "name": "Get all of an operator's flights",
+            "description": {
+              "content": "Returns all recent and upcoming flights for this operator. Behaviour for\noptional start and end dates for each type returned (`scheduled`, `arrivals`,\n`enroute`) match the behaviour in their corresponding endpoints.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "operators",
+                ":id",
+                "flights"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "max_pages",
+                  "value": "1",
+                  "description": "Maximum number of pages to fetch. This is an upper limit and not a guarantee of how many pages will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque value used to get the next batch of data from a paged collection.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb471587-a3b1-4fdf-a4d4-d6befa7526f0",
+              "name": "Operator's flights.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"next\": \"https://ItPBpYwYtmG.biEyazX4,7Mpu.gDWSz73HLBc92apK6pfpWg3X4c40Kn?a=8ht&iig=jwvI&\"\n  },\n  \"num_pages\": 3859,\n  \"scheduled\": [\n    {\n      \"ident\": \"string\",\n      \"fa_flight_id\": \"string\",\n      \"operator\": \"string\",\n      \"operator_iata\": \"string\",\n      \"flight_number\": \"string\",\n      \"registration\": \"string\",\n      \"atc_ident\": \"string\",\n      \"inbound_fa_flight_id\": \"string\",\n      \"codeshares\": [\n        \"string\",\n        \"string\"\n      ],\n      \"blocked\": false,\n      \"diverted\": true,\n      \"cancelled\": true,\n      \"position_only\": true,\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://bTCFeDgACGoPx.yjkikFjsZ-zkTVi-CZJOBv1ei,8GwKExFMHMAf-\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://vJcMznWCGgmDXJhyPmfcUjWeMsOUTASds.rjciUEYKc1YKW8VwB-hWj5lKYwD.l8rbCnl3uWq,loabWsc+-QwpGJ32SCyF?vulxl&fyur=5ycf&mo&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"departure_delay\": 743,\n      \"arrival_delay\": 5793,\n      \"filed_ete\": 5612,\n      \"progress_percent\": 46,\n      \"status\": \"string\",\n      \"aircraft_type\": \"string\",\n      \"route_distance\": 6826,\n      \"filed_airspeed\": 6313,\n      \"filed_altitude\": 2980,\n      \"route\": \"string\",\n      \"baggage_claim\": \"string\",\n      \"seats_cabin_business\": 4606,\n      \"seats_cabin_coach\": 6118,\n      \"seats_cabin_first\": 6827,\n      \"gate_origin\": \"string\",\n      \"gate_destination\": \"string\",\n      \"terminal_origin\": \"string\",\n      \"terminal_destination\": \"string\",\n      \"type\": \"Airline\",\n      \"scheduled_out\": \"2021-12-31T19:59:59Z\",\n      \"estimated_out\": \"2021-12-31T19:59:59Z\",\n      \"actual_out\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_off\": \"2021-12-31T19:59:59Z\",\n      \"estimated_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_on\": \"2021-12-31T19:59:59Z\",\n      \"estimated_on\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_in\": \"2021-12-31T19:59:59Z\",\n      \"estimated_in\": \"2021-12-31T19:59:59Z\",\n      \"actual_in\": \"2021-12-31T19:59:59Z\",\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"actual_runway_off\": \"string\",\n      \"actual_runway_on\": \"string\",\n      \"operator_icao\": \"string\",\n      \"codeshares_iata\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"ident\": \"string\",\n      \"fa_flight_id\": \"string\",\n      \"operator\": \"string\",\n      \"operator_iata\": \"string\",\n      \"flight_number\": \"string\",\n      \"registration\": \"string\",\n      \"atc_ident\": \"string\",\n      \"inbound_fa_flight_id\": \"string\",\n      \"codeshares\": [\n        \"string\",\n        \"string\"\n      ],\n      \"blocked\": true,\n      \"diverted\": true,\n      \"cancelled\": true,\n      \"position_only\": false,\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://iGUe.zgJdqzISgwHLFVnqVqPZ04CVGfGUFMU,X+0WvHLWUE?plxs&imo=gp&rec=Jcb&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://xjzMnpZTLgvKWbUStggTguk.jgnqfrW7y.zrSFAh5SnaQWf4mOIO55.2FUQmge4s0NQQ\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"departure_delay\": 9973,\n      \"arrival_delay\": 6198,\n      \"filed_ete\": 247,\n      \"progress_percent\": 45,\n      \"status\": \"string\",\n      \"aircraft_type\": \"string\",\n      \"route_distance\": 2461,\n      \"filed_airspeed\": 2917,\n      \"filed_altitude\": 9351,\n      \"route\": \"string\",\n      \"baggage_claim\": \"string\",\n      \"seats_cabin_business\": 5079,\n      \"seats_cabin_coach\": 5318,\n      \"seats_cabin_first\": 9584,\n      \"gate_origin\": \"string\",\n      \"gate_destination\": \"string\",\n      \"terminal_origin\": \"string\",\n      \"terminal_destination\": \"string\",\n      \"type\": \"Airline\",\n      \"scheduled_out\": \"2021-12-31T19:59:59Z\",\n      \"estimated_out\": \"2021-12-31T19:59:59Z\",\n      \"actual_out\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_off\": \"2021-12-31T19:59:59Z\",\n      \"estimated_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_on\": \"2021-12-31T19:59:59Z\",\n      \"estimated_on\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_in\": \"2021-12-31T19:59:59Z\",\n      \"estimated_in\": \"2021-12-31T19:59:59Z\",\n      \"actual_in\": \"2021-12-31T19:59:59Z\",\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"actual_runway_off\": \"string\",\n      \"actual_runway_on\": \"string\",\n      \"operator_icao\": \"string\",\n      \"codeshares_iata\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"arrivals\": [\n    {\n      \"ident\": \"string\",\n      \"fa_flight_id\": \"string\",\n      \"operator\": \"string\",\n      \"operator_iata\": \"string\",\n      \"flight_number\": \"string\",\n      \"registration\": \"string\",\n      \"atc_ident\": \"string\",\n      \"inbound_fa_flight_id\": \"string\",\n      \"codeshares\": [\n        \"string\",\n        \"string\"\n      ],\n      \"blocked\": true,\n      \"diverted\": false,\n      \"cancelled\": false,\n      \"position_only\": true,\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://fEIWXicaIaammpiVFhaxrpKDYEQiXdQwV.yyfuG3x+CmnV\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://RD.nnstG5iCQj9i+gUffpXj0KOiWI9ugEqxl.ZBL3gOjyRtMgm?zznkzw=i&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"departure_delay\": 5149,\n      \"arrival_delay\": 5816,\n      \"filed_ete\": 6326,\n      \"progress_percent\": 44,\n      \"status\": \"string\",\n      \"aircraft_type\": \"string\",\n      \"route_distance\": 9061,\n      \"filed_airspeed\": 1189,\n      \"filed_altitude\": 8216,\n      \"route\": \"string\",\n      \"baggage_claim\": \"string\",\n      \"seats_cabin_business\": 4546,\n      \"seats_cabin_coach\": 1145,\n      \"seats_cabin_first\": 2122,\n      \"gate_origin\": \"string\",\n      \"gate_destination\": \"string\",\n      \"terminal_origin\": \"string\",\n      \"terminal_destination\": \"string\",\n      \"type\": \"Airline\",\n      \"scheduled_out\": \"2021-12-31T19:59:59Z\",\n      \"estimated_out\": \"2021-12-31T19:59:59Z\",\n      \"actual_out\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_off\": \"2021-12-31T19:59:59Z\",\n      \"estimated_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_on\": \"2021-12-31T19:59:59Z\",\n      \"estimated_on\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_in\": \"2021-12-31T19:59:59Z\",\n      \"estimated_in\": \"2021-12-31T19:59:59Z\",\n      \"actual_in\": \"2021-12-31T19:59:59Z\",\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"actual_runway_off\": \"string\",\n      \"actual_runway_on\": \"string\",\n      \"operator_icao\": \"string\",\n      \"codeshares_iata\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"ident\": \"string\",\n      \"fa_flight_id\": \"string\",\n      \"operator\": \"string\",\n      \"operator_iata\": \"string\",\n      \"flight_number\": \"string\",\n      \"registration\": \"string\",\n      \"atc_ident\": \"string\",\n      \"inbound_fa_flight_id\": \"string\",\n      \"codeshares\": [\n        \"string\",\n        \"string\"\n      ],\n      \"blocked\": true,\n      \"diverted\": false,\n      \"cancelled\": true,\n      \"position_only\": false,\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://xZKKrPTwA.tooBScGpZTpvgaGItdOaBofFYzca8AE7\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://ChlkkWwIZfmgFawgNFdegTsxECjaho.jrcwfHCq2AGIAKNRRFgbCMZdDf9JAmidB3aQdHQzFjGO15bzXs8KIYz6qDhIJ9v0Fbq+Jd4NX8Ex,fauy\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"departure_delay\": 2171,\n      \"arrival_delay\": 9801,\n      \"filed_ete\": 5025,\n      \"progress_percent\": 63,\n      \"status\": \"string\",\n      \"aircraft_type\": \"string\",\n      \"route_distance\": 6056,\n      \"filed_airspeed\": 6417,\n      \"filed_altitude\": 2629,\n      \"route\": \"string\",\n      \"baggage_claim\": \"string\",\n      \"seats_cabin_business\": 5042,\n      \"seats_cabin_coach\": 9475,\n      \"seats_cabin_first\": 3075,\n      \"gate_origin\": \"string\",\n      \"gate_destination\": \"string\",\n      \"terminal_origin\": \"string\",\n      \"terminal_destination\": \"string\",\n      \"type\": \"Airline\",\n      \"scheduled_out\": \"2021-12-31T19:59:59Z\",\n      \"estimated_out\": \"2021-12-31T19:59:59Z\",\n      \"actual_out\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_off\": \"2021-12-31T19:59:59Z\",\n      \"estimated_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_on\": \"2021-12-31T19:59:59Z\",\n      \"estimated_on\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_in\": \"2021-12-31T19:59:59Z\",\n      \"estimated_in\": \"2021-12-31T19:59:59Z\",\n      \"actual_in\": \"2021-12-31T19:59:59Z\",\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"actual_runway_off\": \"string\",\n      \"actual_runway_on\": \"string\",\n      \"operator_icao\": \"string\",\n      \"codeshares_iata\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"enroute\": [\n    {\n      \"ident\": \"string\",\n      \"fa_flight_id\": \"string\",\n      \"operator\": \"string\",\n      \"operator_iata\": \"string\",\n      \"flight_number\": \"string\",\n      \"registration\": \"string\",\n      \"atc_ident\": \"string\",\n      \"inbound_fa_flight_id\": \"string\",\n      \"codeshares\": [\n        \"string\",\n        \"string\"\n      ],\n      \"blocked\": true,\n      \"diverted\": true,\n      \"cancelled\": true,\n      \"position_only\": false,\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://aQJaaCiEF.wxyEuj,xmpjBc2bCuh\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://qoZormzdofeA.wzdfEqsh6pG9jHNSX5Qdf615gRL,RLvNi7Fm9t++rlsNuziH6gZTeVfbSPg8\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"departure_delay\": 6519,\n      \"arrival_delay\": 2129,\n      \"filed_ete\": 5020,\n      \"progress_percent\": 41,\n      \"status\": \"string\",\n      \"aircraft_type\": \"string\",\n      \"route_distance\": 9637,\n      \"filed_airspeed\": 6639,\n      \"filed_altitude\": 1071,\n      \"route\": \"string\",\n      \"baggage_claim\": \"string\",\n      \"seats_cabin_business\": 4789,\n      \"seats_cabin_coach\": 7142,\n      \"seats_cabin_first\": 8632,\n      \"gate_origin\": \"string\",\n      \"gate_destination\": \"string\",\n      \"terminal_origin\": \"string\",\n      \"terminal_destination\": \"string\",\n      \"type\": \"Airline\",\n      \"scheduled_out\": \"2021-12-31T19:59:59Z\",\n      \"estimated_out\": \"2021-12-31T19:59:59Z\",\n      \"actual_out\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_off\": \"2021-12-31T19:59:59Z\",\n      \"estimated_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_on\": \"2021-12-31T19:59:59Z\",\n      \"estimated_on\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_in\": \"2021-12-31T19:59:59Z\",\n      \"estimated_in\": \"2021-12-31T19:59:59Z\",\n      \"actual_in\": \"2021-12-31T19:59:59Z\",\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"actual_runway_off\": \"string\",\n      \"actual_runway_on\": \"string\",\n      \"operator_icao\": \"string\",\n      \"codeshares_iata\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"ident\": \"string\",\n      \"fa_flight_id\": \"string\",\n      \"operator\": \"string\",\n      \"operator_iata\": \"string\",\n      \"flight_number\": \"string\",\n      \"registration\": \"string\",\n      \"atc_ident\": \"string\",\n      \"inbound_fa_flight_id\": \"string\",\n      \"codeshares\": [\n        \"string\",\n        \"string\"\n      ],\n      \"blocked\": true,\n      \"diverted\": true,\n      \"cancelled\": true,\n      \"position_only\": false,\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://GFLyX.fcaQ2u1c\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://bm.nwK5xefIJZ5r4EL6BbR2Bk3s3wnF,JCVV1jOo1-hyblNfh.2xBiBabQOi7D1Pg4shLHJ+uAqoU?arysee&ggt&k=WQpR9&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"departure_delay\": 4481,\n      \"arrival_delay\": 9579,\n      \"filed_ete\": 7408,\n      \"progress_percent\": 41,\n      \"status\": \"string\",\n      \"aircraft_type\": \"string\",\n      \"route_distance\": 2267,\n      \"filed_airspeed\": 9945,\n      \"filed_altitude\": 1626,\n      \"route\": \"string\",\n      \"baggage_claim\": \"string\",\n      \"seats_cabin_business\": 2294,\n      \"seats_cabin_coach\": 8243,\n      \"seats_cabin_first\": 4745,\n      \"gate_origin\": \"string\",\n      \"gate_destination\": \"string\",\n      \"terminal_origin\": \"string\",\n      \"terminal_destination\": \"string\",\n      \"type\": \"General_Aviation\",\n      \"scheduled_out\": \"2021-12-31T19:59:59Z\",\n      \"estimated_out\": \"2021-12-31T19:59:59Z\",\n      \"actual_out\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_off\": \"2021-12-31T19:59:59Z\",\n      \"estimated_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_on\": \"2021-12-31T19:59:59Z\",\n      \"estimated_on\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_in\": \"2021-12-31T19:59:59Z\",\n      \"estimated_in\": \"2021-12-31T19:59:59Z\",\n      \"actual_in\": \"2021-12-31T19:59:59Z\",\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"actual_runway_off\": \"string\",\n      \"actual_runway_on\": \"string\",\n      \"operator_icao\": \"string\",\n      \"codeshares_iata\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e1cbc7a-5350-4b62-8094-da2b90155ac6",
+              "name": "Incorrect parameter (id). Id must be a valid operator code and cannot be empty.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9808\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbd9cf84-122e-4208-b574-60d0f43541ad",
+              "name": "No such operator exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9808\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd431ab7-2a71-45ff-acce-bb8cef940d8f",
+          "name": "Get scheduled flights",
+          "request": {
+            "name": "Get scheduled flights",
+            "description": {
+              "content": "Returns flights for this operator that are scheduled to depart or have\nrecently been cancelled, ordered by `estimated_off` (or `scheduled_off`\nif `estimated_off` is missing) ascending. The optional start and end\nparameters will be compared against `scheduled_off` to limit the\nflights returned. If start is not specified, flights with a\n`scheduled_off` or cancellation time no further than two hours into the\npast will be returned. If end is not specified, there is no guaranteed\nbound for how far in the future scheduled flights will be returned (it\nwill typically be around 48 hours in the future for commercial flights,\nthough).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "operators",
+                ":id",
+                "flights",
+                "scheduled"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "max_pages",
+                  "value": "1",
+                  "description": "Maximum number of pages to fetch. This is an upper limit and not a guarantee of how many pages will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque value used to get the next batch of data from a paged collection.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5fe48aa1-5136-4af3-b7da-2feecc52e12f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights",
+                    "scheduled"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"next\": \"http://GKAglaeKSQGKrhCWIRuPCPYRKa.ojvB0FljQgO.j8hFMJxGmfseOO08fFuj6g8fgnRffmhmShZ,EOnZwD4\"\n  },\n  \"num_pages\": 1645,\n  \"scheduled\": [\n    {\n      \"ident\": \"string\",\n      \"fa_flight_id\": \"string\",\n      \"operator\": \"string\",\n      \"operator_iata\": \"string\",\n      \"flight_number\": \"string\",\n      \"registration\": \"string\",\n      \"atc_ident\": \"string\",\n      \"inbound_fa_flight_id\": \"string\",\n      \"codeshares\": [\n        \"string\",\n        \"string\"\n      ],\n      \"blocked\": true,\n      \"diverted\": true,\n      \"cancelled\": true,\n      \"position_only\": true,\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://yrRkvvRba.whzebGZnSGTGJWPGrLQr.TTOghZylisMZ?\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://WvHlELNLwczQnmMmmKwzYquiC.hprpHzf4ZVnhD2W+?cdc&krolq=h&d=MiLEu&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"departure_delay\": 6387,\n      \"arrival_delay\": 6545,\n      \"filed_ete\": 7400,\n      \"progress_percent\": 87,\n      \"status\": \"string\",\n      \"aircraft_type\": \"string\",\n      \"route_distance\": 2088,\n      \"filed_airspeed\": 5288,\n      \"filed_altitude\": 3675,\n      \"route\": \"string\",\n      \"baggage_claim\": \"string\",\n      \"seats_cabin_business\": 9863,\n      \"seats_cabin_coach\": 3763,\n      \"seats_cabin_first\": 4327,\n      \"gate_origin\": \"string\",\n      \"gate_destination\": \"string\",\n      \"terminal_origin\": \"string\",\n      \"terminal_destination\": \"string\",\n      \"type\": \"Airline\",\n      \"scheduled_out\": \"2021-12-31T19:59:59Z\",\n      \"estimated_out\": \"2021-12-31T19:59:59Z\",\n      \"actual_out\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_off\": \"2021-12-31T19:59:59Z\",\n      \"estimated_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_on\": \"2021-12-31T19:59:59Z\",\n      \"estimated_on\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_in\": \"2021-12-31T19:59:59Z\",\n      \"estimated_in\": \"2021-12-31T19:59:59Z\",\n      \"actual_in\": \"2021-12-31T19:59:59Z\",\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"actual_runway_off\": \"string\",\n      \"actual_runway_on\": \"string\",\n      \"operator_icao\": \"string\",\n      \"codeshares_iata\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"ident\": \"string\",\n      \"fa_flight_id\": \"string\",\n      \"operator\": \"string\",\n      \"operator_iata\": \"string\",\n      \"flight_number\": \"string\",\n      \"registration\": \"string\",\n      \"atc_ident\": \"string\",\n      \"inbound_fa_flight_id\": \"string\",\n      \"codeshares\": [\n        \"string\",\n        \"string\"\n      ],\n      \"blocked\": false,\n      \"diverted\": true,\n      \"cancelled\": false,\n      \"position_only\": true,\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://aNanAWSMdDxLLXKSzaK.qmyADNgxcttfumfApko9VdrTgvE4LfuQnwXdboBmop-cAIZE?fpdoamg=r_qH&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://sQrTfXPoMkZx.rxZfzQJIPA3lwMvqY7OJp2ufAFUjbOx2uVD\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"departure_delay\": 9117,\n      \"arrival_delay\": 3880,\n      \"filed_ete\": 4349,\n      \"progress_percent\": 58,\n      \"status\": \"string\",\n      \"aircraft_type\": \"string\",\n      \"route_distance\": 681,\n      \"filed_airspeed\": 6621,\n      \"filed_altitude\": 1654,\n      \"route\": \"string\",\n      \"baggage_claim\": \"string\",\n      \"seats_cabin_business\": 4405,\n      \"seats_cabin_coach\": 6759,\n      \"seats_cabin_first\": 108,\n      \"gate_origin\": \"string\",\n      \"gate_destination\": \"string\",\n      \"terminal_origin\": \"string\",\n      \"terminal_destination\": \"string\",\n      \"type\": \"General_Aviation\",\n      \"scheduled_out\": \"2021-12-31T19:59:59Z\",\n      \"estimated_out\": \"2021-12-31T19:59:59Z\",\n      \"actual_out\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_off\": \"2021-12-31T19:59:59Z\",\n      \"estimated_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_on\": \"2021-12-31T19:59:59Z\",\n      \"estimated_on\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_in\": \"2021-12-31T19:59:59Z\",\n      \"estimated_in\": \"2021-12-31T19:59:59Z\",\n      \"actual_in\": \"2021-12-31T19:59:59Z\",\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"actual_runway_off\": \"string\",\n      \"actual_runway_on\": \"string\",\n      \"operator_icao\": \"string\",\n      \"codeshares_iata\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17bf9539-0357-4c72-8d88-11ec93818e0c",
+              "name": "Incorrect parameter (id). Id must be a valid operator code and cannot be empty.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights",
+                    "scheduled"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9808\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9a7f785-2823-4589-b06e-505c5329581f",
+              "name": "No such operator exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights",
+                    "scheduled"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9808\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a27027b-9bea-49e8-9b36-9b72c8e12d71",
+          "name": "Get arrived flights",
+          "request": {
+            "name": "Get arrived flights",
+            "description": {
+              "content": "Returns flights for this operator that have departed and subsequently\narrived, ordered by `actual_on` descending. The optional start and end\nparameters will be compared against `actual_on` to limit the flights\nreturned. The start parameter's default value is 24 hours before the\ncurrent time. The end parameter's default value is the current time.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "operators",
+                ":id",
+                "flights",
+                "arrivals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "max_pages",
+                  "value": "1",
+                  "description": "Maximum number of pages to fetch. This is an upper limit and not a guarantee of how many pages will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque value used to get the next batch of data from a paged collection.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "146f8465-d942-4f2b-aa1d-85308bd143ac",
+              "name": "Arrived flights.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights",
+                    "arrivals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"next\": \"http://ZYOqYtYasoCXBRPaogfMHQ.xkutvbmFo2t1.nogN5FN1TdzfMmk+PbCFNMQtAW98Od\"\n  },\n  \"num_pages\": 4721,\n  \"arrivals\": [\n    {\n      \"ident\": \"string\",\n      \"fa_flight_id\": \"string\",\n      \"operator\": \"string\",\n      \"operator_iata\": \"string\",\n      \"flight_number\": \"string\",\n      \"registration\": \"string\",\n      \"atc_ident\": \"string\",\n      \"inbound_fa_flight_id\": \"string\",\n      \"codeshares\": [\n        \"string\",\n        \"string\"\n      ],\n      \"blocked\": false,\n      \"diverted\": true,\n      \"cancelled\": false,\n      \"position_only\": true,\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://lGmJsRjJoZTiXupSHryAfJGny.apTWOEFF.lGMtH\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://iYbByatnkhsBAewFjJqO.icLOGb7.8FmS,JJrtcrbIgBdAm9CpVFgtzyFf.Kbos2L5Jl+gjH0n-VhEUo?d=N3B&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"departure_delay\": 1089,\n      \"arrival_delay\": 819,\n      \"filed_ete\": 6591,\n      \"progress_percent\": 16,\n      \"status\": \"string\",\n      \"aircraft_type\": \"string\",\n      \"route_distance\": 6164,\n      \"filed_airspeed\": 4456,\n      \"filed_altitude\": 6360,\n      \"route\": \"string\",\n      \"baggage_claim\": \"string\",\n      \"seats_cabin_business\": 2178,\n      \"seats_cabin_coach\": 4311,\n      \"seats_cabin_first\": 1157,\n      \"gate_origin\": \"string\",\n      \"gate_destination\": \"string\",\n      \"terminal_origin\": \"string\",\n      \"terminal_destination\": \"string\",\n      \"type\": \"General_Aviation\",\n      \"scheduled_out\": \"2021-12-31T19:59:59Z\",\n      \"estimated_out\": \"2021-12-31T19:59:59Z\",\n      \"actual_out\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_off\": \"2021-12-31T19:59:59Z\",\n      \"estimated_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_on\": \"2021-12-31T19:59:59Z\",\n      \"estimated_on\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_in\": \"2021-12-31T19:59:59Z\",\n      \"estimated_in\": \"2021-12-31T19:59:59Z\",\n      \"actual_in\": \"2021-12-31T19:59:59Z\",\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"actual_runway_off\": \"string\",\n      \"actual_runway_on\": \"string\",\n      \"operator_icao\": \"string\",\n      \"codeshares_iata\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"ident\": \"string\",\n      \"fa_flight_id\": \"string\",\n      \"operator\": \"string\",\n      \"operator_iata\": \"string\",\n      \"flight_number\": \"string\",\n      \"registration\": \"string\",\n      \"atc_ident\": \"string\",\n      \"inbound_fa_flight_id\": \"string\",\n      \"codeshares\": [\n        \"string\",\n        \"string\"\n      ],\n      \"blocked\": false,\n      \"diverted\": false,\n      \"cancelled\": true,\n      \"position_only\": true,\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://vsyGdhTMtnAFKwSeyFOUGizzseBQCt.rtwlfRpmCJvn,rGXd+0w0HV18\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://o.xdoiu\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"departure_delay\": 3234,\n      \"arrival_delay\": 3270,\n      \"filed_ete\": 1373,\n      \"progress_percent\": 58,\n      \"status\": \"string\",\n      \"aircraft_type\": \"string\",\n      \"route_distance\": 1429,\n      \"filed_airspeed\": 2356,\n      \"filed_altitude\": 6105,\n      \"route\": \"string\",\n      \"baggage_claim\": \"string\",\n      \"seats_cabin_business\": 1992,\n      \"seats_cabin_coach\": 9875,\n      \"seats_cabin_first\": 7777,\n      \"gate_origin\": \"string\",\n      \"gate_destination\": \"string\",\n      \"terminal_origin\": \"string\",\n      \"terminal_destination\": \"string\",\n      \"type\": \"Airline\",\n      \"scheduled_out\": \"2021-12-31T19:59:59Z\",\n      \"estimated_out\": \"2021-12-31T19:59:59Z\",\n      \"actual_out\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_off\": \"2021-12-31T19:59:59Z\",\n      \"estimated_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_on\": \"2021-12-31T19:59:59Z\",\n      \"estimated_on\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_in\": \"2021-12-31T19:59:59Z\",\n      \"estimated_in\": \"2021-12-31T19:59:59Z\",\n      \"actual_in\": \"2021-12-31T19:59:59Z\",\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"actual_runway_off\": \"string\",\n      \"actual_runway_on\": \"string\",\n      \"operator_icao\": \"string\",\n      \"codeshares_iata\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ad2edee-5805-4779-a9de-ca3b6ec3407e",
+              "name": "Incorrect parameter (id). Id must be a valid operator code and cannot be empty.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights",
+                    "arrivals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9808\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd6dd31f-c792-4162-8cb6-8366161adc77",
+              "name": "No such operator exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights",
+                    "arrivals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9808\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d9b954a-2a9a-40d0-a27a-36012ebaae75",
+          "name": "Get en route flights",
+          "request": {
+            "name": "Get en route flights",
+            "description": {
+              "content": "Returns flights for this operator that have departed and are currently\nen route, ordered by `estimated_on` ascending. The optional start and\nend parameters will be compared against `estimated_on` to limit the\nflights returned. The start parameter's default value is 48 hours\nbefore the current time (this accounts for delayed flights). There is\nno default end bound.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "operators",
+                ":id",
+                "flights",
+                "enroute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "max_pages",
+                  "value": "1",
+                  "description": "Maximum number of pages to fetch. This is an upper limit and not a guarantee of how many pages will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque value used to get the next batch of data from a paged collection.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c5f02c6-ed77-4299-80c8-c0dc05595312",
+              "name": "En route flights.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights",
+                    "enroute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"next\": \"http://MyEdBCNkuUoVBCYs.ioh,ZamzbBWGZa.FwXz74yFTGN6rYf7FOj+yZdWjWMn3cMoiHdrwus-lA\"\n  },\n  \"num_pages\": 7094,\n  \"enroute\": [\n    {\n      \"ident\": \"string\",\n      \"fa_flight_id\": \"string\",\n      \"operator\": \"string\",\n      \"operator_iata\": \"string\",\n      \"flight_number\": \"string\",\n      \"registration\": \"string\",\n      \"atc_ident\": \"string\",\n      \"inbound_fa_flight_id\": \"string\",\n      \"codeshares\": [\n        \"string\",\n        \"string\"\n      ],\n      \"blocked\": true,\n      \"diverted\": false,\n      \"cancelled\": false,\n      \"position_only\": true,\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://wqVAqaskqkOliKTEnaXborBjtnlkfQU.jnmpkzsLs+ZCJB,EyChiTbeDgR.IVFPon4WAZN5Fg+CSa?aqtp&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://gVHe.vzroq.GNqdPXHxWJ2RyUqPBjDex+gFHO9b?\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"departure_delay\": 2337,\n      \"arrival_delay\": 374,\n      \"filed_ete\": 8478,\n      \"progress_percent\": 63,\n      \"status\": \"string\",\n      \"aircraft_type\": \"string\",\n      \"route_distance\": 4679,\n      \"filed_airspeed\": 9051,\n      \"filed_altitude\": 6409,\n      \"route\": \"string\",\n      \"baggage_claim\": \"string\",\n      \"seats_cabin_business\": 5636,\n      \"seats_cabin_coach\": 4315,\n      \"seats_cabin_first\": 9993,\n      \"gate_origin\": \"string\",\n      \"gate_destination\": \"string\",\n      \"terminal_origin\": \"string\",\n      \"terminal_destination\": \"string\",\n      \"type\": \"Airline\",\n      \"scheduled_out\": \"2021-12-31T19:59:59Z\",\n      \"estimated_out\": \"2021-12-31T19:59:59Z\",\n      \"actual_out\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_off\": \"2021-12-31T19:59:59Z\",\n      \"estimated_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_on\": \"2021-12-31T19:59:59Z\",\n      \"estimated_on\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_in\": \"2021-12-31T19:59:59Z\",\n      \"estimated_in\": \"2021-12-31T19:59:59Z\",\n      \"actual_in\": \"2021-12-31T19:59:59Z\",\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"actual_runway_off\": \"string\",\n      \"actual_runway_on\": \"string\",\n      \"operator_icao\": \"string\",\n      \"codeshares_iata\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"ident\": \"string\",\n      \"fa_flight_id\": \"string\",\n      \"operator\": \"string\",\n      \"operator_iata\": \"string\",\n      \"flight_number\": \"string\",\n      \"registration\": \"string\",\n      \"atc_ident\": \"string\",\n      \"inbound_fa_flight_id\": \"string\",\n      \"codeshares\": [\n        \"string\",\n        \"string\"\n      ],\n      \"blocked\": false,\n      \"diverted\": false,\n      \"cancelled\": true,\n      \"position_only\": false,\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://IluNMFphRcBaWZpjWQBlaGewE.btlj9W0H7zW3-0SGSnhiRhpB+nY1pcxwkpfB3zoDshvUhUFxFGCF3vNB?\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://HKVRfndrkeaBB.ijzpg3RnWrXoPBpiMJ4n+eKIh6ymrPd?cnvolki&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"departure_delay\": 590,\n      \"arrival_delay\": 8468,\n      \"filed_ete\": 4119,\n      \"progress_percent\": 19,\n      \"status\": \"string\",\n      \"aircraft_type\": \"string\",\n      \"route_distance\": 5621,\n      \"filed_airspeed\": 5893,\n      \"filed_altitude\": 9003,\n      \"route\": \"string\",\n      \"baggage_claim\": \"string\",\n      \"seats_cabin_business\": 8758,\n      \"seats_cabin_coach\": 7172,\n      \"seats_cabin_first\": 8088,\n      \"gate_origin\": \"string\",\n      \"gate_destination\": \"string\",\n      \"terminal_origin\": \"string\",\n      \"terminal_destination\": \"string\",\n      \"type\": \"Airline\",\n      \"scheduled_out\": \"2021-12-31T19:59:59Z\",\n      \"estimated_out\": \"2021-12-31T19:59:59Z\",\n      \"actual_out\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_off\": \"2021-12-31T19:59:59Z\",\n      \"estimated_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_on\": \"2021-12-31T19:59:59Z\",\n      \"estimated_on\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_in\": \"2021-12-31T19:59:59Z\",\n      \"estimated_in\": \"2021-12-31T19:59:59Z\",\n      \"actual_in\": \"2021-12-31T19:59:59Z\",\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"actual_runway_off\": \"string\",\n      \"actual_runway_on\": \"string\",\n      \"operator_icao\": \"string\",\n      \"codeshares_iata\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c808644-c590-4073-a558-68e867912ef9",
+              "name": "Incorrect parameter (id). Id must be a valid operator code and cannot be empty.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights",
+                    "enroute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9808\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acea72de-4cfa-4c99-8a56-7b90df573c1a",
+              "name": "No such operator exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights",
+                    "enroute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9808\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dac2b591-498b-414c-927e-17d3a57dda6f",
+          "name": "Get flight counts for operator",
+          "request": {
+            "name": "Get flight counts for operator",
+            "description": {
+              "content": "Returns counts of both airborne and recently operated flights for\noperator.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "operators",
+                ":id",
+                "flights",
+                "counts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84b2945b-ba7e-4e10-863a-a478ca40fc12",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights",
+                    "counts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"airborne\": 3660,\n  \"flights_last_24_hours\": 3962\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "022ecae2-bf46-493b-94a1-da27561f68cf",
+              "name": "Incorrect parameter (id). Id must be a valid operator code and cannot be empty.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights",
+                    "counts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9808\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b41d0af-3de2-4343-b537-ad04940b7819",
+              "name": "No such operator exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":id",
+                    "flights",
+                    "counts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ICAO or IATA identifier for an operator. The use of ICAO code is\nstrongly preferred. In the case of non-unique IATA codes the operator\nwith the lexicographically first ICAO code will be returned.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9808\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of aeroapi)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "aeroapi",
+      "key": "env"
+    },
+    {
+      "type": "string",
+      "value": "https://{{env}}.flightaware.com/aeroapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "99f2b3ba-128e-4cb1-8599-6366ccf6f9d1",
+    "name": "Aero airports operators API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\nAeroAPI is a simple, query-based API that gives software developers access\nto a variety of FlightAware's flight data. Users can obtain current or\nhistorical data. AeroAPI is a RESTful API delivering accurate and\nactionable aviation data. With the introduction of Foresight™, customers\nhave access to the data that powers over half of the predictive airline\nETAs in the US.\n\n## Categories\nAeroAPI is divided into several categories to make things easier to\ndiscover.\n- Flights: Summary information, planned routes, positions and more\n- Foresight: Flight positions enhanced with FlightAware Foresight™\n- Airports: Airport information and FIDS style resources\n- Operators: Operator information and fleet activity resources\n- Alerts: Configure flight alerts and delivery destinations\n- History: Historical flight access for various endpoints\n- Miscellaneous: Flight disruption, future schedule information, and aircraft owner information\n\n## Development Tools\nAeroAPI is defined using the OpenAPI Spec 3.0, which means it can be easily\nimported into tools like Postman. To get started try importing the API\nspecification using\n[Postman's instructions](https://learning.postman.com/docs/integrations/available-integrations/working-with-openAPI/).\nOnce imported as a collection only the \"Value\" field under the collection's\nAuthorization tab needs to be populated and saved before making calls.\n\nThe AeroAPI OpenAPI specification is located at:\\\nhttps://flightaware.com/commercial/aeroapi/resources/aeroapi-openapi.yml\n\nOur [open source AeroApps project](/aeroapi/portal/resources)\nprovides a small collection of services and sample applications to help\nyou get started.\n\nThe Flight Information Display System (FIDS) AeroApp is an example of a\nmulti-tier application using multiple languages and Docker containers.\nIt demonstrates connectivity, data caching, flight presentation, and leveraging flight maps.\n\nThe Alerts AeroApp demonstrates the use of AeroAPI to set, edit, and\nreceive alerts in a sample application with a Dockerized Python backend\nand a React frontend.\n\nOur AeroAPI push notification [testing interface](/commercial/aeroapi/send.rvt)\nprovides a quick and easy way to test the delivery of customized alerts via AeroAPI push.\n",
+      "type": "text/plain"
+    }
+  }
+}

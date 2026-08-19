@@ -1,0 +1,2474 @@
+{
+  "item": [
+    {
+      "id": "e3d84e46-ba0e-435b-b3de-755b4d1850f5",
+      "name": "flights",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2bb3f748-a6d8-4f62-a285-67767fcd7f0f",
+          "name": "Search for flights",
+          "request": {
+            "name": "Search for flights",
+            "description": {
+              "content": "Search for airborne flights by matching against various parameters including\ngeospatial data. Uses a simplified query syntax compared to\n/flights/search/advanced.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "flights",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Query to search for flights with a simplified syntax (compared to\n/flights/search/advanced). It should not exceed 1000 bytes in length.\nQuery syntax allows filtering by latitude/longitude box, aircraft ident\nwith wildcards, type with wildcards, prefix, origin airport,\ndestination airport, origin or destination airport, groundspeed, and\naltitude. It takes search terms in a single string comprising \"-key\nvalue\" pairs. Codeshares and alternate idents are NOT searched when\nusing the -idents clause.\n\nKeys include:\n* `-prefix STRING`\n* `-type STRING`\n* `-idents STRING`\n* `-identOrReg STRING`\n* `-airline STRING`\n* `-destination STRING`\n* `-origin STRING`\n* `-originOrDestination STRING`\n* `-aboveAltitude INTEGER`\n* `-belowAltitude INTEGER`\n* `-aboveGroundspeed INTEGER`\n* `-belowGroundspeed INTEGER`\n* `-latlong \"MINLAT MINLON MAXLAT MAXLON\"`\n* `-filter {ga|airline}`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_pages",
+                  "value": "1",
+                  "description": "Maximum number of pages to fetch. This is an upper limit and not a guarantee of how many pages will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque value used to get the next batch of data from a paged collection.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b64c6d05-cb22-41d2-8223-8faf60127c38",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "-latlong \"44.953469 -111.045360 40.962321 -104.046577\"\n"
+                    },
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"next\": \"https://EhXiYK.teqVph2oD5qpMooLFDBOqeOrr2\"\n  },\n  \"num_pages\": 8504,\n  \"flights\": [\n    {\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"aircraft_type\": \"string\",\n      \"bounding_box\": [\n        6393.249820303516,\n        5055.416925398218,\n        1601.2851215896917,\n        187.76916893555762\n      ],\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://fJJrBPNtaZXR.gpst7mAHXFAUkSIfLvyxqJF2uvet?\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"fa_flight_id\": \"string\",\n      \"first_position_time\": \"2021-12-31T19:59:59Z\",\n      \"foresight_predictions_available\": true,\n      \"ident\": \"string\",\n      \"ident_prefix\": \"string\",\n      \"last_position\": {\n        \"fa_flight_id\": \"string\",\n        \"altitude\": 3808,\n        \"altitude_change\": \"C\",\n        \"groundspeed\": 2814,\n        \"heading\": 274,\n        \"latitude\": 329.83437693811845,\n        \"longitude\": 8913.06645224635,\n        \"timestamp\": \"2021-12-31T19:59:59Z\",\n        \"update_type\": \"A\"\n      },\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://JLNMOPxiaYxKacZOSbYvpFIExFf.fzOvonAEBWvhsTaekiaXmSlrz7abJxDTHK?l=hzc&xu&dms=fUNCZ&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"predicted_in\": null,\n      \"predicted_in_source\": null,\n      \"predicted_off\": null,\n      \"predicted_off_source\": \"Foresight\",\n      \"predicted_on\": null,\n      \"predicted_on_source\": null,\n      \"predicted_out\": null,\n      \"predicted_out_source\": null,\n      \"waypoints\": [\n        3113.0447446073895,\n        5535.250910391234\n      ],\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\"\n    },\n    {\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"aircraft_type\": \"string\",\n      \"bounding_box\": [\n        8103.514097375276,\n        9921.562231377644,\n        3092.61429702537,\n        3260.3455505093602\n      ],\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://HQePFcRjkvthBJwuZjFsiiHyOEM.ljgnPvEoJINuplJ-cMUYUJIRyivU6vx,iNo4ALsWsrAf4AXV?\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"fa_flight_id\": \"string\",\n      \"first_position_time\": \"2021-12-31T19:59:59Z\",\n      \"foresight_predictions_available\": true,\n      \"ident\": \"string\",\n      \"ident_prefix\": \"string\",\n      \"last_position\": {\n        \"fa_flight_id\": \"string\",\n        \"altitude\": 4970,\n        \"altitude_change\": \"D\",\n        \"groundspeed\": 9849,\n        \"heading\": 157,\n        \"latitude\": 9304.77028032305,\n        \"longitude\": 2222.807153095909,\n        \"timestamp\": \"2021-12-31T19:59:59Z\",\n        \"update_type\": \"A\"\n      },\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://PyqeK.omkoQ1Vp2GPA.+Z7TBLd0fjxPqQDpK4ajoL+ii.uK9Q6UeC1?qi=hmQTv&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"predicted_in\": null,\n      \"predicted_in_source\": null,\n      \"predicted_off\": null,\n      \"predicted_off_source\": \"Historical Average\",\n      \"predicted_on\": null,\n      \"predicted_on_source\": null,\n      \"predicted_out\": null,\n      \"predicted_out_source\": null,\n      \"waypoints\": [\n        9707.185201961704,\n        7087.766793998475\n      ],\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e00152e-fe2a-49d2-9f70-d87965e747cf",
+              "name": "Incorrect parameter(s). Query may be empty.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "-latlong \"44.953469 -111.045360 40.962321 -104.046577\"\n"
+                    },
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2df2a52c-229c-4d04-ad22-776ae0fd4798",
+          "name": "Search for flight positions",
+          "request": {
+            "name": "Search for flight positions",
+            "description": {
+              "content": "Returns flight positions based on geospatial search parameters.  This\nallows you to locate flights that have ever flown within a specific a\nlatitude/longitude box, groundspeed, and altitude. It takes search\nterms in a single string comprising of {operator key value} elements\nand returns an array of flight structures. Each search term must be\nenclosed in curly braces. Multiple search terms can be combined in an\nimplicit boolean \"and\" by separating the terms with at least one space.\nThis function only searches flight data representing approximately the\nlast 24 hours.\n\nThe supported operators include (note that operators take different numbers of arguments):\n\n* false - results must have the specified boolean key set to a value of false. Example: {false preferred}\n* true - results must have the specified boolean key set to a value of true. Example: {true preferred}\n* null - results must have the specified key set to a null value. Example: {null waypoints}\n* notnull - results must have the specified key not set to a null value. Example: {notnull aircraftType}\n* = - results must have a key that exactly matches the specified value. Example: {= fp C172}\n* != - results must have a key that must not match the specified value. Example: {!= prefix H}\n* < - results must have a key that is lexicographically less-than a specified value. Example: {< arrivalTime 1276811040}\n* \\> - results must have a key that is lexicographically greater-than a specified value. Example: {> speed 500}\n* <= - results must have a key that is lexicographically less-than-or-equal-to a specified value. Example: {<= alt 8000}\n* \\>= - results must have a key that is lexicographically greater-than-or-equal-to a specified value.\n* match - results must have a key that matches against a case-insensitive wildcard pattern. Example: {match ident AAL*}\n* notmatch - results must have a key that does not match against a case-insensitive wildcard pattern. Example: {notmatch aircraftType B76*}\n* range - results must have a key that is numerically between the two specified values. Example: {range alt 8000 20000}\n* in - results must have a key that exactly matches one of the specified values. Example: {in orig {KLAX KBUR KSNA KLGB}}\n\nThe supported key names include (note that not all of these key names are returned in the result structure, and some have slightly different names):\n\n* alt - Altitude, measured in hundreds of feet or Flight Level.\n* altChange - a one-character code indicating the change in altitude.\n* cid - a three-character cid code\n* clock - UNIX epoch timestamp seconds since 1970\n* fp - unique identifier assigned by FlightAware for this flight, aka fa_flight_id.\n* gs - ground speed, measured in kts.\n* lat - latitude of the reported position.\n* lon - longitude of the reported position\n* updateType - source of the last reported position (P=projected, O=oceanic, Z=radar, A=ADS-B, M=multilateration, D=datalink, X=surface and near surface (ADS-B and ASDE-X), S=space-based)\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "flights",
+                "search",
+                "positions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Query to search for flight positions. It should not exceed 1000 bytes\nin length. Search criteria is applied against all positions of a\nflight. This function only searches flights within approximately the\nlast 24 hours. The supported operators include (note that operators\ntake different numbers of arguments):\n\n* false - results must have the specified boolean key set to a value of false. Example: {false preferred}\n* true - results must have the specified boolean key set to a value of true. Example: {true preferred}\n* null - results must have the specified key set to a null value. Example: {null waypoints}\n* notnull - results must have the specified key not set to a null value. Example: {notnull aircraftType}\n* = - results must have a key that exactly matches the specified value. Example: {= fp C172}\n* != - results must have a key that must not match the specified value. Example: {!= prefix H}\n* < - results must have a key that is lexicographically less-than a specified value. Example: {< arrivalTime 1276811040}\n* \\> - results must have a key that is lexicographically greater-than a specified value. Example: {> speed 500}\n* <= - results must have a key that is lexicographically less-than-or-equal-to a specified value. Example: {<= alt 8000}\n* \\>= - results must have a key that is lexicographically greater-than-or-equal-to a specified value.\n* match - results must have a key that matches against a case-insensitive wildcard pattern. Example: {match ident AAL*}\n* notmatch - results must have a key that does not match against a case-insensitive wildcard pattern. Example: {notmatch aircraftType B76*}\n* range - results must have a key that is numerically between the two specified values. Example: {range alt 8000 20000}\n* in - results must have a key that exactly matches one of the specified values. Example: {in orig {KLAX KBUR KSNA KLGB}}\n\nThe supported key names include (note that not all of these key names are returned in the result structure, and some have slightly different names):\n\n* alt - Altitude, measured in hundreds of feet or Flight Level.\n* altChange - a one-character code indicating the change in altitude.\n* altMax - Altitude, measured in hundreds of feet or Flight Level.\n* cid - a three-character cid code\n* cidfac - a four-character cidfac code\n* clock - UNIX epoch timestamp seconds since 1970\n* fp - unique identifier assigned by FlightAware for this flight, aka fa_flight_id.\n* gs - ground speed, measured in kts.\n* lat - latitude of the reported position.\n* lon - longitude of the reported position\n* preferred - boolean indicator of position quality\n* recvd - UNIX epoch timestamp seconds since 1970\n* updateType - source of the last reported position (P=projected, O=oceanic, Z=radar, A=ADS-B, M=multilateration, D=datalink, X=surface and near surface (ADS-B and ASDE-X), S=space-based)\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_flights",
+                  "value": "false",
+                  "description": "Whether to return only a single position per unique fa_flight_id."
+                },
+                {
+                  "disabled": false,
+                  "key": "max_pages",
+                  "value": "1",
+                  "description": "Maximum number of pages to fetch. This is an upper limit and not a guarantee of how many pages will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque value used to get the next batch of data from a paged collection.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b419c000-a3d1-4103-92c9-96f065ab438a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    "search",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "{< alt 500} {range gs 10 100}\n"
+                    },
+                    {
+                      "key": "unique_flights",
+                      "value": "false"
+                    },
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"next\": \"https://szPdQTNcZ.gznmB1wvV?\"\n  },\n  \"num_pages\": 565,\n  \"positions\": [\n    {\n      \"fa_flight_id\": \"string\",\n      \"altitude\": 6243,\n      \"altitude_change\": \"C\",\n      \"groundspeed\": 3885,\n      \"heading\": 13,\n      \"latitude\": 5190.214187776902,\n      \"longitude\": 9580.295239993824,\n      \"timestamp\": \"2021-12-31T19:59:59Z\",\n      \"update_type\": \"O\"\n    },\n    {\n      \"fa_flight_id\": \"string\",\n      \"altitude\": 9390,\n      \"altitude_change\": \"-\",\n      \"groundspeed\": 9241,\n      \"heading\": 279,\n      \"latitude\": 2366.368686631446,\n      \"longitude\": 5531.806490181966,\n      \"timestamp\": \"2021-12-31T19:59:59Z\",\n      \"update_type\": \"M\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08d85e61-11c4-4c5c-9b6c-23dd930d0128",
+              "name": "Incorrect parameter(s). Expected: pages > 0.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    "search",
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "{< alt 500} {range gs 10 100}\n"
+                    },
+                    {
+                      "key": "unique_flights",
+                      "value": "false"
+                    },
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fdcb92e3-4671-4a2d-ae92-d6a27fc0caa4",
+          "name": "Get count of flights matching search parameters",
+          "request": {
+            "name": "Get count of flights matching search parameters",
+            "description": {
+              "content": "Full search query documentation is available at the /flights/search\nendpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "flights",
+                "search",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Query to search for flights with a simplified syntax (compared to\n/flights/search/advanced). It should not exceed 1000 bytes in length.\nQuery syntax allows filtering by latitude/longitude box, aircraft ident\nwith wildcards, type with wildcards, prefix, origin airport,\ndestination airport, origin or destination airport, groundspeed, and\naltitude. It takes search terms in a single string comprising \"-key\nvalue\" pairs. Codeshares and alternate idents are NOT searched when\nusing the -idents clause.\n\nKeys include:\n* `-prefix STRING`\n* `-type STRING`\n* `-idents STRING`\n* `-identOrReg STRING`\n* `-airline STRING`\n* `-destination STRING`\n* `-origin STRING`\n* `-originOrDestination STRING`\n* `-aboveAltitude INTEGER`\n* `-belowAltitude INTEGER`\n* `-aboveGroundspeed INTEGER`\n* `-belowGroundspeed INTEGER`\n* `-latlong \"MINLAT MINLON MAXLAT MAXLON\"`\n"
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "113aa410-00ec-4a4e-a9c5-0f2723cc9d0a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    "search",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "-latlong \"44.953469 -111.045360 40.962321 -104.046577\"\n"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"count\": 9055\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eaafaf2d-cc10-4309-91a2-baa9a9fee9f4",
+          "name": "Search for flights using advanced syntax",
+          "request": {
+            "name": "Search for flights using advanced syntax",
+            "description": {
+              "content": "Returns currently or recently airborne flights based on geospatial\nsearch parameters.\n\nQuery parameters include a latitude/longitude box, aircraft ident with\nwildcards, type with wildcards, prefix, origin airport,\ndestination airport, origin or destination airport, groundspeed, and\naltitude. It takes search terms in a single string comprising of\n{operator key value} elements and returns an array of flight\nstructures. Each search term must be enclosed in curly braces. Multiple\nsearch terms can be combined in an implicit boolean \"and\" by separating\nthe terms with at least one space. This function only searches flight\ndata representing approximately the last 24 hours. Codeshares and\nalternate idents are NOT searched when matching against the ident key.\n\nThe supported operators include (note that operators take different numbers of arguments):\n\n* false - results must have the specified boolean key set to a value of false. Example: {false arrived}\n* true - results must have the specified boolean key set to a value of true. Example: {true lifeguard}\n* null - results must have the specified key set to a null value. Example: {null waypoints}\n* notnull - results must have the specified key not set to a null value. Example: {notnull aircraftType}\n* = - results must have a key that exactly matches the specified value. Example: {= aircraftType C172}\n* != - results must have a key that must not match the specified value. Example: {!= prefix H}\n* < - results must have a key that is lexicographically less-than a specified value. Example: {< arrivalTime 1276811040}\n* \\> - results must have a key that is lexicographically greater-than a specified value. Example: {> speed 500}\n* <= - results must have a key that is lexicographically less-than-or-equal-to a specified value. Example: {<= alt 8000}\n* \\>= - results must have a key that is lexicographically greater-than-or-equal-to a specified value.\n* match - results must have a key that matches against a case-insensitive wildcard pattern. Example: {match ident AAL*}\n* notmatch - results must have a key that does not match against a case-insensitive wildcard pattern. Example: {notmatch aircraftType B76*}\n* range - results must have a key that is numerically between the two specified values. Example: {range alt 8000 20000}\n* in - results must have a key that exactly matches one of the specified values. Example: {in orig {KLAX KBUR KSNA KLGB}}\n* orig_or_dest - results must have either the origin or destination key exactly match one of the specified values. Example: {orig_or_dest {KLAX KBUR KSNA KLGB}}\n* airline - results will only include airline flight if the argument is 1, or will only include GA flights if the argument is 0. Example: {airline 1}\n* aircraftType - results must have an aircraftType key that matches one of the specified case-insensitive wildcard patterns. Example: {aircraftType {B76* B77*}}\n* ident - results must have an ident key that matches one of the specified case-insensitive wildcard patterns. Example: {ident {N123* N456* AAL* UAL*}}\n* ident_or_reg - results must have an ident key or was known to be operated by an aircraft registration that matches one of the specified case-insensitive wildcard patterns. Example: {ident_or_reg {N123* N456* AAL* UAL*}}\n\nThe supported key names include (note that not all of these key names are returned in the result structure, and some have slightly different names):\n\n* actualDepartureTime - Actual time of departure, or null if not departed yet. UNIX epoch timestamp seconds since 1970\n* aircraftType - aircraft type ID (for example: B763)\n* alt - altitude at last reported position (hundreds of feet or Flight Level)\n* altChange - altitude change indication (for example: \"C\" if climbing, \"D\" if descending, and empty if it is level)\n* arrivalTime - Actual time of arrival, or null if not arrived yet. UNIX epoch timestamp seconds since 1970\n* arrived - true if the flight has arrived at its destination.\n* cancelled - true if the flight has been cancelled. The meaning of cancellation is that the flight is no longer being tracked by FlightAware. There are a number of reasons a flight may be cancelled including cancellation by the airline, but that will not always be the case.\n* cdt - Controlled Departure Time, set if there is a ground hold on the flight. UNIX epoch timestamp seconds since 1970\n* clock - Time of last received position. UNIX epoch timestamp seconds since 1970\n* cta - Controlled Time of Arrival, set if there is a ground hold on the flight. UNIX epoch timestamp seconds since 1970\n* dest - ICAO airport code of destination (for example: KLAX)\n* edt - Estimated Departure Time. Epoch timestamp seconds since 1970\n* eta - Estimated Time of Arrival. Epoch timestamp seconds since 1970\n* fdt - Field Departure Time. UNIX epoch timestamp seconds since 1970\n* firstPositionTime - Time when first reported position was received, or 0 if no position has been received yet. Epoch timestamp seconds since 1970\n* fixes - intersections and/or VORs along the route (for example: SLS AMERO ARTOM VODIR NOTOS ULAPA ACA NUXCO OLULA PERAS ALIPO UPN GDL KEDMA BRISA CUL PERTI CEN PPE ALTAR ASUTA JLI RONLD LAADY WYVIL OLDEE RAL PDZ ARNES BASET WELLZ CIVET)\n* fp - unique identifier assigned by FlightAware for this flight, aka fa_flight_id.\n* gs - ground speed at last reported position, in kts.\n* heading - direction of travel at last reported position.\n* hiLat - highest latitude travelled by flight.\n* hiLon - highest longitude travelled by flight.\n* ident - flight identifier or registration of aircraft.\n* lastPositionTime - Time when last reported position was received, or 0 if no position has been received yet. Epoch timestamp seconds since 1970.\n* lat - latitude of last reported position.\n* lifeguard - true if a \"lifeguard\" rescue flight.\n* lon - longitude of last reported position.\n* lowLat - lowest latitude travelled by flight.\n* lowLon - lowest longitude travelled by flight.\n* ogta - Original Time of Arrival. UNIX epoch timestamp seconds since 1970\n* ogtd - Original Time of Departure. UNIX epoch timestamp seconds since 1970\n* orig - ICAO airport code of origin (for example: KIAH)\n* physClass - physical class (for example: J is jet)\n* prefix - A one or two character identifier prefix code (common values: G or GG Medevac, L Lifeguard, A Air Taxi, H Heavy, M Medium).\n* speed - ground speed, in kts.\n* status - Single letter code for current flight status, can be S Scheduled, F Filed, A Active, Z Completed, or X Cancelled.\n* updateType - data source of last position (P=projected, O=oceanic, Z=radar, A=ADS-B, M=multilateration, D=datalink, X=surface and near surface (ADS-B and ASDE-X), S=space-based).\n* waypoints - all of the intersections and VORs comprising the route\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "flights",
+                "search",
+                "advanced"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Query to search for airborne or recently arrived flights. It should not\nexceed 1000 bytes in length. Search criteria is only applied to the\nmost recent position for a flight. This function only searches flights\nwithin approximately the last 24 hours. The supported operators include\n(note that operators take different numbers of arguments):\n\n* false - results must have the specified boolean key set to a value of false. Example: {false arrived}\n* true - results must have the specified boolean key set to a value of true. Example: {true lifeguard}\n* null - results must have the specified key set to a null value. Example: {null waypoints}\n* notnull - results must have the specified key not set to a null value. Example: {notnull aircraftType}\n* = - results must have a key that exactly matches the specified value. Example: {= aircraftType C172}\n* != - results must have a key that must not match the specified value. Example: {!= prefix H}\n* < - results must have a key that is lexicographically less-than a specified value. Example: {< arrivalTime 1276811040}\n* \\> - results must have a key that is lexicographically greater-than a specified value. Example: {> speed 500}\n* <= - results must have a key that is lexicographically less-than-or-equal-to a specified value. Example: {<= alt 8000}\n* \\>= - results must have a key that is lexicographically greater-than-or-equal-to a specified value.\n* match - results must have a key that matches against a case-insensitive wildcard pattern. Example: {match ident AAL*}\n* notmatch - results must have a key that does not match against a case-insensitive wildcard pattern. Example: {notmatch aircraftType B76*}\n* range - results must have a key that is numerically between the two specified values. Example: {range alt 8000 20000}\n* in - results must have a key that exactly matches one of the specified values. Example: {in orig {KLAX KBUR KSNA KLGB}}\n* orig_or_dest - results must have either the origin or destination key exactly match one of the specified values. Example: {orig_or_dest {KLAX KBUR KSNA KLGB}}\n* airline - results will only include airline flight if the argument is 1, or will only include GA flights if the argument is 0. Example: {airline 1}\n* aircraftType - results must have an aircraftType key that matches one of the specified case-insensitive wildcard patterns. Example: {aircraftType {B76* B77*}}\n* ident - results must have an ident key that matches one of the specified case-insensitive wildcard patterns. Example: {ident {N123* N456* AAL* UAL*}}\n* ident_or_reg - results must have an ident key or was known to be operated by an aircraft registration that matches one of the specified case-insensitive wildcard patterns. Example: {ident_or_reg {N123* N456* AAL* UAL*}}\n\nThe supported key names include (note that not all of these key names are returned in the result structure, and some have slightly different names):\n\n* actualDepartureTime - Actual time of departure, or null if not departed yet. UNIX epoch timestamp seconds since 1970\n* aircraftType - aircraft type ID (for example: B763)\n* alt - altitude at last reported position (hundreds of feet or Flight Level)\n* altChange - altitude change indication (for example: \"C\" if climbing, \"D\" if descending, and empty if it is level)\n* arrivalTime - Actual time of arrival, or null if not arrived yet. UNIX epoch timestamp seconds since 1970\n* arrived - true if the flight has arrived at its destination.\n* cancelled - true if the flight has been cancelled. The meaning of cancellation is that the flight is no longer being tracked by FlightAware. There are a number of reasons a flight may be cancelled including cancellation by the airline, but that will not always be the case.\n* cdt - Controlled Departure Time, set if there is a ground hold on the flight. UNIX epoch timestamp seconds since 1970\n* clock - Time of last received position. UNIX epoch timestamp seconds since 1970\n* cta - Controlled Time of Arrival, set if there is a ground hold on the flight. UNIX epoch timestamp seconds since 1970\n* dest - ICAO airport code of destination (for example: KLAX)\n* edt - Estimated Departure Time. Epoch timestamp seconds since 1970\n* eta - Estimated Time of Arrival. Epoch timestamp seconds since 1970\n* fdt - Field Departure Time. UNIX epoch timestamp seconds since 1970\n* firstPositionTime - Time when first reported position was received, or 0 if no position has been received yet. Epoch timestamp seconds since 1970\n* fixes - intersections and/or VORs along the route (for example: SLS AMERO ARTOM VODIR NOTOS ULAPA ACA NUXCO OLULA PERAS ALIPO UPN GDL KEDMA BRISA CUL PERTI CEN PPE ALTAR ASUTA JLI RONLD LAADY WYVIL OLDEE RAL PDZ ARNES BASET WELLZ CIVET)\n* fp - unique identifier assigned by FlightAware for this flight, aka fa_flight_id.\n* gs - ground speed at last reported position, in kts.\n* heading - direction of travel at last reported position.\n* hiLat - highest latitude travelled by flight.\n* hiLon - highest longitude travelled by flight.\n* ident - flight identifier or registration of aircraft.\n* lastPositionTime - Time when last reported position was received, or 0 if no position has been received yet. Epoch timestamp seconds since 1970.\n* lat - latitude of last reported position.\n* lifeguard - true if a \"lifeguard\" rescue flight.\n* lon - longitude of last reported position.\n* lowLat - lowest latitude travelled by flight.\n* lowLon - lowest longitude travelled by flight.\n* ogta - Original Time of Arrival. UNIX epoch timestamp seconds since 1970\n* ogtd - Original Time of Departure. UNIX epoch timestamp seconds since 1970\n* orig - ICAO airport code of origin (for example: KIAH)\n* physClass - physical class (for example: J is jet)\n* prefix - A one or two character identifier prefix code (common values: G or GG Medevac, L Lifeguard, A Air Taxi, H Heavy, M Medium).\n* speed - ground speed, in kts.\n* status - Single letter code for current flight status, can be S Scheduled, F Filed, A Active, Z Completed, or X Cancelled.\n* updateType - data source of last position (P=projected, O=oceanic, Z=radar, A=ADS-B, M=multilateration, D=datalink, X=surface and near surface (ADS-B and ASDE-X), S=space-based).\n* waypoints - all of the intersections and VORs comprising the route\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_pages",
+                  "value": "1",
+                  "description": "Maximum number of pages to fetch. This is an upper limit and not a guarantee of how many pages will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque value used to get the next batch of data from a paged collection.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4da839e8-4408-497d-a11d-12c76ca3cd69",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    "search",
+                    "advanced"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "{orig_or_dest {KLAX KBUR KSNA KLGB}} {<= alt 8000} {match ident AAL*}\n"
+                    },
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"next\": \"https://EhXiYK.teqVph2oD5qpMooLFDBOqeOrr2\"\n  },\n  \"num_pages\": 8504,\n  \"flights\": [\n    {\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"aircraft_type\": \"string\",\n      \"bounding_box\": [\n        6393.249820303516,\n        5055.416925398218,\n        1601.2851215896917,\n        187.76916893555762\n      ],\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://fJJrBPNtaZXR.gpst7mAHXFAUkSIfLvyxqJF2uvet?\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"fa_flight_id\": \"string\",\n      \"first_position_time\": \"2021-12-31T19:59:59Z\",\n      \"foresight_predictions_available\": true,\n      \"ident\": \"string\",\n      \"ident_prefix\": \"string\",\n      \"last_position\": {\n        \"fa_flight_id\": \"string\",\n        \"altitude\": 3808,\n        \"altitude_change\": \"C\",\n        \"groundspeed\": 2814,\n        \"heading\": 274,\n        \"latitude\": 329.83437693811845,\n        \"longitude\": 8913.06645224635,\n        \"timestamp\": \"2021-12-31T19:59:59Z\",\n        \"update_type\": \"A\"\n      },\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://JLNMOPxiaYxKacZOSbYvpFIExFf.fzOvonAEBWvhsTaekiaXmSlrz7abJxDTHK?l=hzc&xu&dms=fUNCZ&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"predicted_in\": null,\n      \"predicted_in_source\": null,\n      \"predicted_off\": null,\n      \"predicted_off_source\": \"Foresight\",\n      \"predicted_on\": null,\n      \"predicted_on_source\": null,\n      \"predicted_out\": null,\n      \"predicted_out_source\": null,\n      \"waypoints\": [\n        3113.0447446073895,\n        5535.250910391234\n      ],\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\"\n    },\n    {\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"aircraft_type\": \"string\",\n      \"bounding_box\": [\n        8103.514097375276,\n        9921.562231377644,\n        3092.61429702537,\n        3260.3455505093602\n      ],\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://HQePFcRjkvthBJwuZjFsiiHyOEM.ljgnPvEoJINuplJ-cMUYUJIRyivU6vx,iNo4ALsWsrAf4AXV?\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"fa_flight_id\": \"string\",\n      \"first_position_time\": \"2021-12-31T19:59:59Z\",\n      \"foresight_predictions_available\": true,\n      \"ident\": \"string\",\n      \"ident_prefix\": \"string\",\n      \"last_position\": {\n        \"fa_flight_id\": \"string\",\n        \"altitude\": 4970,\n        \"altitude_change\": \"D\",\n        \"groundspeed\": 9849,\n        \"heading\": 157,\n        \"latitude\": 9304.77028032305,\n        \"longitude\": 2222.807153095909,\n        \"timestamp\": \"2021-12-31T19:59:59Z\",\n        \"update_type\": \"A\"\n      },\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://PyqeK.omkoQ1Vp2GPA.+Z7TBLd0fjxPqQDpK4ajoL+ii.uK9Q6UeC1?qi=hmQTv&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"predicted_in\": null,\n      \"predicted_in_source\": null,\n      \"predicted_off\": null,\n      \"predicted_off_source\": \"Historical Average\",\n      \"predicted_on\": null,\n      \"predicted_on_source\": null,\n      \"predicted_out\": null,\n      \"predicted_out_source\": null,\n      \"waypoints\": [\n        9707.185201961704,\n        7087.766793998475\n      ],\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c1124a7-8ee3-42b7-be10-60c85f391e43",
+              "name": "Incorrect parameter(s). Id may be missing or may not be fa_flight_id format.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    "search",
+                    "advanced"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "{orig_or_dest {KLAX KBUR KSNA KLGB}} {<= alt 8000} {match ident AAL*}\n"
+                    },
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7e043c8-5631-46ea-af00-162b6466f989",
+          "name": "Get information for a flight",
+          "request": {
+            "name": "Get information for a flight",
+            "description": {
+              "content": "Returns the flight info status summary for a registration, ident, or\nfa_flight_id.  If a fa_flight_id is specified then a maximum of 1\nflight is returned, unless the flight has been diverted in which case\nboth the original flight and any diversions will be returned with a\nduplicate fa_flight_id. If a registration or ident is specified,\napproximately 14 days of recent and scheduled flight information is\nreturned, ordered by `scheduled_out` (or `scheduled_off` if\n`scheduled_out` is missing) descending. Alternately, specify a start\nand end parameter to find your flight(s) of interest, including up to\n10 days of flight history.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "flights",
+                ":ident"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ident_type",
+                  "value": "<string>",
+                  "description": "Type of ident provided in the ident parameter. By default, the passed\nident is interpreted as a registration if possible. This parameter can\nforce the ident to be interpreted as a designator instead.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_pages",
+                  "value": "1",
+                  "description": "Maximum number of pages to fetch. This is an upper limit and not a guarantee of how many pages will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque value used to get the next batch of data from a paged collection.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ident",
+                  "description": "(Required) The ident, registration, or fa_flight_id to fetch. If using\na flight ident, it is highly recommended to specify ICAO flight\nident rather than IATA flight ident to avoid ambiguity and unexpected results.\nSetting the ident_type can also be used to help disambiguate.\n"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef60d3fb-247c-4b60-8730-c3017d099da7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":ident"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ident_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ident",
+                      "description": "(Required) The ident, registration, or fa_flight_id to fetch. If using\na flight ident, it is highly recommended to specify ICAO flight\nident rather than IATA flight ident to avoid ambiguity and unexpected results.\nSetting the ident_type can also be used to help disambiguate.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"next\": \"https://TvUgAwotWWSxmOZNKsDCwIROiqzALR.wmdyQ9Aq5OAfC+rf4LW3wE2X9QSw\"\n  },\n  \"num_pages\": 1454,\n  \"flights\": [\n    {\n      \"actual_in\": \"2021-12-31T19:59:59Z\",\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"actual_out\": \"2021-12-31T19:59:59Z\",\n      \"aircraft_type\": \"string\",\n      \"arrival_delay\": 8857,\n      \"atc_ident\": \"string\",\n      \"baggage_claim\": \"string\",\n      \"blocked\": true,\n      \"cancelled\": false,\n      \"codeshares\": [\n        \"string\",\n        \"string\"\n      ],\n      \"departure_delay\": 4555,\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://pzMklhlvQfCIzMSgAWFqgVqImwjT.cxjGVy7i+oVf7GKhId?iloqh&xozhwyo=Td&ytvhb&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"diverted\": true,\n      \"estimated_in\": \"2021-12-31T19:59:59Z\",\n      \"estimated_off\": \"2021-12-31T19:59:59Z\",\n      \"estimated_on\": \"2021-12-31T19:59:59Z\",\n      \"estimated_out\": \"2021-12-31T19:59:59Z\",\n      \"fa_flight_id\": \"string\",\n      \"filed_airspeed\": 5079,\n      \"filed_altitude\": 3999,\n      \"filed_ete\": 6372,\n      \"flight_number\": \"string\",\n      \"foresight_predictions_available\": true,\n      \"gate_destination\": \"string\",\n      \"gate_origin\": \"string\",\n      \"ident\": \"string\",\n      \"inbound_fa_flight_id\": \"string\",\n      \"operator\": \"string\",\n      \"operator_iata\": \"string\",\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"https://kzqakFYWIdcvsdJehOWXM.zpiepU9bW.YDX32vepGaV+?ycel=tGAmn&ez&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"position_only\": true,\n      \"progress_percent\": 70,\n      \"registration\": \"string\",\n      \"route\": \"string\",\n      \"route_distance\": 8733,\n      \"scheduled_in\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_off\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_on\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_out\": \"2021-12-31T19:59:59Z\",\n      \"seats_cabin_business\": 548,\n      \"seats_cabin_coach\": 1187,\n      \"seats_cabin_first\": 3830,\n      \"status\": \"string\",\n      \"terminal_destination\": \"string\",\n      \"terminal_origin\": \"string\",\n      \"type\": \"General_Aviation\",\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"actual_runway_off\": \"string\",\n      \"actual_runway_on\": \"string\",\n      \"operator_icao\": \"string\",\n      \"codeshares_iata\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"actual_in\": \"2021-12-31T19:59:59Z\",\n      \"actual_off\": \"2021-12-31T19:59:59Z\",\n      \"actual_on\": \"2021-12-31T19:59:59Z\",\n      \"actual_out\": \"2021-12-31T19:59:59Z\",\n      \"aircraft_type\": \"string\",\n      \"arrival_delay\": 9345,\n      \"atc_ident\": \"string\",\n      \"baggage_claim\": \"string\",\n      \"blocked\": false,\n      \"cancelled\": false,\n      \"codeshares\": [\n        \"string\",\n        \"string\"\n      ],\n      \"departure_delay\": 2441,\n      \"destination\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://i.uwyoPL4X9y\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"diverted\": false,\n      \"estimated_in\": \"2021-12-31T19:59:59Z\",\n      \"estimated_off\": \"2021-12-31T19:59:59Z\",\n      \"estimated_on\": \"2021-12-31T19:59:59Z\",\n      \"estimated_out\": \"2021-12-31T19:59:59Z\",\n      \"fa_flight_id\": \"string\",\n      \"filed_airspeed\": 7467,\n      \"filed_altitude\": 4984,\n      \"filed_ete\": 338,\n      \"flight_number\": \"string\",\n      \"foresight_predictions_available\": true,\n      \"gate_destination\": \"string\",\n      \"gate_origin\": \"string\",\n      \"ident\": \"string\",\n      \"inbound_fa_flight_id\": \"string\",\n      \"operator\": \"string\",\n      \"operator_iata\": \"string\",\n      \"origin\": {\n        \"code\": \"string\",\n        \"airport_info_url\": \"http://ywmRO.brjcSUu4mdTm3KFgPtAGYbKV.rUsc,G9CXL1RFPjkcm?rrqrh=p0Iy&dozw=eP&hpdn=8RO8U&\",\n        \"code_icao\": \"string\",\n        \"code_iata\": \"string\",\n        \"code_lid\": \"string\",\n        \"timezone\": \"America/New_York\",\n        \"name\": \"LaGuardia\",\n        \"city\": \"New York\"\n      },\n      \"position_only\": false,\n      \"progress_percent\": 52,\n      \"registration\": \"string\",\n      \"route\": \"string\",\n      \"route_distance\": 3996,\n      \"scheduled_in\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_off\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_on\": \"2021-12-31T19:59:59Z\",\n      \"scheduled_out\": \"2021-12-31T19:59:59Z\",\n      \"seats_cabin_business\": 7440,\n      \"seats_cabin_coach\": 6658,\n      \"seats_cabin_first\": 7424,\n      \"status\": \"string\",\n      \"terminal_destination\": \"string\",\n      \"terminal_origin\": \"string\",\n      \"type\": \"Airline\",\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"actual_runway_off\": \"string\",\n      \"actual_runway_on\": \"string\",\n      \"operator_icao\": \"string\",\n      \"codeshares_iata\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62fce820-2ce2-4aee-b45a-5f93184a844b",
+              "name": "Incorrect parameter(s). Ident may be missing or not in fa_flight_id format or pages may be < 1.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":ident"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ident_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max_pages",
+                      "value": "1"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ident",
+                      "description": "(Required) The ident, registration, or fa_flight_id to fetch. If using\na flight ident, it is highly recommended to specify ICAO flight\nident rather than IATA flight ident to avoid ambiguity and unexpected results.\nSetting the ident_type can also be used to help disambiguate.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8da13c88-4660-47c6-bf4e-aeabac992ae8",
+          "name": "Get the canonical ident of a flight",
+          "request": {
+            "name": "Get the canonical ident of a flight",
+            "description": {
+              "content": "When the ident parameter is a code that could map to multiple other codes,\nthis endpoint returns an array of information about all the possible codes.\nAn optional ident type and country code can be provided to refine ambiguous\nidents to a single result. The ident type should either be designator or\nregistration to describe the ident being passed in. The country code should\nrepresent a country the operator of the flight operates within.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "flights",
+                ":ident",
+                "canonical"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ident_type",
+                  "value": "<string>",
+                  "description": "Type of ident provided in the ident parameter"
+                },
+                {
+                  "disabled": false,
+                  "key": "country_code",
+                  "value": "<string>",
+                  "description": "An ISO 3166-1 alpha-2 country code."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ident",
+                  "description": "(Required) The flight designator or aircraft registration"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "179607ef-2053-49f1-bc77-c52ae4c40022",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":ident",
+                    "canonical"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ident_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ident",
+                      "description": "(Required) The flight designator or aircraft registration"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"idents\": [\n    {\n      \"ident\": \"string\",\n      \"ident_type\": \"registration\"\n    },\n    {\n      \"ident\": \"string\",\n      \"ident_type\": \"designator\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f99f5a7-6cc8-4354-905b-0b7fccfe28af",
+              "name": "Incorrect parameter(s). ident, ident_type, or country_code may be invalid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":ident",
+                    "canonical"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ident_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ident",
+                      "description": "(Required) The flight designator or aircraft registration"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5148830-cee1-4538-afb2-1f250ca4448f",
+          "name": "Submit a Flight Intent",
+          "request": {
+            "name": "Submit a Flight Intent",
+            "description": {
+              "content": "This operation informs FlightAware of an upcoming (or recently\ndeparted) flight. This information is used solely by FlightAware for\nimproving the accuracy of flight tracking. This method does not\ntransmit to any ANSP/ATC facility for flight separation or operational\nservices. Access to this endpoint requires special account\nauthorization. The FlightAware account must also be subscribed to\nFlightAware Global and the specified registration or ident must be on\nthe Global account.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "flights",
+                ":ident",
+                "intents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ident",
+                  "description": "(Required) The ident or registration of the Flight Intent"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=UTF-8"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"aircraft_type\": \"<string>\",\n  \"origin\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"intended_off\": \"<dateTime>\",\n  \"intended_on\": \"<dateTime>\",\n  \"altitude\": \"<integer>\",\n  \"airspeed\": \"<integer>\",\n  \"route\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6970c97f-5f12-47ce-b83f-cb58c75c9137",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":ident",
+                    "intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ident",
+                      "description": "(Required) The ident or registration of the Flight Intent"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aircraft_type\": \"C162\",\n  \"origin\": \"KSGR\",\n  \"destination\": \"50R\",\n  \"intended_off\": \"2021-10-16T21:30:00Z\",\n  \"intended_on\": \"2021-10-16T22:50:00Z\",\n  \"altitude\": 3500,\n  \"airspeed\": 86,\n  \"route\": \"MAPGP VICUC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8eed4b97-8356-4797-834e-c219d859e817",
+              "name": "Incorrect parameter(s). Ident may be missing or pages may be < 1. Body may be incomplete. User may lack permissions to post flight intent for this ident. Arrival/departure times, duration, or aircraft type may be invalid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":ident",
+                    "intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ident",
+                      "description": "(Required) The ident or registration of the Flight Intent"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aircraft_type\": \"C162\",\n  \"origin\": \"KSGR\",\n  \"destination\": \"50R\",\n  \"intended_off\": \"2021-10-16T21:30:00Z\",\n  \"intended_on\": \"2021-10-16T22:50:00Z\",\n  \"altitude\": 3500,\n  \"airspeed\": 86,\n  \"route\": \"MAPGP VICUC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "743b8524-ec4f-4e0f-8a4a-79eb2e43f932",
+          "name": "Get flight's current position",
+          "request": {
+            "name": "Get flight's current position",
+            "description": {
+              "content": "Returns the latest position for a flight",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "flights",
+                ":id",
+                "position"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The fa_flight_id to fetch. If looking for data from more than 10 days ago,\nplease use the corresponding historical endpoint.\n"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1616dbbd-d777-4ec9-a7bf-53e220eda26d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":id",
+                    "position"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The fa_flight_id to fetch. If looking for data from more than 10 days ago,\nplease use the corresponding historical endpoint.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"actual_off\": \"2021-12-31T19:59:59Z\",\n  \"actual_on\": \"2021-12-31T19:59:59Z\",\n  \"aircraft_type\": \"string\",\n  \"bounding_box\": [\n    9353.766343298665,\n    9521.666090472023,\n    9588.838495991675,\n    1158.1957142549727\n  ],\n  \"destination\": {\n    \"code\": \"string\",\n    \"airport_info_url\": \"http://tIXtTFpRkHnOoWxn.kefAjUOBnFxVdxtzm01aU8OR2d9UvNty4a-8h,,cxjyele1XtrUyIbVEDWYO?x&wvy=uCahq&t&\",\n    \"code_icao\": \"string\",\n    \"code_iata\": \"string\",\n    \"code_lid\": \"string\",\n    \"timezone\": \"America/New_York\",\n    \"name\": \"LaGuardia\",\n    \"city\": \"New York\"\n  },\n  \"fa_flight_id\": \"string\",\n  \"first_position_time\": \"2021-12-31T19:59:59Z\",\n  \"foresight_predictions_available\": true,\n  \"ident\": \"string\",\n  \"ident_prefix\": \"string\",\n  \"last_position\": {\n    \"fa_flight_id\": \"string\",\n    \"altitude\": 7431,\n    \"altitude_change\": \"C\",\n    \"groundspeed\": 5253,\n    \"heading\": 11,\n    \"latitude\": 5361.22468371301,\n    \"longitude\": 1156.6045228564449,\n    \"timestamp\": \"2021-12-31T19:59:59Z\",\n    \"update_type\": \"S\"\n  },\n  \"origin\": {\n    \"code\": \"string\",\n    \"airport_info_url\": \"http://qEMSrfYfLJNBwufJzof.byD0y3qtJiDRua,yGE.v\",\n    \"code_icao\": \"string\",\n    \"code_iata\": \"string\",\n    \"code_lid\": \"string\",\n    \"timezone\": \"America/New_York\",\n    \"name\": \"LaGuardia\",\n    \"city\": \"New York\"\n  },\n  \"predicted_in\": null,\n  \"predicted_in_source\": null,\n  \"predicted_off\": null,\n  \"predicted_off_source\": null,\n  \"predicted_on\": null,\n  \"predicted_on_source\": null,\n  \"predicted_out\": null,\n  \"predicted_out_source\": \"Historical Average\",\n  \"waypoints\": [\n    5120.022465493943,\n    6079.219108499248\n  ],\n  \"ident_icao\": \"string\",\n  \"ident_iata\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3de6cf35-0254-4156-a025-376e32d4c690",
+              "name": "Incorrect parameter (id). Id may be missing or may not be fa_flight_id format.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":id",
+                    "position"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The fa_flight_id to fetch. If looking for data from more than 10 days ago,\nplease use the corresponding historical endpoint.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91f8a1d6-6ed3-4a4e-8c6f-8058a2444be9",
+          "name": "Get flight's track",
+          "request": {
+            "name": "Get flight's track",
+            "description": {
+              "content": "Returns the track for a flight as an array of positions.\nData from up to 10 days ago can be obtained. If looking for older data,\nplease use the corresponding historical endpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "flights",
+                ":id",
+                "track"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_estimated_positions",
+                  "value": "<boolean>",
+                  "description": "Whether to include estimated positions in the flight track"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The fa_flight_id to fetch. If looking for data from more than 10 days ago,\nplease use the corresponding historical endpoint.\n"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93d1ad40-1f6f-4eed-b782-961b92e1d9a6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":id",
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_estimated_positions",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The fa_flight_id to fetch. If looking for data from more than 10 days ago,\nplease use the corresponding historical endpoint.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"positions\": [\n    {\n      \"fa_flight_id\": \"string\",\n      \"altitude\": 4610,\n      \"altitude_change\": \"D\",\n      \"groundspeed\": 3617,\n      \"heading\": 251,\n      \"latitude\": 8402.379252716637,\n      \"longitude\": 6637.3474166672595,\n      \"timestamp\": \"2021-12-31T19:59:59Z\",\n      \"update_type\": \"O\"\n    },\n    {\n      \"fa_flight_id\": \"string\",\n      \"altitude\": 5920,\n      \"altitude_change\": \"-\",\n      \"groundspeed\": 3955,\n      \"heading\": 159,\n      \"latitude\": 6887.228888341045,\n      \"longitude\": 6393.30302516059,\n      \"timestamp\": \"2021-12-31T19:59:59Z\",\n      \"update_type\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2ffeb88-e99d-4207-b008-5e57c76e8e59",
+              "name": "Incorrect parameter(s). Id may be missing or may not be fa_flight_id format. Aircraft may be blocked.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":id",
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_estimated_positions",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The fa_flight_id to fetch. If looking for data from more than 10 days ago,\nplease use the corresponding historical endpoint.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5339c1b9-9dce-4df2-88e8-1fee0af54029",
+              "name": "No track is available for this flight.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":id",
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_estimated_positions",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The fa_flight_id to fetch. If looking for data from more than 10 days ago,\nplease use the corresponding historical endpoint.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf93a2af-84b1-4f22-b2b7-47620be2caa5",
+          "name": "Get flight's filed route",
+          "request": {
+            "name": "Get flight's filed route",
+            "description": {
+              "content": "Returns information about a flight's filed route including coordinates,\nnames, and types of fixes along the route.  Not all flight routes can\nbe successfully decoded by this endpoint, particularly if the flight is\nnot entirely within the continental U.S. airspace, since this function\nonly has access to navaids within that area. If data on a waypoint is\nmissing then the type will be listed as \"UNKNOWN\". Data from up to 10 days\nago can be obtained. If looking for older data, please use the corresponding\nhistorical endpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "flights",
+                ":id",
+                "route"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The fa_flight_id to fetch. If looking for data from more than 10 days ago,\nplease use the corresponding historical endpoint.\n"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5eccec6-46e2-4039-9f4b-5b4dbde01b88",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":id",
+                    "route"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The fa_flight_id to fetch. If looking for data from more than 10 days ago,\nplease use the corresponding historical endpoint.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"route_distance\": \"string\",\n  \"fixes\": [\n    {\n      \"name\": \"string\",\n      \"latitude\": 5058.988905966382,\n      \"longitude\": 9785.391302854372,\n      \"distance_from_origin\": 9530.63860783776,\n      \"distance_this_leg\": 9664.027448051198,\n      \"distance_to_destination\": 6836.027848795951,\n      \"outbound_course\": 7525.598466976446,\n      \"type\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"latitude\": 2853.3708129406987,\n      \"longitude\": 3681.2354647056723,\n      \"distance_from_origin\": 6634.410239669442,\n      \"distance_this_leg\": 2735.3542443573374,\n      \"distance_to_destination\": 3157.811829187863,\n      \"outbound_course\": 1119.7369303477822,\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b17bfd8-0062-44f8-9e9a-3d0ce2270774",
+              "name": "Incorrect parameter (id). Id may be missing or may not be fa_flight_id format.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":id",
+                    "route"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The fa_flight_id to fetch. If looking for data from more than 10 days ago,\nplease use the corresponding historical endpoint.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35a6bf18-fbf3-47e5-8a5f-52fb38ee2198",
+              "name": "No route is available for this flight.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":id",
+                    "route"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The fa_flight_id to fetch. If looking for data from more than 10 days ago,\nplease use the corresponding historical endpoint.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae29c875-24cb-47d0-a5f1-ff815b4d2656",
+          "name": "Get an image of a flight's track on a map",
+          "request": {
+            "name": "Get an image of a flight's track on a map",
+            "description": {
+              "content": "Returns a flight's track as a base64-encoded image. Image can contain a\nvariety of additional data layers beyond just the track. Data from up to 10 days\nago can be obtained. If looking for older data, please use the corresponding\nhistorical endpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "flights",
+                ":id",
+                "map"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "480",
+                  "description": "Height of requested image (pixels)"
+                },
+                {
+                  "disabled": false,
+                  "key": "width",
+                  "value": "640",
+                  "description": "Width of requested image (pixels)"
+                },
+                {
+                  "disabled": false,
+                  "key": "layer_on",
+                  "value": "country boundaries",
+                  "description": "List of map layers to enable"
+                },
+                {
+                  "disabled": false,
+                  "key": "layer_on",
+                  "value": "US state boundaries",
+                  "description": "List of map layers to enable"
+                },
+                {
+                  "disabled": false,
+                  "key": "layer_on",
+                  "value": "water",
+                  "description": "List of map layers to enable"
+                },
+                {
+                  "disabled": false,
+                  "key": "layer_on",
+                  "value": "US major roads",
+                  "description": "List of map layers to enable"
+                },
+                {
+                  "disabled": false,
+                  "key": "layer_on",
+                  "value": "radar",
+                  "description": "List of map layers to enable"
+                },
+                {
+                  "disabled": false,
+                  "key": "layer_on",
+                  "value": "track",
+                  "description": "List of map layers to enable"
+                },
+                {
+                  "disabled": false,
+                  "key": "layer_on",
+                  "value": "flights",
+                  "description": "List of map layers to enable"
+                },
+                {
+                  "disabled": false,
+                  "key": "layer_on",
+                  "value": "airports",
+                  "description": "List of map layers to enable"
+                },
+                {
+                  "disabled": false,
+                  "key": "layer_off",
+                  "value": "US Cities",
+                  "description": "List of map layers to disable"
+                },
+                {
+                  "disabled": false,
+                  "key": "layer_off",
+                  "value": "european country boundaries",
+                  "description": "List of map layers to disable"
+                },
+                {
+                  "disabled": false,
+                  "key": "layer_off",
+                  "value": "asia country boundaries",
+                  "description": "List of map layers to disable"
+                },
+                {
+                  "disabled": false,
+                  "key": "layer_off",
+                  "value": "major airports",
+                  "description": "List of map layers to disable"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_data_block",
+                  "value": "false",
+                  "description": "Whether a textual caption containing the ident, type, heading,\naltitude, origin, and destination should be displayed by the flight's\nposition.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "airports_expand_view",
+                  "value": "false",
+                  "description": "Whether to force zoom area to ensure origin/destination airports are\nvisible. Enabling this flag forcefully enables the show_airports flag\nas well.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_airports",
+                  "value": "false",
+                  "description": "Whether to show the origin/destination airports for the flight as\nlabeled points on the map.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "bounding_box",
+                  "value": "<number>",
+                  "description": "Manually specify the zoom area of the map using custom bounds. Should\nbe a list of 4 coordinates representing the top, right, bottom, and\nleft sides of the area (in that order).\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "bounding_box",
+                  "value": "<number>",
+                  "description": "Manually specify the zoom area of the map using custom bounds. Should\nbe a list of 4 coordinates representing the top, right, bottom, and\nleft sides of the area (in that order).\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "bounding_box",
+                  "value": "<number>",
+                  "description": "Manually specify the zoom area of the map using custom bounds. Should\nbe a list of 4 coordinates representing the top, right, bottom, and\nleft sides of the area (in that order).\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "bounding_box",
+                  "value": "<number>",
+                  "description": "Manually specify the zoom area of the map using custom bounds. Should\nbe a list of 4 coordinates representing the top, right, bottom, and\nleft sides of the area (in that order).\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The fa_flight_id to fetch. If looking for data from more than 10 days ago,\nplease use the corresponding historical endpoint.\n"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "321fd798-0b13-4d63-b444-261246e014c8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":id",
+                    "map"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "480"
+                    },
+                    {
+                      "key": "width",
+                      "value": "640"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "country boundaries"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "US state boundaries"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "water"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "US major roads"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "radar"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "track"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "flights"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "airports"
+                    },
+                    {
+                      "key": "layer_off",
+                      "value": "US Cities"
+                    },
+                    {
+                      "key": "layer_off",
+                      "value": "european country boundaries"
+                    },
+                    {
+                      "key": "layer_off",
+                      "value": "asia country boundaries"
+                    },
+                    {
+                      "key": "layer_off",
+                      "value": "major airports"
+                    },
+                    {
+                      "key": "show_data_block",
+                      "value": "false"
+                    },
+                    {
+                      "key": "airports_expand_view",
+                      "value": "false"
+                    },
+                    {
+                      "key": "show_airports",
+                      "value": "false"
+                    },
+                    {
+                      "key": "bounding_box",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "bounding_box",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "bounding_box",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "bounding_box",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The fa_flight_id to fetch. If looking for data from more than 10 days ago,\nplease use the corresponding historical endpoint.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"map\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43a532d1-0888-4564-a542-65df7166e192",
+              "name": "Incorrect parameter (id). Id may be missing or may not be fa_flight_id format. Bounding box corners may be incorrectly defined.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "flights",
+                    ":id",
+                    "map"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "height",
+                      "value": "480"
+                    },
+                    {
+                      "key": "width",
+                      "value": "640"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "country boundaries"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "US state boundaries"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "water"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "US major roads"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "radar"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "track"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "flights"
+                    },
+                    {
+                      "key": "layer_on",
+                      "value": "airports"
+                    },
+                    {
+                      "key": "layer_off",
+                      "value": "US Cities"
+                    },
+                    {
+                      "key": "layer_off",
+                      "value": "european country boundaries"
+                    },
+                    {
+                      "key": "layer_off",
+                      "value": "asia country boundaries"
+                    },
+                    {
+                      "key": "layer_off",
+                      "value": "major airports"
+                    },
+                    {
+                      "key": "show_data_block",
+                      "value": "false"
+                    },
+                    {
+                      "key": "airports_expand_view",
+                      "value": "false"
+                    },
+                    {
+                      "key": "show_airports",
+                      "value": "false"
+                    },
+                    {
+                      "key": "bounding_box",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "bounding_box",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "bounding_box",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "bounding_box",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The fa_flight_id to fetch. If looking for data from more than 10 days ago,\nplease use the corresponding historical endpoint.\n"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 9485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of aeroapi)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "aeroapi",
+      "key": "env"
+    },
+    {
+      "type": "string",
+      "value": "https://{{env}}.flightaware.com/aeroapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c5476b6d-9cca-4c9b-88c4-baf763a83d75",
+    "name": "Aero airports flights API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\nAeroAPI is a simple, query-based API that gives software developers access\nto a variety of FlightAware's flight data. Users can obtain current or\nhistorical data. AeroAPI is a RESTful API delivering accurate and\nactionable aviation data. With the introduction of Foresight™, customers\nhave access to the data that powers over half of the predictive airline\nETAs in the US.\n\n## Categories\nAeroAPI is divided into several categories to make things easier to\ndiscover.\n- Flights: Summary information, planned routes, positions and more\n- Foresight: Flight positions enhanced with FlightAware Foresight™\n- Airports: Airport information and FIDS style resources\n- Operators: Operator information and fleet activity resources\n- Alerts: Configure flight alerts and delivery destinations\n- History: Historical flight access for various endpoints\n- Miscellaneous: Flight disruption, future schedule information, and aircraft owner information\n\n## Development Tools\nAeroAPI is defined using the OpenAPI Spec 3.0, which means it can be easily\nimported into tools like Postman. To get started try importing the API\nspecification using\n[Postman's instructions](https://learning.postman.com/docs/integrations/available-integrations/working-with-openAPI/).\nOnce imported as a collection only the \"Value\" field under the collection's\nAuthorization tab needs to be populated and saved before making calls.\n\nThe AeroAPI OpenAPI specification is located at:\\\nhttps://flightaware.com/commercial/aeroapi/resources/aeroapi-openapi.yml\n\nOur [open source AeroApps project](/aeroapi/portal/resources)\nprovides a small collection of services and sample applications to help\nyou get started.\n\nThe Flight Information Display System (FIDS) AeroApp is an example of a\nmulti-tier application using multiple languages and Docker containers.\nIt demonstrates connectivity, data caching, flight presentation, and leveraging flight maps.\n\nThe Alerts AeroApp demonstrates the use of AeroAPI to set, edit, and\nreceive alerts in a sample application with a Dockerized Python backend\nand a React frontend.\n\nOur AeroAPI push notification [testing interface](/commercial/aeroapi/send.rvt)\nprovides a quick and easy way to test the delivery of customized alerts via AeroAPI push.\n",
+      "type": "text/plain"
+    }
+  }
+}

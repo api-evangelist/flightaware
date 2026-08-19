@@ -1,0 +1,1386 @@
+{
+  "item": [
+    {
+      "id": "c47f32cf-7300-4d34-ad0e-43d2d49fc10a",
+      "name": "alerts",
+      "description": {
+        "content": "AeroAPI alerting can be used to configure and receive real-time alerts on key flight\nevents. With customizable alerting offered by our alert endpoints, AeroAPI empowers\nusers to selectively pick various types of events/filters to alert on. By doing so,\nyou can receive specially tailored alerts delivered to you for events such as flight plan\nfiled, flight departure (out and off), flight arrival (on and in), and more!\n\nTo get started with alerting, the **PUT /alerts/endpoint** endpoint must first be used\nto set up the account-wide default URL that alerts will be delivered to. This step must\nbe done before any alerts can be configured and will serve as the fallback URL that all\nalerts will be sent to for the account if a specific delivery URL is not designated on a\nparticular alert. If this is not performed before configuring alerts, then you will\nreceive a 400 error with an error message reminding you of this step when trying to interact\nwith the **POST /alerts** endpoint. Once a URL is set via the **PUT /alerts/endpoint** endpoint,\nthen alerts can be configured using the **POST /alerts** endpoint. The **GET /alerts** endpoint\ncan also be used to retrieve all currently configured alerts associated with your AeroAPI key.\nThe **GET /alerts** endpoint will allow you to easily retrieve the id of any specific alerts of\ninterest configured for the account which can let you use the **GET** **PUT** and **DELETE**\n**/alerts/{id}** endpoints to retrieve, update, and delete specific alerts.\n\nWhen configuring an individual alert, the *target_url* field can be set to a URL that’s\ndifferent than the account-wide target endpoint set via the **PUT /alerts/endpoint**. If\nthe *target_url* field is set on an alert, then that specific alert will be delivered to\nthe specified *target_url* rather than the default account-wide one. If this field is not\nconfigured for the alert, then the alert will be delivered to the default account-wide endpoint.\nBy setting this field, one can easily target different alerts to be received by different endpoints\nwhich can be useful for configuring per-application alerts or sending alerts to an alternate\ndevelopment environment without having to adjust a production alert configuration.\n\nFor each alert configured, one-to-many ‘events’ can be set for alert delivery. While most\nevents will result in one alert delivery, both the *arrival* and the *departure* events can\nresult in multiple alerts delivered (referred to as bundled). The *departure* event bundles the\ndeparture (actual OFF the ground) alert, along with the flight plan filed alert and up to 5\nper-departure changes which can include alerts for significant departure delays of over\n30 minutes, gate changes, and airport delays. FlightAware Global customers will\nalso receive *Power on* and *Ready to taxi* alerts as part of the departure bundle. The *arrival* event\nbundles the arrival (actual ON the ground) alert, along with up to 5 en-route changes (including delays\nof over 30 minutes and excluding diversions) identified. FlightAware Global customers will also receive\n*taxi stop* times as part of the *arrival* bundle. Setting a bundled type and unbundled type for an\nOn/Off will only result in a single alert in the case where events may overlap.\n\nIf there is a need to change the alert configurations, updating an alert using the **PUT /alerts/{id}**\nendpoint and a unique alert identifier (id) is preferred rather than creating an additional alert.\nBy doing so, you can avoid duplicate alerts being delivered which could create unnecessary noise\nif they are not of interest anymore.\n\nIf at any point there is a need to delete an alert, the **DELETE alerts/{id}** endpoint can be\nleveraged to delete an alert so that it won’t be delivered anymore. As a reminder, specific alert\nIDs can be retrieved from the **GET /alerts** endpoint.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "79592089-a6d5-47ec-8ace-1635997791aa",
+          "name": "Get all configured alerts",
+          "request": {
+            "name": "Get all configured alerts",
+            "description": {
+              "content": "Returns all configured alerts for the FlightAware account (this\nincludes alerts configured through other means by the FlightAware user\nowning the AeroAPI account like FlightAware's website or mobile apps).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "max_pages",
+                  "value": "0",
+                  "description": "Maximum number of pages to fetch. This is an upper limit and not\na guarantee of how many pages will be returned. Defaults to 0, meaning\nno maximum is set. Set this parameter if your call is timing out\n(most likely due to a high number of alerts).\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque value used to get the next batch of data from a paged collection.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1f896200-4169-4fa3-b041-01c6ef9227a9",
+              "name": "List of all alerts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_pages",
+                      "value": "0"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"alerts\": [\n    {\n      \"id\": 6857,\n      \"description\": \"string\",\n      \"ident\": \"string\",\n      \"origin\": \"string\",\n      \"destination\": \"string\",\n      \"aircraft_type\": \"string\",\n      \"created\": \"2021-12-31T19:59:59Z\",\n      \"changed\": \"2021-12-31T19:59:59Z\",\n      \"start\": \"1988-06-26\",\n      \"end\": \"1947-06-25\",\n      \"user_ident\": \"string\",\n      \"eta\": 0,\n      \"events\": {\n        \"arrival\": false,\n        \"cancelled\": false,\n        \"departure\": false,\n        \"diverted\": false,\n        \"filed\": false,\n        \"out\": false,\n        \"off\": false,\n        \"on\": false,\n        \"in\": false\n      },\n      \"target_url\": \"string\",\n      \"enabled\": false,\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"origin_icao\": \"string\",\n      \"origin_iata\": \"string\",\n      \"origin_lid\": \"string\",\n      \"destination_icao\": \"string\",\n      \"destination_iata\": \"string\",\n      \"destination_lid\": \"string\"\n    },\n    {\n      \"id\": 9706,\n      \"description\": \"string\",\n      \"ident\": \"string\",\n      \"origin\": \"string\",\n      \"destination\": \"string\",\n      \"aircraft_type\": \"string\",\n      \"created\": \"2021-12-31T19:59:59Z\",\n      \"changed\": \"2021-12-31T19:59:59Z\",\n      \"start\": \"1955-11-12\",\n      \"end\": \"1971-08-13\",\n      \"user_ident\": \"string\",\n      \"eta\": 0,\n      \"events\": {\n        \"arrival\": false,\n        \"cancelled\": false,\n        \"departure\": false,\n        \"diverted\": false,\n        \"filed\": false,\n        \"out\": false,\n        \"off\": false,\n        \"on\": false,\n        \"in\": false\n      },\n      \"target_url\": \"string\",\n      \"enabled\": true,\n      \"ident_icao\": \"string\",\n      \"ident_iata\": \"string\",\n      \"origin_icao\": \"string\",\n      \"origin_iata\": \"string\",\n      \"origin_lid\": \"string\",\n      \"destination_icao\": \"string\",\n      \"destination_iata\": \"string\",\n      \"destination_lid\": \"string\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"https://FTRUk.mdjvyz1JXn7wK+Xyq0B.Ljsn7AqqqOSlhnfbsHKTdzisW3\"\n  },\n  \"num_pages\": 9128\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b5ae120-d52c-4ef7-835d-e5bb4b475189",
+          "name": "Create new alert",
+          "request": {
+            "name": "Create new alert",
+            "description": {
+              "content": "Create a new AeroAPI flight alert. When the alert is triggered, a\ncallback mechanism will be used to notify the address set via the\n/alerts/endpoint endpoint. Each callback will be charged as a query and\ncount towards usage for the AeroAPI key that created the alert. If this key\nis disabled or removed, the alert will no longer be available.\nIf a target_url is provided, then this specific alert will be delivered\nto that address regardless of the adress set via the /alerts/endpoint endpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=UTF-8"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ident\": \"<string>\",\n  \"origin\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"aircraft_type\": \"<string>\",\n  \"start\": \"<date>\",\n  \"end\": \"<date>\",\n  \"eta\": 0,\n  \"events\": {\n    \"arrival\": false,\n    \"cancelled\": false,\n    \"departure\": false,\n    \"diverted\": false,\n    \"filed\": false,\n    \"out\": false,\n    \"off\": false,\n    \"on\": false,\n    \"in\": false\n  },\n  \"target_url\": \"<string>\",\n  \"max_weekly\": \"<integer>\",\n  \"id\": 9599.186487389228,\n  \"description\": false,\n  \"created\": 1525.4568762548847,\n  \"changed\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7ae6b99b-781e-4e1f-aa4e-5b33f5c3f7e8",
+              "name": "Alert created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ident\": \"<string>\",\n  \"origin\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"aircraft_type\": \"<string>\",\n  \"start\": \"<date>\",\n  \"end\": \"<date>\",\n  \"eta\": 0,\n  \"events\": {\n    \"arrival\": false,\n    \"cancelled\": false,\n    \"departure\": false,\n    \"diverted\": false,\n    \"filed\": false,\n    \"out\": false,\n    \"off\": false,\n    \"on\": false,\n    \"in\": false\n  },\n  \"target_url\": \"<string>\",\n  \"max_weekly\": \"<integer>\",\n  \"id\": false,\n  \"description\": 9583.434960808845,\n  \"created\": 8288.915591253126,\n  \"changed\": 1694\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URL of the newly created alert",
+                  "key": "Location",
+                  "value": "https://AmbikXmZALxGthOcAorjL.ukndUJc7A.UFiCHRYlY.UT,bxlH9lOUnThBLKVw6mFYP?cjhnqxt=JL&"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "29bc7858-4eab-45ab-9879-6a1c55cb58c4",
+              "name": "Invalid parameters specified (invalid ident, origin, destination, aircraft_type, dates or missing events) or alert configured would trigger more\nthan max_weekly delivered alerts per week.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ident\": \"<string>\",\n  \"origin\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"aircraft_type\": \"<string>\",\n  \"start\": \"<date>\",\n  \"end\": \"<date>\",\n  \"eta\": 0,\n  \"events\": {\n    \"arrival\": false,\n    \"cancelled\": false,\n    \"departure\": false,\n    \"diverted\": false,\n    \"filed\": false,\n    \"out\": false,\n    \"off\": false,\n    \"on\": false,\n    \"in\": false\n  },\n  \"target_url\": \"<string>\",\n  \"max_weekly\": \"<integer>\",\n  \"id\": false,\n  \"description\": 9583.434960808845,\n  \"created\": 8288.915591253126,\n  \"changed\": 1694\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 2678\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "667f25ec-1f2b-49cd-9315-e5e03b4771e3",
+          "name": "Get specific alert",
+          "request": {
+            "name": "Get specific alert",
+            "description": {
+              "content": "Returns the configuration data for an alert with the specified ID.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of the alert to fetch or update"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0cd43e19-5f45-45f7-b0eb-739e08d835e3",
+              "name": "Returns alert configuration structure.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the alert to fetch or update"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"id\": 4067,\n  \"description\": \"string\",\n  \"ident\": \"string\",\n  \"origin\": \"string\",\n  \"destination\": \"string\",\n  \"aircraft_type\": \"string\",\n  \"created\": \"2021-12-31T19:59:59Z\",\n  \"changed\": \"2021-12-31T19:59:59Z\",\n  \"start\": \"1992-11-25\",\n  \"end\": \"1965-08-13\",\n  \"user_ident\": \"string\",\n  \"eta\": 0,\n  \"events\": {\n    \"arrival\": false,\n    \"cancelled\": false,\n    \"departure\": false,\n    \"diverted\": false,\n    \"filed\": false,\n    \"out\": false,\n    \"off\": false,\n    \"on\": false,\n    \"in\": false\n  },\n  \"target_url\": \"string\",\n  \"enabled\": true,\n  \"ident_icao\": \"string\",\n  \"ident_iata\": \"string\",\n  \"origin_icao\": \"string\",\n  \"origin_iata\": \"string\",\n  \"origin_lid\": \"string\",\n  \"destination_icao\": \"string\",\n  \"destination_iata\": \"string\",\n  \"destination_lid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a4bba08-d5c2-452d-aaeb-a6e9789a1499",
+              "name": "No such alert exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the alert to fetch or update"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 2678\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d6c6dc31-be1d-4c95-ac33-0c5785ecbc27",
+          "name": "Modify specific alert",
+          "request": {
+            "name": "Modify specific alert",
+            "description": {
+              "content": "Modifies the configuration for an alert with the specified ID. If a target\nURL address is provided, then the alert will be delivered to that address\neven if it is different than the default account-wide address set through\nthe alerts/endpoint endpoint. Updating an alert that was created with a\ndifferent AeroAPI key is possible, but will not change the AeroAPI key that\nthe alert is associated with for usage.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of the alert to fetch or update"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=UTF-8"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"aircraft_type\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"end\": \"<date>\",\n  \"eta\": 0,\n  \"events\": {\n    \"arrival\": false,\n    \"cancelled\": false,\n    \"departure\": false,\n    \"diverted\": false,\n    \"filed\": false,\n    \"out\": false,\n    \"off\": false,\n    \"on\": false,\n    \"in\": false\n  },\n  \"ident\": \"<string>\",\n  \"origin\": \"<string>\",\n  \"start\": \"<date>\",\n  \"target_url\": \"<string>\",\n  \"max_weekly\": \"<integer>\",\n  \"changed\": true,\n  \"created\": \"string\",\n  \"description\": 115.13988043650225,\n  \"id\": 328\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f5554c6a-f445-469d-b3ea-f6a60b784803",
+              "name": "Alert modified",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the alert to fetch or update"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aircraft_type\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"end\": \"<date>\",\n  \"eta\": 0,\n  \"events\": {\n    \"arrival\": false,\n    \"cancelled\": false,\n    \"departure\": false,\n    \"diverted\": false,\n    \"filed\": false,\n    \"out\": false,\n    \"off\": false,\n    \"on\": false,\n    \"in\": false\n  },\n  \"ident\": \"<string>\",\n  \"origin\": \"<string>\",\n  \"start\": \"<date>\",\n  \"target_url\": \"<string>\",\n  \"max_weekly\": \"<integer>\",\n  \"changed\": 2936,\n  \"created\": \"string\",\n  \"description\": 4168,\n  \"id\": 4083\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c4d7ae7d-1ae0-4fea-82f8-414cad0a116e",
+              "name": "Invalid parameters specified (invalid ident, origin, destination, aircraft_type, dates or missing events) or alert configured would trigger more than max_weekly delivered alerts per week.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the alert to fetch or update"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aircraft_type\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"end\": \"<date>\",\n  \"eta\": 0,\n  \"events\": {\n    \"arrival\": false,\n    \"cancelled\": false,\n    \"departure\": false,\n    \"diverted\": false,\n    \"filed\": false,\n    \"out\": false,\n    \"off\": false,\n    \"on\": false,\n    \"in\": false\n  },\n  \"ident\": \"<string>\",\n  \"origin\": \"<string>\",\n  \"start\": \"<date>\",\n  \"target_url\": \"<string>\",\n  \"max_weekly\": \"<integer>\",\n  \"changed\": 2936,\n  \"created\": \"string\",\n  \"description\": 4168,\n  \"id\": 4083\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 2678\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b370da87-78ce-4f6b-b31a-d19ca0539959",
+              "name": "No such alert exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the alert to fetch or update"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aircraft_type\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"end\": \"<date>\",\n  \"eta\": 0,\n  \"events\": {\n    \"arrival\": false,\n    \"cancelled\": false,\n    \"departure\": false,\n    \"diverted\": false,\n    \"filed\": false,\n    \"out\": false,\n    \"off\": false,\n    \"on\": false,\n    \"in\": false\n  },\n  \"ident\": \"<string>\",\n  \"origin\": \"<string>\",\n  \"start\": \"<date>\",\n  \"target_url\": \"<string>\",\n  \"max_weekly\": \"<integer>\",\n  \"changed\": 2936,\n  \"created\": \"string\",\n  \"description\": 4168,\n  \"id\": 4083\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 2678\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c00017d7-75df-42c8-8093-d661a90491f8",
+          "name": "Delete specific alert",
+          "request": {
+            "name": "Delete specific alert",
+            "description": {
+              "content": "Deletes specific alert with given ID\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of the alert to fetch or update"
+                },
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3dfb1941-12a0-43f1-a0a4-861ea2c57a4c",
+              "name": "Alert deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the alert to fetch or update"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ca455f3a-49f4-4026-8f27-f569e083ff95",
+              "name": "Invalid id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the alert to fetch or update"
+                    },
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 2678\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8cdf76b-a778-4c6d-a3cd-218a4967a5e7",
+          "name": "Get configured alert callback URL",
+          "request": {
+            "name": "Get configured alert callback URL",
+            "description": {
+              "content": "Returns URL that will be POSTed to for alerts that are delivered via AeroAPI.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                "endpoint"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a06b1ffd-f6fd-476d-96f3-b348c7c04c19",
+              "name": "Returns endpoint URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    "endpoint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"url\": \"http://enumpZMhICl.jvgzrMb3pntHtQoZTYlITCAsVMBp.y\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23017f95-c677-48f8-b601-cafbdb2577fb",
+              "name": "Failed to get endpoint or no endpoint set.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    "endpoint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 2678\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9fb3c1a8-fadd-4510-956e-e8f508576310",
+          "name": "Set alert callback URL",
+          "request": {
+            "name": "Set alert callback URL",
+            "description": {
+              "content": "Updates the default URL that will be POSTed to for alerts that are delivered via AeroAPI.\nThis sets the account-wide default URL that all alerts will be delivered to unless\nthe specific alert has a different delivery address configured for it.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                "endpoint"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=UTF-8"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e575704e-9fb5-4da5-83ba-8f22d404b253",
+              "name": "Endpoint updated successfully, empty response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    "endpoint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3cfaaf4e-38c6-4a3e-b81c-f0f579120563",
+              "name": "Bad address, missing hostname, or unsupported address protocol.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    "endpoint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 2678\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff516596-93e1-4e20-af3b-9bc6e18b5e64",
+          "name": "Remove and disable default account-wide alert callback URL",
+          "request": {
+            "name": "Remove and disable default account-wide alert callback URL",
+            "description": {
+              "content": "Remove the default account-wide URL that will be POSTed to for alerts that are\nnot configured with a specific URL. This means that any alerts that are not configured\nwith a specific URL will not be delivered.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                "endpoint"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": " (This can only be one of aeroapi)",
+                  "type": "any",
+                  "value": "{{env}}",
+                  "key": "env"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3ea0f0b-2bba-42d7-b6c1-e839f7951602",
+              "name": "Endpoint successfully removed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    "endpoint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "99139dd4-4fe7-444b-b1e1-dcf99285a5d2",
+              "name": "Failed to delete endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    "endpoint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": " (This can only be one of aeroapi)",
+                      "type": "any",
+                      "value": "{{env}}",
+                      "key": "env"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"reason\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 2678\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": " (This can only be one of aeroapi)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "aeroapi",
+      "key": "env"
+    },
+    {
+      "type": "string",
+      "value": "https://{{env}}.flightaware.com/aeroapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8a164aa0-ad65-4c2f-bfee-12bde66a0951",
+    "name": "Aero airports alerts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\nAeroAPI is a simple, query-based API that gives software developers access\nto a variety of FlightAware's flight data. Users can obtain current or\nhistorical data. AeroAPI is a RESTful API delivering accurate and\nactionable aviation data. With the introduction of Foresight™, customers\nhave access to the data that powers over half of the predictive airline\nETAs in the US.\n\n## Categories\nAeroAPI is divided into several categories to make things easier to\ndiscover.\n- Flights: Summary information, planned routes, positions and more\n- Foresight: Flight positions enhanced with FlightAware Foresight™\n- Airports: Airport information and FIDS style resources\n- Operators: Operator information and fleet activity resources\n- Alerts: Configure flight alerts and delivery destinations\n- History: Historical flight access for various endpoints\n- Miscellaneous: Flight disruption, future schedule information, and aircraft owner information\n\n## Development Tools\nAeroAPI is defined using the OpenAPI Spec 3.0, which means it can be easily\nimported into tools like Postman. To get started try importing the API\nspecification using\n[Postman's instructions](https://learning.postman.com/docs/integrations/available-integrations/working-with-openAPI/).\nOnce imported as a collection only the \"Value\" field under the collection's\nAuthorization tab needs to be populated and saved before making calls.\n\nThe AeroAPI OpenAPI specification is located at:\\\nhttps://flightaware.com/commercial/aeroapi/resources/aeroapi-openapi.yml\n\nOur [open source AeroApps project](/aeroapi/portal/resources)\nprovides a small collection of services and sample applications to help\nyou get started.\n\nThe Flight Information Display System (FIDS) AeroApp is an example of a\nmulti-tier application using multiple languages and Docker containers.\nIt demonstrates connectivity, data caching, flight presentation, and leveraging flight maps.\n\nThe Alerts AeroApp demonstrates the use of AeroAPI to set, edit, and\nreceive alerts in a sample application with a Dockerized Python backend\nand a React frontend.\n\nOur AeroAPI push notification [testing interface](/commercial/aeroapi/send.rvt)\nprovides a quick and easy way to test the delivery of customized alerts via AeroAPI push.\n",
+      "type": "text/plain"
+    }
+  }
+}
