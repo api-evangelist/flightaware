@@ -1,0 +1,90 @@
+generated: '2026-09-10'
+method: searched
+source: >-
+  https://www.flightaware.com/commercial/firehose/documentation/revisionhistory,
+  https://www.flightaware.com/commercial/aeroapi/, https://status.flightaware.com/,
+  and openapi/_original/flightaware-openapi.yml (AeroAPI 4.30.0)
+description: >-
+  FlightAware runs three generations of API in parallel: AeroAPI v4 (current, REST), Firehose
+  (current, streaming, on its own version train), and FlightXML 2/3 (legacy SOAP, superseded but
+  still serving live WSDL contracts). Each has a different versioning and support posture, and only
+  Firehose publishes an explicit support window.
+versioning:
+  - api: AeroAPI
+    scheme: major-version-in-product-name plus semver in info.version
+    current: 4.30.0
+    major: v4
+    docs: https://www.flightaware.com/aeroapi/portal/documentation
+    note: >-
+      The base path carries no version segment (https://aeroapi.flightaware.com/aeroapi); the
+      generation is expressed in the product name and the contract's info.version. Observed moving
+      from 4.17.1 to 4.30.0 between API Evangelist harvests, additively — 11 operations added, none
+      removed. A migration guide exists for the v3 to v4 transition
+      (https://go.flightaware.com/aeroapi-version-4-migration-guide).
+  - api: Firehose
+    scheme: integer major release, requested per connection with the `version` initiation command
+    current: '37.0'
+    current_released: '2026-02'
+    docs: https://www.flightaware.com/commercial/firehose/documentation/revisionhistory
+    note: >-
+      A client pins the protocol version at connection time, so old and new clients coexist. Message
+      types and fields are gated on the version requested AND on the replay date range.
+  - api: FlightXML
+    scheme: major version in the URL path
+    current: '3'
+    status: legacy
+    note: FlightXML 2 and 3 are superseded by AeroAPI v4. Both WSDLs still resolve and both SOAP endpoints answer 401 (auth required), so the services are live but no longer the recommended surface.
+deprecation:
+  policy_url: https://www.flightaware.com/commercial/firehose/documentation/revisionhistory
+  sunset_header: false
+  support_window: >-
+    Firehose, verbatim: "The non-latest versions of major releases are supported for up to 1 year
+    after the date of release." This is the only explicit support window FlightAware publishes for
+    any of its APIs.
+  note: >-
+    No RFC 8594 Sunset or Deprecation response header is declared in AeroAPI 4.30.0 or documented
+    for Firehose. Deprecation is communicated in prose in the revision history and via
+    `deprecated: true` markers inside the OpenAPI schema.
+deprecated_surfaces:
+  - surface: Firehose event code `flightplan`
+    replacement: flifo
+    evidence: >-
+      Firehose commands page, verbatim: "'flightplan' and 'extendedFlightInfo' are being deprecated
+      in favor of 'flifo'."
+    source: https://www.flightaware.com/commercial/firehose/documentation/commands
+  - surface: Firehose event code `extendedFlightInfo`
+    replacement: flifo
+    evidence: same statement as above
+    source: https://www.flightaware.com/commercial/firehose/documentation/commands
+  - surface: FlightXML 2 and FlightXML 3 (SOAP + JSON)
+    replacement: AeroAPI v4
+    evidence: >-
+      https://www.flightaware.com/commercial/flightxml/ now redirects to the AeroAPI product page,
+      and https://flightxml.flightaware.com/json/FlightXML3/ returns HTTP 410 Gone with the body
+      "The requested resource is no longer available on this server and there is no forwarding
+      address." Individual FlightXML operations still answer 401, so the services remain reachable
+      for existing customers.
+    probed: '2026-09-10'
+deprecated_fields:
+  - field: alternate_ident
+    surface: airport objects across AeroAPI
+    replacement: code_iata (IATA) or code_lid (FAA LID)
+    evidence: '`deprecated: true` in the contract, with remediation text naming both replacements.'
+    source: openapi/_original/flightaware-openapi.yml
+deprecated_operations: []
+sla:
+  url: https://www.flightaware.com/commercial/aeroapi/
+  uptime_target: 99.5%
+  applies_to: AeroAPI Premium tier only
+  note: >-
+    The 99.5% uptime guarantee is published as a Premium-tier ($1,000/month minimum) benefit on the
+    AeroAPI pricing page, alongside email and phone support. No SLA is published for the Personal or
+    Standard tiers.
+status_page: https://status.flightaware.com/
+status_page_details:
+  platform: Atlassian Statuspage
+  page_id: PP9NJN5
+  created: '2025-06-03'
+  subscribe: [email, slack, webhook]
+  probed: '2026-09-10'
+  http_status: 200

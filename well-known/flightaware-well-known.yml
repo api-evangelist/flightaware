@@ -1,0 +1,82 @@
+generated: '2026-09-10'
+method: probed
+source: live HTTPS probes of every host this record knows
+description: >-
+  Named-path /.well-known/ discovery probe across every host in this record — the registrable
+  domain and www, the AeroAPI base host, the blog host — plus the two APIs.json root locations.
+  Every path was probed by name; nothing was found. www.flightaware.com and blog.flightaware.com
+  both return a real HTML 404 page (a rendered "Page Not Found" document, not a catch-all 200),
+  aeroapi.flightaware.com returns an Apigee JSON routing fault, and the apex 308-redirects to www.
+  A negative-control path was issued on every host and correctly 404'd, so no path-echo behavior
+  is present.
+hit_count: 0
+path_echo_control: passed
+hosts:
+  - host: https://flightaware.com
+    note: apex 308-redirects every path to www.flightaware.com
+    documents:
+      - {path: /.well-known/security.txt, status: 308}
+      - {path: /.well-known/openid-configuration, status: 308}
+      - {path: /.well-known/oauth-authorization-server, status: 308}
+      - {path: /.well-known/oauth-protected-resource, status: 308}
+      - {path: /.well-known/api-catalog, status: 308}
+      - {path: /.well-known/ai-plugin.json, status: 308}
+      - {path: /.well-known/aauth-resource.json, status: 308}
+      - {path: /.well-known/agent-card.json, status: 308}
+      - {path: /.well-known/agent.json, status: 308}
+      - {path: /.well-known/apis.json, status: 308}
+      - {path: /apis.json, status: 308}
+      - {path: /apis.yml, status: 308}
+      - {path: /.well-known/flightaware-negative-control-7f3ab91c.json, status: 308, control: true}
+  - host: https://www.flightaware.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+      - {path: /.well-known/flightaware-negative-control-7f3ab91c.json, status: 404, control: true}
+  - host: https://aeroapi.flightaware.com
+    note: >-
+      API gateway (Apigee). Every unrouted path returns a JSON fault body
+      "Unable to identify proxy for host: secure and url: ..." with status 404.
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+      - {path: /.well-known/flightaware-negative-control-7f3ab91c.json, status: 404, control: true}
+  - host: https://blog.flightaware.com
+    note: HubSpot-hosted blog; serves a rendered 404 template for every unknown path.
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/aauth-resource.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/apis.json, status: 404}
+      - {path: /apis.json, status: 404}
+      - {path: /apis.yml, status: 404}
+      - {path: /.well-known/flightaware-negative-control-7f3ab91c.json, status: 404, control: true}
+finding: >-
+  FlightAware publishes no /.well-known/ discovery surface and no APIs.json index. No WellKnown or
+  SecurityTxt pointer is emitted, because a recorded absence must not be scored as a presence.

@@ -1,0 +1,102 @@
+generated: '2026-09-10'
+method: searched
+source: >-
+  npm registry, PyPI, RubyGems, crates.io and the FlightAware GitHub organization
+  (https://github.com/flightaware), probed 2026-09-10
+description: >-
+  FlightAware publishes NO first-party client SDK for AeroAPI or Firehose on any language package
+  registry. What it ships instead is a set of first-party open-source starter applications and
+  example programs on GitHub, distributed by clone rather than by package manager, plus one
+  unrelated first-party Rust crate. The AeroAPI documentation's own "Development Tools" section
+  points developers at importing the OpenAPI into Postman rather than at an SDK, which is
+  consistent with this finding.
+sdk_finding: no-first-party-registry-sdk
+packages:
+  - language: rust
+    registry: crates.io
+    name: egm2008
+    url: https://crates.io/crates/egm2008
+    install: cargo add egm2008
+    official: true
+    version: 0.1.0
+    published: '2023-11-01'
+    source_repo: https://github.com/flightaware/egm2008
+    note: >-
+      Genuinely first-party — crates.io ownership includes the
+      github:flightaware:flightaware-staff team. Earth Gravitational Model (EGM2008) geoid
+      library; it is NOT an AeroAPI or Firehose client, so it does not count as an API SDK.
+  - language: python
+    registry: github
+    name: aeroapps
+    url: https://github.com/flightaware/aeroapps
+    install: git clone https://github.com/flightaware/aeroapps
+    official: true
+    version: null
+    published: null
+    note: >-
+      "Getting started with FlightAware AeroAPI" — first-party sample applications (FIDS and
+      Alerts AeroApps, Python and Java backends, Docker compose). No registry release and no
+      version tag, so there is no published version to record; the repository last received a
+      push in 2022, which is the only currency signal available for it.
+  - language: python
+    registry: github
+    name: firestarter
+    url: https://github.com/flightaware/firestarter
+    install: git clone https://github.com/flightaware/firestarter
+    official: true
+    version: null
+    published: null
+    note: >-
+      "Getting started with FlightAware Firehose" — first-party Python reference client for the
+      Firehose streaming feed. Distributed by clone; not published to PyPI, so no registry
+      version exists to record.
+  - language: java
+    registry: github
+    name: firehose_examples
+    url: https://github.com/flightaware/firehose_examples
+    install: git clone https://github.com/flightaware/firehose_examples
+    official: true
+    version: null
+    published: null
+    note: First-party Java example programs for the Firehose service. Not published to Maven Central.
+  - language: csharp
+    registry: github
+    name: flightxml3_examples
+    url: https://github.com/flightaware/flightxml3_examples
+    install: git clone https://github.com/flightaware/flightxml3_examples
+    official: true
+    version: null
+    published: null
+    note: First-party C# examples for the legacy FlightXML3 SOAP/JSON API. Not published to NuGet.
+  - language: ruby
+    registry: github
+    name: flightxml2-client-ruby
+    url: https://github.com/flightaware/flightxml2-client-ruby
+    install: git clone https://github.com/flightaware/flightxml2-client-ruby
+    official: true
+    version: null
+    published: null
+    note: >-
+      First-party Ruby client for the legacy FlightXML2 SOAP API, last pushed in 2010. Never
+      published to RubyGems — rubygems.org/api/v1/gems/flightxml.json and .../flightaware.json
+      both 404. Historical interest only.
+  - language: typescript
+    registry: npm
+    name: flightaware
+    url: https://www.npmjs.com/package/flightaware
+    install: npm install flightaware
+    official: false
+    version: 0.1.0-alpha.3
+    published: '2025-09-16'
+    note: >-
+      Describes itself as "The official TypeScript library for the Flightaware API" and sets its
+      npm author name to "Flightaware", but FIRST-PARTY COULD NOT BE ESTABLISHED: the declared
+      repository is github.com/tonybruess/flightaware-typescript (a personal account, not the
+      flightaware org) and the sole npm maintainer is a personal gmail address. No FlightAware
+      documentation page references it. Recorded as official:false pending provider confirmation.
+registries_probed:
+  - {registry: npm, query: 'flightaware, aeroapi', result: 'one unverified third-party package; no @flightaware scope'}
+  - {registry: pypi, query: 'flightaware, aeroapi, flightaware-aeroapi', result: '404 — no first-party package'}
+  - {registry: rubygems, query: 'flightaware, flightxml', result: '404 — no first-party gem'}
+  - {registry: crates.io, query: egm2008, result: 'first-party (flightaware-staff team owned)'}
+  - {registry: buf.build, query: flightaware, result: 'no published protobuf modules'}

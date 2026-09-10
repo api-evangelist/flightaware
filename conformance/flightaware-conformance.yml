@@ -1,0 +1,104 @@
+generated: '2026-09-10'
+method: derived
+source: >-
+  openapi/_original/flightaware-openapi.yml (AeroAPI 4.30.0), wsdl/flightaware-flightxml2.wsdl,
+  wsdl/flightaware-flightxml3.wsdl, and the Firehose documentation at
+  https://www.flightaware.com/commercial/firehose/documentation
+description: >-
+  Cross-cutting and domain-standard conformance for FlightAware's API surface, asserted only where
+  the contract itself carries the evidence. FlightAware publishes no compliance/certification
+  program (no trust center, no SOC 2 / ISO 27001 page was found on 2026-09-10), so no Compliance
+  pointer is emitted from this file.
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      openapi components.securitySchemes declares only ApiKeyAuth (apiKey, in: header, name:
+      x-apikey). No oauth2 flow anywhere in the contract and no OAuth documentation on the portal.
+  - id: oidc
+    conforms: false
+    evidence: No /.well-known/openid-configuration on any host (see well-known/flightaware-well-known.yml).
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Error responses are application/json; charset=UTF-8 with an object of title/reason/detail/status.
+      The field set is RFC 7807-shaped but the media type is not application/problem+json and there is
+      no `type` URI member, so this is a look-alike envelope, not RFC 9457.
+  - id: json-api
+    conforms: false
+    evidence: Responses are plain JSON resource objects; no data/attributes/relationships envelope.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      Cursor pagination declared in the contract — `cursor` and `max_pages` query parameters,
+      `links.next` (uri-reference) and `num_pages` in every collection response schema.
+  - id: idempotency
+    conforms: false
+    evidence: >-
+      No Idempotency-Key header or equivalent parameter appears anywhere in AeroAPI 4.30.0. The
+      mutating surface (POST /alerts, PUT /alerts/{id}, DELETE /alerts/{id}, PUT /alerts/endpoint,
+      DELETE /alerts/endpoint, POST /flights/{ident}/intents) carries no replay protection.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: >-
+      No Sunset or Deprecation response header is declared in the contract, and no header-based
+      deprecation signalling is documented. Deprecation is communicated in prose and by
+      `deprecated: true` on individual schema fields (e.g. alternate_ident).
+  - id: soap-1.1
+    conforms: true
+    evidence: >-
+      wsdl/flightaware-flightxml2.wsdl and wsdl/flightaware-flightxml3.wsdl are live WSDL 1.1
+      documents (targetNamespace http://flightxml.flightaware.com/soap/FlightXML2 and
+      .../FlightXML3), 47 and 24 operations respectively, fetched 2026-09-10.
+  - id: json-lines
+    conforms: true
+    evidence: >-
+      Firehose documentation, Data Format section — "All messages are in UTF-8 encoding. Each
+      message is a valid JSON value. Each message is separated by a newline."
+      https://www.flightaware.com/commercial/firehose/documentation/summary
+domain_standards:
+  - id: icao-location-and-operator-codes
+    conforms: true
+    evidence: >-
+      The contract natively speaks the ICAO identifier scheme. Airport and operator objects carry a
+      first-class `code_icao` member (72 occurrences), operator endpoints are keyed on ICAO airline
+      codes, and Firehose's `filter` command takes "a series of space separated ICAO airline codes".
+      openapi/_original/flightaware-openapi.yml — components of airports/operators responses.
+  - id: iata-location-and-airline-codes
+    conforms: true
+    evidence: >-
+      Parallel first-class `code_iata` member (76 occurrences) on airport and operator objects,
+      distinct from the ICAO member rather than collapsed into one opaque identifier.
+      openapi/_original/flightaware-openapi.yml.
+  - id: faa-lid
+    conforms: true
+    evidence: >-
+      `code_lid` (FAA Location Identifier, 76 occurrences) is modelled as its own member alongside
+      code_iata and code_icao. The older single `alternate_ident` field that conflated IATA and LID
+      is marked `deprecated: true` in the contract with remediation text naming both replacements.
+  - id: metar
+    conforms: true
+    evidence: >-
+      GET /airports/{id}/weather/observations returns `raw_data` — "Raw METAR report string" —
+      alongside decoded members, so a consumer that already speaks METAR can use the untouched
+      report. openapi/flightaware-airports-api-openapi.yml#get_airport_weather_observations.
+  - id: taf
+    conforms: true
+    evidence: >-
+      GET /airports/{id}/weather/forecast is documented against TAF (Terminal Aerodrome Forecast)
+      in the contract description. openapi/flightaware-airports-api-openapi.yml#get_airport_weather_forecast.
+  - id: ads-b
+    conforms: true
+    evidence: >-
+      Position provenance is declared in the contract and in the Firehose subscription layers —
+      terrestrial ADS-B, Aireon space-based ADS-B, MLAT, ANSP radar and datalink are separately
+      named position sources rather than an undifferentiated "position".
+notes:
+  - >-
+    REWARD-ONLY, and stated honestly: aviation has no single machine-readable interchange standard
+    that AeroAPI could declare the way a healthcare API declares FHIR. What the contract does carry
+    is the sector's identifier and observation standards (ICAO, IATA, FAA LID, METAR, TAF) as
+    first-class, separately-named members. A consumer who already holds an ICAO or IATA fleet and
+    airport reference integrates with no bespoke crosswalk.
+  - >-
+    FlightAware does NOT publish AIXM, FIXM, SWIM or IATA AIDX/SSIM contracts, and none is asserted here.

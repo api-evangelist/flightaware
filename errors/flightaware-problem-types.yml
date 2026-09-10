@@ -1,0 +1,129 @@
+generated: '2026-09-10'
+method: derived
+source: >-
+  openapi/ (AeroAPI 4.30.0, all 8 refined specs) plus one live unauthenticated probe of
+  https://aeroapi.flightaware.com/aeroapi/airports/KIAH on 2026-09-10
+format: custom
+description: >-
+  AeroAPI's error catalog, derived from every 4xx response declared in the contract and confirmed
+  against a live 401. The envelope is RFC 7807-SHAPED BUT NOT RFC 9457: the media type is
+  `application/json; charset=UTF-8`, not `application/problem+json`, and there is no `type` URI
+  member, so a client cannot dereference an error to a stable documentation page. `reason` is the
+  stable machine-readable discriminator; `title` and `detail` are human strings.
+envelope:
+  media_type: application/json; charset=UTF-8
+  schema_title: Error
+  required: [title, reason, detail, status]
+  fields:
+    - {name: title, type: string, description: Short summary of the type of error encountered.}
+    - {name: reason, type: string, description: 'Error type name directly from the backend — the stable machine-readable discriminator.'}
+    - {name: detail, type: string, description: 'More detailed description, possibly naming the invalid field or remediation steps.'}
+    - {name: status, type: integer, description: The HTTP response code repeated inside the body.}
+  example_observed:
+    url: https://aeroapi.flightaware.com/aeroapi/airports/KIAH
+    http_status: 401
+    body: '{"title": "Invalid API key", "reason": "INVALID_API_KEY", "detail": "Provided API key is not valid", "status": 401}'
+statuses_declared:
+  '400': 52
+  '404': 14
+problems:
+  - status: 401
+    reason: INVALID_API_KEY
+    title: Invalid API key
+    detail: Provided API key is not valid
+    remediation: >-
+      Send a valid key in the `x-apikey` request header. NOT DECLARED IN THE CONTRACT — AeroAPI
+      4.30.0 declares no 401 response on any operation, yet every unauthenticated request returns
+      one. This is a real gap between the published spec and the deployed API.
+    source: 'probed: https://aeroapi.flightaware.com/aeroapi/airports/KIAH (2026-09-10)'
+  - status: 400
+    title: Incorrect parameter(s)
+    detail: >-
+      The dominant 400 class. The contract states the specific validation rule per operation, e.g.
+      "Id must be a valid airport code and cannot be empty. Airline and type query params cannot
+      both be set."
+    remediation: Correct the named parameter and retry. Not retryable unchanged.
+    source_operations:
+      - openapi/flightaware-flights-api-openapi.yml#get_flights_by_search
+      - openapi/flightaware-airports-api-openapi.yml#get_airport
+      - openapi/flightaware-account-api-openapi.yml#get_account_usage
+  - status: 400
+    title: Invalid fa_flight_id
+    detail: '"Id may be missing or may not be fa_flight_id format." Flight-scoped operations key on the opaque fa_flight_id, not on a bare ident.'
+    remediation: >-
+      Resolve an ident to an fa_flight_id first (get_flight / get_flights_by_search), then call the
+      position, track, route or map operation with it.
+    source_operations:
+      - openapi/flightaware-flights-api-openapi.yml#get_flight_position
+      - openapi/flightaware-flights-api-openapi.yml#get_flight_track
+      - openapi/flightaware-flights-api-openapi.yml#get_flight_route
+      - openapi/flightaware-flights-api-openapi.yml#get_flight_map
+  - status: 400
+    title: Time window out of range
+    detail: >-
+      "`start` cannot be more than 10 days in the past and `end` cannot be more than ...", and for
+      history operations "Request may be for data before earliest date". Historical depth is a
+      function of the subscription, so the same query can succeed on one account and 400 on another.
+    remediation: Narrow the window, or check the account's historical entitlement.
+    source_operations:
+      - openapi/flightaware-history-api-openapi.yml#get_history_flight
+      - openapi/flightaware-operators-api-openapi.yml#get_operator_flights_cancellations
+      - openapi/flightaware-history-api-openapi.yml#get_history_airports_flights_arrived
+  - status: 400
+    title: Invalid alert configuration
+    detail: >-
+      "Invalid parameters specified (invalid ident, origin, destination, aircraft_type, dates or
+      missing events) or alert configured would trigger more than [the permitted volume]."
+    remediation: >-
+      Narrow the alert's matching criteria, and set at least one event. A PUT /alerts/endpoint must
+      be performed BEFORE the first POST /alerts, or the create returns 400 telling you so.
+    source_operations:
+      - openapi/flightaware-alerts-api-openapi.yml#create_alert
+      - openapi/flightaware-alerts-api-openapi.yml#update_alert
+  - status: 400
+    title: Bad alert delivery endpoint
+    detail: Bad address, missing hostname, or unsupported address protocol.
+    remediation: Supply an https URL FlightAware can POST alert payloads to.
+    source_operations:
+      - openapi/flightaware-alerts-api-openapi.yml#set_alerts_endpoint
+  - status: 400
+    title: No alert endpoint set
+    detail: Failed to get endpoint or no endpoint set.
+    remediation: Call PUT /alerts/endpoint to establish the account-wide default delivery URL.
+    source_operations:
+      - openapi/flightaware-alerts-api-openapi.yml#get_alerts_endpoint
+  - status: 404
+    title: No such operator exists
+    detail: The operator code did not resolve. The most common 404 in the contract (9 operations).
+    remediation: Use an ICAO or IATA airline code; resolve ambiguity with get_operators_canonical.
+    source_operations:
+      - openapi/flightaware-operators-api-openapi.yml#get_operator
+      - openapi/flightaware-operators-api-openapi.yml#get_operator_flights
+      - openapi/flightaware-history-api-openapi.yml#get_history_operators_flights
+  - status: 404
+    title: No such alert exists
+    detail: The alert id did not resolve for this API key.
+    remediation: List alerts with get_all_alerts to obtain valid ids.
+    source_operations:
+      - openapi/flightaware-alerts-api-openapi.yml#get_alert
+      - openapi/flightaware-alerts-api-openapi.yml#update_alert
+  - status: 404
+    title: No data available for this flight
+    detail: >-
+      "No track is available for this flight." / "No route is available for this flight." /
+      "No upcoming forecast currently available for this airport." A 404 here means the DATA does
+      not exist, not that the resource identifier is wrong.
+    remediation: Treat as an empty result, not as a client error. Do not retry.
+    source_operations:
+      - openapi/flightaware-flights-api-openapi.yml#get_flight_track
+      - openapi/flightaware-flights-api-openapi.yml#get_flight_route
+      - openapi/flightaware-airports-api-openapi.yml#get_airport_weather_forecast
+gaps:
+  - >-
+    No 401, 403, 429 or 5xx response is declared on ANY operation in AeroAPI 4.30.0, although 401 is
+    demonstrably returned. An agent reading only the contract has no machine-readable description of
+    authentication failure, entitlement failure, throttling or server error.
+  - >-
+    No error `type` URI, and no published error-code reference page on the developer portal, so the
+    `reason` values above are the only stable identifiers and they are discoverable only by
+    triggering them.

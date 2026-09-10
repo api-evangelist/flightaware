@@ -1,0 +1,25 @@
+generated: '2026-09-10'
+method: generated
+source: openapi/ (AeroAPI 4.30.0) + conventions/, errors/, lifecycle/, asyncapi/
+description: >-
+  Packaged Agent Skills for FlightAware's AeroAPI. Every step is grounded in an operationId that
+  exists verbatim in the linked contract; the conventions, error and reversibility rules are
+  carried over from the harvested artifacts in this repository. Authored by API Evangelist —
+  FlightAware publishes no skills or AGENTS.md of its own.
+skills:
+  - file: flightaware-track-a-flight.md
+    name: Track a flight with AeroAPI
+    api: openapi/flightaware-flights-api-openapi.yml
+    operations: [get_flights_by_search, get_flight, get_flights_canonical, get_flight_position, get_flight_track, get_flight_route]
+  - file: flightaware-airport-operations-board.md
+    name: Build an airport operations board with AeroAPI
+    api: openapi/flightaware-airports-api-openapi.yml
+    operations: [get_airports_canonical, get_airport, get_airport_flights, get_airport_flights_departed, get_airport_flights_arrived, get_airport_delays, get_airport_weather_observations]
+  - file: flightaware-configure-flight-alerts.md
+    name: Configure AeroAPI flight alerts (push webhooks)
+    api: openapi/flightaware-alerts-api-openapi.yml
+    operations: [set_alerts_endpoint, get_alerts_endpoint, create_alert, get_all_alerts, get_alert, update_alert, delete_alert, delete_alerts_endpoint]
+  - file: flightaware-historical-flight-research.md
+    name: Research historical flights with AeroAPI
+    api: openapi/flightaware-history-api-openapi.yml
+    operations: [get_history_flight, get_history_flight_track, get_history_flight_route, get_history_aircraft_last_flight, get_history_airports_flights_arrived, get_history_airports_flights_departed, get_history_operators_flights, get_account_usage]

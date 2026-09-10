@@ -1,26 +1,61 @@
 {
-  "provider": "flightaware",
-  "sources": [
-    "flightaware-airports-api-openapi.yml",
-    "flightaware-alerts-api-openapi.yml",
-    "flightaware-flights-api-openapi.yml",
-    "flightaware-foresight-api-openapi.yml",
-    "flightaware-history-api-openapi.yml",
-    "flightaware-miscellaneous-api-openapi.yml",
-    "flightaware-operators-api-openapi.yml"
-  ],
-  "outputs": [
-    "flightaware-airports-api-openapi.yml",
-    "flightaware-alerts-api-openapi.yml",
-    "flightaware-flights-api-openapi.yml",
-    "flightaware-foresight-api-openapi.yml",
-    "flightaware-history-api-openapi.yml",
-    "flightaware-miscellaneous-api-openapi.yml",
-    "flightaware-operators-api-openapi.yml"
-  ],
-  "archived": [],
-  "errors": [],
-  "warnings": [],
-  "notes": [],
-  "skipped": []
+  "summary": {
+    "providers_processed": 1,
+    "providers_with_openapi": 1,
+    "outputs_written": 8,
+    "sources_disposed": 1,
+    "providers_with_errors": 0,
+    "total_errors": 0,
+    "dry_run": false,
+    "cleanup": "archive",
+    "tag_axis": "auto",
+    "sources_split_on_first_tag": 0
+  },
+  "providers": [
+    {
+      "provider": "flightaware",
+      "sources": [
+        "_original/flightaware-openapi.yml",
+        "flightaware-openapi.yml"
+      ],
+      "outputs": [
+        "flightaware-account-api-openapi.yml",
+        "flightaware-airports-api-openapi.yml",
+        "flightaware-alerts-api-openapi.yml",
+        "flightaware-flights-api-openapi.yml",
+        "flightaware-foresight-api-openapi.yml",
+        "flightaware-history-api-openapi.yml",
+        "flightaware-miscellaneous-api-openapi.yml",
+        "flightaware-operators-api-openapi.yml"
+      ],
+      "archived": [
+        "archived openapi/flightaware-openapi.yml"
+      ],
+      "errors": [],
+      "warnings": [],
+      "notes": [
+        "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+        "flightaware-openapi.yml: upgraded openapi 3.0.2 -> OpenAPI 3.2.0",
+        "flightaware-openapi.yml: upgraded openapi 3.0.2 -> OpenAPI 3.2.0",
+        "tag 'account' spans 2 source specs (flightaware-openapi.yml, flightaware-openapi.yml): per-path servers applied",
+        "tag 'airports' spans 2 source specs (flightaware-openapi.yml, flightaware-openapi.yml): per-path servers applied",
+        "tag 'alerts' spans 2 source specs (flightaware-openapi.yml, flightaware-openapi.yml): per-path servers applied",
+        "tag 'flights' spans 2 source specs (flightaware-openapi.yml, flightaware-openapi.yml): per-path servers applied",
+        "tag 'foresight' spans 2 source specs (flightaware-openapi.yml, flightaware-openapi.yml): per-path servers applied",
+        "tag 'history' spans 2 source specs (flightaware-openapi.yml, flightaware-openapi.yml): per-path servers applied",
+        "tag 'miscellaneous' spans 2 source specs (flightaware-openapi.yml, flightaware-openapi.yml): per-path servers applied",
+        "tag 'operators' spans 2 source specs (flightaware-openapi.yml, flightaware-openapi.yml): per-path servers applied",
+        "apis.yml register: written (+1 apis, 10 total)"
+      ],
+      "skipped": [
+        "flightaware-airports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+        "flightaware-alerts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+        "flightaware-flights-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+        "flightaware-foresight-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+        "flightaware-history-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+        "flightaware-miscellaneous-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+        "flightaware-operators-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+      ]
+    }
+  ]
 }

@@ -1,0 +1,248 @@
+generated: '2026-09-10'
+method: derived
+source: openapi/ (AeroAPI 4.30.0, 69 operations)
+status: candidate
+description: >-
+  FlightAware publishes NO first-party MCP server. This is a DERIVED candidate tool list, one
+  tool per AeroAPI operation, so an implementer can see what an MCP surface over AeroAPI would
+  contain. Each tool inherits its real input contract from the referenced operation's
+  parameters and requestBody in the linked OpenAPI. Nothing here is served by FlightAware.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+  note: >-
+    No official hosted endpoint and no official stdio package. Searched the AeroAPI developer
+    portal, the FlightAware GitHub organization, npm and PyPI on 2026-09-10. Every MCP server
+    for AeroAPI found in the wild is third-party and community-built (cssnr/flightaware-mcp,
+    mikedarke/mcp-server-flight-aware-aeroapi, chrischall/flightaware-mcp, imonroe) — each one
+    wraps AeroAPI with the user's own x-apikey. None is endorsed or operated by FlightAware,
+    so none is recorded as this provider's agent surface.
+third_party_servers:
+  - name: cssnr/flightaware-mcp
+    url: https://github.com/cssnr/flightaware-mcp
+    official: false
+    note: community; local CLI and self-hosted remote modes, AEROAPI_KEY env var
+  - name: mikedarke/mcp-server-flight-aware-aeroapi
+    url: https://github.com/mikedarke/mcp-server-flight-aware-aeroapi
+    official: false
+    note: community; local stdio
+  - name: chrischall/flightaware-mcp
+    url: https://www.npmjs.com/package/@chrischall/flightaware-mcp
+    official: false
+    note: community; npm package
+server:
+  name: flightaware-aeroapi
+  transport: null
+  url: null
+tools:
+  - name: get_account_usage
+    description: Get AeroAPI usage statistics for account
+    source_operation: openapi/flightaware-account-api-openapi.yml#get_account_usage
+  - name: get_all_airports
+    description: Get all airports
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_all_airports
+  - name: get_delays_for_all_airports
+    description: Get delay information for all airports with delays
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_delays_for_all_airports
+  - name: get_nearby_airports
+    description: Get airports near a location
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_nearby_airports
+  - name: get_airport
+    description: Get static information about an airport
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_airport
+  - name: get_airports_canonical
+    description: Get the canonical code of an airport
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_airports_canonical
+  - name: get_airport_delays
+    description: Get airport delay information
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_airport_delays
+  - name: get_airport_flights
+    description: Get all flights for a given airport
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_airport_flights
+  - name: get_airport_flights_arrived
+    description: Get flights that have recently arrived at an airport
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_airport_flights_arrived
+  - name: get_airport_flights_arrivals_cancellations
+    description: Get recently cancelled flights that were scheduled to arrive at an airport
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_airport_flights_arrivals_cancellations
+  - name: get_airport_flights_count
+    description: Get flight counts for an airport
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_airport_flights_count
+  - name: get_airport_flights_departed
+    description: Get flights that have recently departed from an airport
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_airport_flights_departed
+  - name: get_airport_flights_departures_cancellations
+    description: Get recently cancelled flights that were scheduled to depart from an airport
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_airport_flights_departures_cancellations
+  - name: get_airport_flights_scheduled_arrivals
+    description: Get future flights arriving at an airport
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_airport_flights_scheduled_arrivals
+  - name: get_airport_flights_scheduled_departures
+    description: Get future flights departing from an airport
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_airport_flights_scheduled_departures
+  - name: get_flights_between_airports
+    description: Get flights with a specific origin and destination
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_flights_between_airports
+  - name: get_airports_near_airport
+    description: Get airports near an airport
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_airports_near_airport
+  - name: get_routes_between_airports
+    description: Get routes between 2 airports
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_routes_between_airports
+  - name: get_airport_weather_forecast
+    description: Get weather forecast for given airport
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_airport_weather_forecast
+  - name: get_airport_weather_observations
+    description: Get weather conditions for given airport
+    source_operation: openapi/flightaware-airports-api-openapi.yml#get_airport_weather_observations
+  - name: get_all_alerts
+    description: Get all configured alerts
+    source_operation: openapi/flightaware-alerts-api-openapi.yml#get_all_alerts
+  - name: create_alert
+    description: Create new alert
+    source_operation: openapi/flightaware-alerts-api-openapi.yml#create_alert
+  - name: get_alerts_endpoint
+    description: Get configured alert callback URL
+    source_operation: openapi/flightaware-alerts-api-openapi.yml#get_alerts_endpoint
+  - name: set_alerts_endpoint
+    description: Set alert callback URL
+    source_operation: openapi/flightaware-alerts-api-openapi.yml#set_alerts_endpoint
+  - name: delete_alerts_endpoint
+    description: Remove and disable default account-wide alert callback URL
+    source_operation: openapi/flightaware-alerts-api-openapi.yml#delete_alerts_endpoint
+  - name: get_alert
+    description: Get specific alert
+    source_operation: openapi/flightaware-alerts-api-openapi.yml#get_alert
+  - name: update_alert
+    description: Modify specific alert
+    source_operation: openapi/flightaware-alerts-api-openapi.yml#update_alert
+  - name: delete_alert
+    description: Delete specific alert
+    source_operation: openapi/flightaware-alerts-api-openapi.yml#delete_alert
+  - name: get_flights_by_search
+    description: Search for flights
+    source_operation: openapi/flightaware-flights-api-openapi.yml#get_flights_by_search
+  - name: get_flights_by_advanced_search
+    description: Search for flights using advanced syntax
+    source_operation: openapi/flightaware-flights-api-openapi.yml#get_flights_by_advanced_search
+  - name: get_flights_count_by_search
+    description: Get count of flights matching search parameters
+    source_operation: openapi/flightaware-flights-api-openapi.yml#get_flights_count_by_search
+  - name: get_flights_by_position_search
+    description: Search for flight positions
+    source_operation: openapi/flightaware-flights-api-openapi.yml#get_flights_by_position_search
+  - name: get_flight
+    description: Get information for a flight
+    source_operation: openapi/flightaware-flights-api-openapi.yml#get_flight
+  - name: get_flights_canonical
+    description: Get the canonical ident of a flight
+    source_operation: openapi/flightaware-flights-api-openapi.yml#get_flights_canonical
+  - name: post_flights_by_ident
+    description: Submit a Flight Intent
+    source_operation: openapi/flightaware-flights-api-openapi.yml#post_flights_by_ident
+  - name: get_flight_map
+    description: Get an image of a flight's track on a map
+    source_operation: openapi/flightaware-flights-api-openapi.yml#get_flight_map
+  - name: get_flight_position
+    description: Get flight's current position
+    source_operation: openapi/flightaware-flights-api-openapi.yml#get_flight_position
+  - name: get_flight_route
+    description: Get flight's filed route
+    source_operation: openapi/flightaware-flights-api-openapi.yml#get_flight_route
+  - name: get_flight_track
+    description: Get flight's track
+    source_operation: openapi/flightaware-flights-api-openapi.yml#get_flight_track
+  - name: get_flights_by_advanced_search_with_foresight
+    description: Search for flights, responses include Foresight data
+    source_operation: openapi/flightaware-foresight-api-openapi.yml#get_flights_by_advanced_search_with_foresight
+  - name: get_flight_with_foresight
+    description: Get information for a flight, including Foresight data
+    source_operation: openapi/flightaware-foresight-api-openapi.yml#get_flight_with_foresight
+  - name: get_flight_position_with_foresight
+    description: Get flight's current position, including Foresight data
+    source_operation: openapi/flightaware-foresight-api-openapi.yml#get_flight_position_with_foresight
+  - name: get_history_aircraft_last_flight
+    description: Get aircraft's last known flight
+    source_operation: openapi/flightaware-history-api-openapi.yml#get_history_aircraft_last_flight
+  - name: get_history_airports_flights_arrived
+    description: Get historical flights that were planned to arrive at an airport
+    source_operation: openapi/flightaware-history-api-openapi.yml#get_history_airports_flights_arrived
+  - name: get_history_airports_flights_arrivals_cancellations
+    description: Get historical cancelled flights that were planned to arrive at an airport
+    source_operation: openapi/flightaware-history-api-openapi.yml#get_history_airports_flights_arrivals_cancellations
+  - name: get_history_airports_flights_departed
+    description: Get historical flights that were planned to depart from an airport
+    source_operation: openapi/flightaware-history-api-openapi.yml#get_history_airports_flights_departed
+  - name: get_history_airports_flights_departures_cancellations
+    description: Get historical cancelled flights that were planned to depart from an airport
+    source_operation: openapi/flightaware-history-api-openapi.yml#get_history_airports_flights_departures_cancellations
+  - name: get_history_flights_between_airports
+    description: Get historical flights with a specific origin and destination
+    source_operation: openapi/flightaware-history-api-openapi.yml#get_history_flights_between_airports
+  - name: get_history_flight
+    description: Get information for a historical flight
+    source_operation: openapi/flightaware-history-api-openapi.yml#get_history_flight
+  - name: get_history_flight_map
+    description: Get an image of a historical flight's track on a map
+    source_operation: openapi/flightaware-history-api-openapi.yml#get_history_flight_map
+  - name: get_history_flight_route
+    description: Get historical flight's filed route
+    source_operation: openapi/flightaware-history-api-openapi.yml#get_history_flight_route
+  - name: get_history_flight_track
+    description: Get historical information for a flight's track
+    source_operation: openapi/flightaware-history-api-openapi.yml#get_history_flight_track
+  - name: get_history_operators_flights
+    description: Get historical flights for a given operator
+    source_operation: openapi/flightaware-history-api-openapi.yml#get_history_operators_flights
+  - name: get_history_operators_flights_cancellations
+    description: Get historical cancelled flights for a given operator
+    source_operation: openapi/flightaware-history-api-openapi.yml#get_history_operators_flights_cancellations
+  - name: get_flight_type
+    description: Get information about an aircraft type
+    source_operation: openapi/flightaware-miscellaneous-api-openapi.yml#get_flight_type
+  - name: get_aircraft_blocked
+    description: Check if a given ident is blocked
+    source_operation: openapi/flightaware-miscellaneous-api-openapi.yml#get_aircraft_blocked
+  - name: get_aircraft_owner
+    description: Get the owner of an aircraft
+    source_operation: openapi/flightaware-miscellaneous-api-openapi.yml#get_aircraft_owner
+  - name: get_all_disruption_counts
+    description: Get global flight disruption statistics
+    source_operation: openapi/flightaware-miscellaneous-api-openapi.yml#get_all_disruption_counts
+  - name: get_disruption_counts
+    description: Get flight disruption statistics for a particular entity
+    source_operation: openapi/flightaware-miscellaneous-api-openapi.yml#get_disruption_counts
+  - name: get_schedules_by_date
+    description: Get scheduled flights
+    source_operation: openapi/flightaware-miscellaneous-api-openapi.yml#get_schedules_by_date
+  - name: get_all_operators
+    description: Get all operators.
+    source_operation: openapi/flightaware-operators-api-openapi.yml#get_all_operators
+  - name: get_operator
+    description: Get static information for an operator.
+    source_operation: openapi/flightaware-operators-api-openapi.yml#get_operator
+  - name: get_operators_canonical
+    description: Get the canonical code of an operator for API usage.
+    source_operation: openapi/flightaware-operators-api-openapi.yml#get_operators_canonical
+  - name: get_operator_flights
+    description: Get all of an operator's flights
+    source_operation: openapi/flightaware-operators-api-openapi.yml#get_operator_flights
+  - name: get_operator_flights_arrived
+    description: Get arrived flights
+    source_operation: openapi/flightaware-operators-api-openapi.yml#get_operator_flights_arrived
+  - name: get_operator_flights_cancellations
+    description: Get recently cancelled flights for an operator
+    source_operation: openapi/flightaware-operators-api-openapi.yml#get_operator_flights_cancellations
+  - name: get_operator_flights_count
+    description: Get flight counts for operator
+    source_operation: openapi/flightaware-operators-api-openapi.yml#get_operator_flights_count
+  - name: get_operator_flights_enroute
+    description: Get en route flights
+    source_operation: openapi/flightaware-operators-api-openapi.yml#get_operator_flights_enroute
+  - name: get_operator_flights_scheduled
+    description: Get scheduled flights
+    source_operation: openapi/flightaware-operators-api-openapi.yml#get_operator_flights_scheduled

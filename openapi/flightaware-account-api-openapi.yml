@@ -1,0 +1,240 @@
+openapi: 3.2.0
+info:
+  title: Flightaware Account API
+  version: 4.30.0
+  description: 'Operations tagged account across 2 of this provider''s published API definitions: flightaware-openapi.yml, flightaware-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://{env}.flightaware.com/aeroapi
+  variables:
+    env:
+      default: aeroapi
+      enum:
+      - aeroapi
+security:
+- ApiKeyAuth: []
+tags:
+- name: account
+paths:
+  /account/usage:
+    get:
+      operationId: get_account_usage
+      summary: Get AeroAPI usage statistics for account
+      description: 'Returns usage statistics for your AeroAPI account. Can be filtered
+
+        by key and date range. Data per account is updated every 10 minutes.
+
+        '
+      tags:
+      - account
+      parameters:
+      - in: query
+        name: start
+        description: 'Datetime or date to start gathering usage data from. If left blank,
+
+          will default to 1 year into the past. Has a maximum value of 1 year into
+
+          the past. If using date instead of datetime, then the time will default to 00:00:00Z.
+
+          Thus, the next day''s date should be specified if one day of data is desired when
+
+          using date instead of datetime.
+
+          '
+        schema:
+          type: string
+          oneOf:
+          - format: date-time
+          - format: date
+        examples:
+          datetime:
+            value: '2023-12-31T19:59:59Z'
+          date:
+            value: '2023-12-31'
+        x-fill-example: 'no'
+      - in: query
+        name: end
+        description: 'Datetime or date to end gathering usage data from. If left blank,
+
+          will default to the current time. Has a maximum value of 1 year into the past
+
+          If using date instead of datetime, then the time will default to 00:00:00Z.
+
+          Thus, the next day''s date should be specified if one day of data is desired when
+
+          using date instead of datetime.
+
+          '
+        schema:
+          type: string
+          oneOf:
+          - format: date-time
+          - format: date
+        examples:
+          datetime:
+            value: '2023-12-31T19:59:59Z'
+          date:
+            value: '2023-12-31'
+        x-fill-example: 'no'
+      - in: query
+        name: all_keys
+        description: 'Flag to determine which key(s) to get usage data for. If False, data for the key
+
+          that made the request will be retrieved. If True, data for all keys
+
+          associated with the account will be retrieved.
+
+          '
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                type: object
+                properties:
+                  total_calls:
+                    type: integer
+                    description: 'Total number of calls across all resources
+
+                      '
+                  total_pages:
+                    type: integer
+                    description: 'Total number of pages retrieved across all resources
+
+                      '
+                  total_cost:
+                    type: number
+                    description: 'Total cost for all calls made across all resources.
+
+                      Does not include volume discounting
+
+                      '
+                  total_discount_cost:
+                    type: number
+                    description: 'Total cost across all resources including volume discounting.
+
+                      (Total cost minus discount)
+
+                      '
+                  total_successful_calls:
+                    type: integer
+                    description: 'Total number of successful calls across all resources
+
+                      '
+                  total_failed_calls:
+                    type: integer
+                    description: 'Total number of failed calls across all resources
+
+                      '
+                  resource_details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        operation:
+                          type: string
+                          description: 'Name of the operation
+
+                            '
+                        total_resource_calls:
+                          type: integer
+                          description: 'Total number of calls made for this resource
+
+                            '
+                        num_pages:
+                          type: integer
+                          description: 'Total number of pages retrieved for this resource
+
+                            '
+                        resource_cost:
+                          type: number
+                          description: 'Total cost for all calls made to this resource.
+
+                            Does not include volume discounting
+
+                            '
+                        successful_resource_calls:
+                          type: integer
+                          description: 'Total number of successful calls for this resource
+
+                            '
+                        failed_resource_calls:
+                          type: integer
+                          description: 'Total number of failed calls for this resource
+
+                            '
+                      required:
+                      - operation
+                      - total_resource_calls
+                      - num_pages
+                      - resource_cost
+                      - successful_resource_calls
+                      - failed_resource_calls
+                    description: 'Resource specific information
+
+                      '
+                required:
+                - total_calls
+                - total_pages
+                - total_cost
+                - total_discount_cost
+                - total_successful_calls
+                - total_failed_calls
+                - resource_details
+        '400':
+          description: 'Incorrect parameter(s).
+
+            '
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                title: Error
+                type: object
+                properties:
+                  title:
+                    type: string
+                    description: Short summary of the type of error encountered.
+                  reason:
+                    type: string
+                    description: Error type name directly from the backend.
+                  detail:
+                    type: string
+                    description: 'More detailed description of the error, possibly including information
+
+                      about specific invalid fields or remediation steps.
+
+                      '
+                  status:
+                    type: integer
+                    description: The HTTP response code returned as part of the error.
+                required:
+                - title
+                - reason
+                - detail
+                - status
+    servers:
+    - url: https://{env}.flightaware.com/aeroapi
+      variables:
+        env:
+          default: aeroapi
+          enum:
+          - aeroapi
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: 'Unlike previous versions of AeroAPI, authentication is now controlled by
+
+        an API key that must be set in the header ```x-apikey```. Your
+
+        FlightAware username is not used when authenticating to the API.
+
+        '
+x-refined-from:
+- flightaware-openapi.yml
+- flightaware-openapi.yml

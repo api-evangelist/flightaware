@@ -3,97 +3,121 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
 provider: FlightAware
 providerId: flightaware
+generated: '2026-09-10'
+method: searched
+source: >-
+  https://www.flightaware.com/commercial/aeroapi/ (published tier limits) and a live
+  unauthenticated probe of https://aeroapi.flightaware.com/aeroapi/airports/KIAH on 2026-09-10
+  (response headers) plus openapi/ (declared responses)
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
-tags:
-  - Aviation
-  - Flights
-  - Flight Tracking
-  - Mapping
-  - Radar
-  - Satellites
-  - Traffic Control
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the FlightAware API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
-responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+modified: '2026-09-10'
+tags: [Aviation, Rate Limiting, Quotas, Throttling, Metering]
+description: >-
+  FlightAware's published rate limits for AeroAPI and Firehose. This REPLACES the 2026-05-04
+  scaffold that previously stood here, which asserted invented per-minute quotas and a full
+  X-RateLimit-* header family that AeroAPI does not return. The real posture is the opposite: limits
+  are published as COMMERCIAL TIER ATTRIBUTES measured in result sets, and there is no runtime
+  rate-limit signal at all.
+limit_count: 6
+unit: result set
+unit_note: >-
+  AeroAPI's limit and billing unit is the RESULT SET, not the HTTP request. A paginated call with
+  max_pages > 1 consumes multiple result sets from one request, so request-per-second reasoning
+  understates consumption.
 limits:
-  - tier: free
-    name: Free Tier Default
+  - tier: Personal
+    name: Personal tier request rate
     scope: api-key
-    metric: requests_per_minute
+    metric: result_sets_per_minute
     limit: 10
-    burst: 20
     timeFrame: minute
-    applies:
-      - FlightAware AeroAPI
-      - FlightAware Firehose
-  - tier: free
-    name: Free Tier Monthly Quota
+    burst: null
+    applies: [FlightAware AeroAPI]
+    source: https://www.flightaware.com/commercial/aeroapi/
+  - tier: Standard
+    name: Standard tier request rate
     scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - FlightAware AeroAPI
-      - FlightAware Firehose
-  - tier: professional
-    name: Professional Tier Default
+    metric: result_sets_per_second
+    limit: 5
+    timeFrame: second
+    burst: null
+    applies: [FlightAware AeroAPI]
+    source: https://www.flightaware.com/commercial/aeroapi/
+  - tier: Premium
+    name: Premium tier request rate
     scope: api-key
-    metric: requests_per_minute
+    metric: result_sets_per_second
     limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - FlightAware AeroAPI
-      - FlightAware Firehose
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
+    timeFrame: second
+    burst: null
+    applies: [FlightAware AeroAPI]
+    source: https://www.flightaware.com/commercial/aeroapi/
+  - tier: Standard
+    name: Historical endpoint monthly ceiling
+    scope: account
+    metric: result_sets_per_month
+    limit: 500000
     timeFrame: month
-    applies:
-      - FlightAware AeroAPI
-      - FlightAware Firehose
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - FlightAware AeroAPI
-      - FlightAware Firehose
+    applies: [FlightAware AeroAPI history endpoints]
+    source: https://www.flightaware.com/commercial/aeroapi/
+  - tier: Premium
+    name: Historical endpoint monthly ceiling
+    scope: account
+    metric: result_sets_per_month
+    limit: 500000
+    timeFrame: month
+    applies: [FlightAware AeroAPI history endpoints]
+    source: https://www.flightaware.com/commercial/aeroapi/
+  - tier: all
+    name: Firehose concurrent connections
+    scope: account
+    metric: concurrent_connections
+    limit: 4
+    timeFrame: concurrent
+    applies: [FlightAware Firehose]
+    source: https://www.flightaware.com/commercial/firehose/documentation/connection
+headers:
+  limit: null
+  remaining: null
+  reset: null
+  retryAfter: null
+  policy: null
+  observed: >-
+    NONE. A live unauthenticated request to https://aeroapi.flightaware.com/aeroapi/airports/KIAH on
+    2026-09-10 returned HTTP 401 carrying only Date, Content-Type, Content-Length and Connection.
+    No X-RateLimit-*, no RateLimit-*, no Retry-After.
+responseCodes:
+  throttled: undocumented
+  quotaExceeded: undocumented
+  serviceUnavailable: undocumented
+  note: >-
+    AeroAPI 4.30.0 declares NO 429 and no 5xx response on any of its 69 operations. There is no
+    documented status code for exhaustion and no documented backoff signal.
+runtime_visibility:
+  in_band_signal: GET /account/usage
+  operation_id: get_account_usage
+  added_in: AeroAPI 4.30.0
+  note: >-
+    The only way an agent can observe its own consumption is to POLL the account usage endpoint. That
+    is a meaningful improvement over nothing — it did not exist in 4.17.1 — but it is a separate,
+    itself-billable call rather than a per-response header, so a client cannot see its headroom on
+    the response that consumed it.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Cost is the real limit
+    description: >-
+      Because AeroAPI meters per result set with no request quota, the binding constraint for most
+      consumers is spend, not throttling. `max_pages` is the single most cost-sensitive parameter in
+      the API; there is no budget cap or spend guard in the contract.
+  - name: Firehose reconnect
+    description: >-
+      Firehose publishes operational guidance rather than a rate limit: disconnect and reconnect if
+      no message has arrived in 5 minutes, and resume with `pitr <epoch>` or
+      `range <start> <end>` from the last received timestamp so no data is lost.
+    source: https://www.flightaware.com/commercial/firehose/documentation/connection
+gaps:
+  - No rate-limit response headers of any kind.
+  - No 429 declared in the contract and no documented status code on exhaustion.
+  - No published backoff or Retry-After guidance for AeroAPI.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

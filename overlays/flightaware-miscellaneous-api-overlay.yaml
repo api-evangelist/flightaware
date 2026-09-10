@@ -1,0 +1,37 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for FlightAware miscellaneous-api
+  version: 1.0.0
+extends: openapi/flightaware-miscellaneous-api-openapi.yml
+x-generated: '2026-09-10'
+x-method: generated
+x-source: openapi/flightaware-miscellaneous-api-openapi.yml
+actions:
+  - target: $.info
+    description: Stamp the API Evangelist profile provenance onto the miscellaneous-api contract.
+    update:
+      x-apievangelist-provider: flightaware
+      x-apievangelist-profile: https://apis.io/provider/flightaware/
+      x-apievangelist-repository: https://github.com/api-evangelist/flightaware
+      x-apievangelist-upstream-spec: https://static.flightaware.com/rsrc/aeroapi/aeroapi-openapi.yml
+      x-apievangelist-spec-version: '4.30.0'
+      x-apievangelist-operations: 6
+  - target: $.info
+    description: >-
+      Record the cross-cutting runtime semantics captured in this repository, so a consumer of the
+      contract alone can find the conventions, error catalog, lifecycle and event surface.
+    update:
+      x-apievangelist-conventions: conventions/flightaware-conventions.yml
+      x-apievangelist-errors: errors/flightaware-problem-types.yml
+      x-apievangelist-lifecycle: lifecycle/flightaware-lifecycle.yml
+      x-apievangelist-events: asyncapi/flightaware-events.yml
+      x-apievangelist-authentication: authentication/flightaware-authentication.yml
+      x-apievangelist-rate-limits: rate-limits/flightaware-rate-limits.yml
+      x-apievangelist-plans: plans/flightaware-plans-pricing.yml
+  - target: $.info
+    description: Declare the agent-facing posture measured for this provider.
+    update:
+      x-apievangelist-idempotency: none
+      x-apievangelist-pagination: cursor
+      x-apievangelist-error-envelope: 'title/reason/detail/status (not RFC 9457)'
+      x-apievangelist-mcp-server: none-published

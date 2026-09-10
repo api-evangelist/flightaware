@@ -1,0 +1,155 @@
+generated: '2026-09-10'
+method: searched
+source: >-
+  https://www.flightaware.com/commercial/firehose/documentation/summary,
+  .../connection, .../commands, .../revisionhistory, and
+  openapi/flightaware-alerts-api-openapi.yml (AeroAPI 4.30.0 alerts surface)
+spec_type: none
+asyncapi_published: false
+description: >-
+  FlightAware operates TWO real event surfaces and publishes NO AsyncAPI document for either. This
+  artifact is the harvested event catalog, not a generated spec — nothing here is authored on
+  FlightAware's behalf. Surface one is AeroAPI push alerts: you register an HTTPS endpoint and
+  FlightAware POSTs flight-event payloads to it (a webhook, in the ordinary sense). Surface two is
+  Firehose: a persistent TLS socket you connect OUT to, streaming JSON Lines. They are different
+  products with different pricing, different auth and different event vocabularies.
+surfaces:
+  - name: AeroAPI push alerts
+    kind: webhook
+    direction: provider-to-consumer over HTTPS POST
+    docs: https://www.flightaware.com/aeroapi/portal/documentation
+    contract: openapi/flightaware-alerts-api-openapi.yml
+    delivery_target: >-
+      An account-wide default URL set with PUT /alerts/endpoint (set_alerts_endpoint). This MUST be
+      configured before the first POST /alerts or the create returns 400. An individual alert may
+      override it with its own `target_url`, which is how per-application or per-environment routing
+      is done without touching the account default.
+    test_tool:
+      url: https://www.flightaware.com/commercial/aeroapi/send.rvt
+      description: >-
+        FlightAware's AeroAPI push notification testing interface — named in the contract's own
+        introduction as "a quick and easy way to test the delivery of customized alerts via AeroAPI
+        push". Returns a Cloudflare interstitial to non-browser clients; it is a signed-in tool.
+    events:
+      - {name: filed, description: A flight plan was filed.}
+      - {name: departure, description: 'Actual OFF the ground. BUNDLED — also carries the flight-plan-filed alert and up to 5 per-departure changes (departure delays over 30 minutes, gate changes, airport delays). FlightAware Global customers additionally receive Power on and Ready to taxi.'}
+      - {name: out, description: Gate departure (out of the gate).}
+      - {name: 'off', description: Wheels off / takeoff.}
+      - {name: 'on', description: Wheels on / touchdown.}
+      - {name: 'in', description: Gate arrival (into the gate).}
+      - {name: arrival, description: 'Actual ON the ground. BUNDLED — also carries up to 5 en-route changes (delays over 30 minutes; diversions excluded). FlightAware Global customers additionally receive taxi stop times.'}
+      - {name: cancelled, description: The airline cancelled the flight.}
+      - {name: diverted, description: The flight was diverted.}
+    operations:
+      - {operationId: set_alerts_endpoint, method: PUT, path: /alerts/endpoint}
+      - {operationId: get_alerts_endpoint, method: GET, path: /alerts/endpoint}
+      - {operationId: delete_alerts_endpoint, method: DELETE, path: /alerts/endpoint}
+      - {operationId: create_alert, method: POST, path: /alerts}
+      - {operationId: get_all_alerts, method: GET, path: /alerts}
+      - {operationId: get_alert, method: GET, path: '/alerts/{id}'}
+      - {operationId: update_alert, method: PUT, path: '/alerts/{id}'}
+      - {operationId: delete_alert, method: DELETE, path: '/alerts/{id}'}
+    caveats:
+      - >-
+        Bundling means one subscribed event can produce several deliveries. Setting both a bundled
+        type and its unbundled component (e.g. departure and off) yields a single alert where they
+        overlap, not two.
+      - >-
+        There is no idempotency key on POST /alerts, so a retried create produces a second alert and
+        therefore duplicate deliveries. The contract itself advises updating an existing alert rather
+        than creating another.
+  - name: Firehose
+    kind: streaming
+    direction: consumer connects OUT to a persistent TLS socket
+    docs: https://www.flightaware.com/commercial/firehose/documentation
+    endpoint: firehose.flightaware.com:1501
+    transport: TCP over SSL/TLS 1.2 or higher
+    encoding: JSON Lines (UTF-8, one JSON value per line, newline separated)
+    protocol_version: '37.0'
+    authentication: >-
+      Username plus Firehose API Key, supplied inside the newline-terminated initiation command
+      (`username <account>` and `password <firehose api key>`) — not an HTTP header.
+    compression: [gzip, compress, deflate]
+    connection_limits:
+      max_concurrent: 4
+      per: user account
+    reconnect_guidance: >-
+      Disconnect and reconnect if no message has been received in the last 5 minutes; resume from
+      the last received message timestamp with the `pitr <epoch>` or `range <start> <end>` command
+      so no data is lost across the gap.
+    egress_cidrs: ['206.253.80.0/21', '2620:13d:c000::/44']
+    initiation_commands:
+      required_one_of:
+        - {command: live, description: Live data from the present time forward.}
+        - {command: 'pitr <epoch>', description: From a POSIX epoch in the past up to now, then continue live.}
+        - {command: 'range <start epoch> <end epoch>', description: 'Bounded replay; FlightAware disconnects after the last message.'}
+      required_both:
+        - {command: 'username <argument>', description: FlightAware account username granted access.}
+        - {command: 'password <argument>', description: 'In most cases the Firehose API Key, not the account password.'}
+      optional:
+        - {command: 'events "<event code list>"', description: Which message types to deliver. Defaults to all Airborne Feed messages enabled in the subscription.}
+        - {command: 'airport_filter "<airport pattern list>"', description: 'Glob patterns on origin/destination, e.g. "K??? P* TJSJ".'}
+        - {command: 'filter "<airline code list>"', description: Space separated ICAO airline codes.}
+        - {command: 'idents "<ident reg list>"', description: Specific flight idents or aircraft registrations.}
+        - {command: 'compression <mode>', description: 'gzip, compress or deflate. The initiation command itself must not be compressed.'}
+    event_codes:
+      airborne:
+        - {name: flifo, description: 'Flight information / status. Supersedes flightplan and extendedFlightInfo.'}
+        - {name: departure, description: Departure event.}
+        - {name: arrival, description: Arrival event.}
+        - {name: cancellation, description: 'Flight cancelled. Carries the optional `uncancel` field (v34+) when a flight is reinstated.'}
+        - {name: position, description: 'Airborne position (ADS-B terrestrial, Aireon space-based, MLAT, ANSP radar, datalink or estimated).'}
+        - {name: surface_offblock, description: Aircraft left the blocks.}
+        - {name: surface_onblock, description: Aircraft arrived on blocks.}
+        - {name: power_on, description: 'Aircraft power on (Ready To Taxi layer).'}
+        - {name: hold_entry, description: 'Hold entered (v32+). Requires flifo data.'}
+        - {name: hold_exit, description: 'Hold exited (v32+).'}
+        - {name: extended_predictions, description: 'Enhanced Foresight context including taxi_out_duration_quantiles (v31+).'}
+        - {name: go_around, description: 'Go-around executed (v35+).'}
+        - {name: flightplan, description: 'DEPRECATED in favor of flifo. May not be requested together with flifo.'}
+        - {name: extendedFlightInfo, description: 'DEPRECATED in favor of flifo. May not be requested together with flifo.'}
+      surface:
+        - {name: ground_position, description: Surface position (ASDE-X or ADS-B).}
+        - {name: ground_position_unmatched, description: 'Surface position with unknown hexid or ident (v29+).'}
+        - {name: vehicle_position, description: Ground vehicle position.}
+        - {name: near_surface_position, description: 'Position within a proximity threshold of an airport (emitted as its own type from v28; v24-27 emitted this data as `position`).'}
+        - {name: location_entry, description: Surface entry event.}
+        - {name: location_exit, description: Surface exit event.}
+      weather:
+        - {name: fmswx, description: 'Aircraft weather reports and telemetry. MUST be requested on a separate connection from all non-weather messages.'}
+    feed_mixing_rules:
+      - >-
+        Version 24+ with a stream start on or after 2021-11-11: airborne and surface events may be
+        requested in the same connection.
+      - Version 23 and lower: surface and non-surface messages cannot be requested together.
+      - All versions: weather (fmswx) requires its own connection.
+      - flifo may not be specified alongside flightplan or extendedFlightInfo.
+    subscription_layers:
+      - FlightAware Terrestrial ADS-B Positions (worldwide)
+      - Aireon Space-Based ADS-B Positions (worldwide)
+      - FlightAware Terrestrial MLAT Positions (worldwide)
+      - FlightAware ANSP Radar, Transoceanic and Estimated Positions
+      - FLIFO (Flight Status)
+      - Extended Flight Info (ExtendedFLIFO)
+      - Surface Positions (ASDE-X and ADS-B)
+      - Aircraft Weather Reports and Telemetry
+      - Autopilot and GPS Accuracy
+      - Obfuscated visibility of Blocked Flights
+      - FlightAware Foresight Runway Arrival (ON)
+      - FlightAware Foresight Gate Arrival (IN)
+      - FlightAware Foresight Taxi Out duration
+      - FlightAware Foresight Arrival Runway Predictions
+      - 'Ready To Taxi (power_on, surface_onblock, surface_offblock)'
+      - Surface Entry and Exit Events
+    pricing_model: >-
+      Monthly rate for unlimited use, dependent on which data layers are enabled and the scope of
+      redistribution. Not metered per message. https://www.flightaware.com/commercial/firehose/
+gaps:
+  - >-
+    No AsyncAPI document is published for either surface, and none is authored here. The Firehose
+    message field tables on
+    https://www.flightaware.com/commercial/firehose/documentation/messages are rendered
+    client-side, so per-message field schemas could not be harvested without a browser.
+  - >-
+    The AeroAPI alert delivery payload schema is not present in the OpenAPI — the contract covers
+    configuring alerts, not the shape of what gets POSTed to your endpoint.

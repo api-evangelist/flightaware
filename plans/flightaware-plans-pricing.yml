@@ -3,154 +3,117 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
 provider: FlightAware
 providerId: flightaware
+generated: '2026-09-10'
+method: searched
+source: https://www.flightaware.com/commercial/aeroapi/
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+modified: '2026-09-10'
 tags:
   - Aviation
   - Flights
   - Flight Tracking
-  - Mapping
-  - Radar
-  - Satellites
-  - Traffic Control
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+  - Pricing
+  - Metered
+description: >-
+  AeroAPI's published plans, read from the public pricing page on 2026-09-10. This REPLACES the
+  2026-05-04 scaffold that previously stood here (a generated Free/Professional/Enterprise
+  placeholder with invented quotas), which described nothing FlightAware actually sells. AeroAPI is
+  not a quota plan — it is METERED PER RESULT SET, with the tier setting the monthly minimum, the
+  rate ceiling, and which endpoint families are unlocked. Firehose is priced separately as a flat
+  monthly rate for unlimited use, negotiated per data layer.
+plan_count: 3
+billing_model: metered-per-result-set-with-monthly-minimum
+currency: USD
 plans:
-  - id: flightaware-free
-    name: Free
+  - id: flightaware-aeroapi-personal
+    name: Personal
     type: freemium
-    description: Free entry tier for the FlightAware API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://aeroapi.flightaware.com/aeroapi
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://aeroapi.flightaware.com/aeroapi
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: FlightAware AeroAPI
-      - name: FlightAware Firehose
-  - id: flightaware-pro
-    name: Professional
+    monthly_minimum: '0.00'
+    free_allowance: >-
+      Up to $5 free per month, or $10 free per month for ADS-B feeders — i.e. the allowance is
+      denominated in dollars of metered usage, not in requests.
+    rate_limit: 10 result sets/minute
+    historical_access: false
+    foresight_access: false
+    alerts_access: false
+    sla: null
+    support: community / self-serve
+    description: >-
+      Self-serve entry tier with no monthly minimum. Usage above the free dollar allowance is billed
+      per result set at list price. No historical endpoints, no Foresight, no alerts.
+  - id: flightaware-aeroapi-standard
+    name: Standard
     type: paid
-    description: Production tier for FlightAware. Provides higher quotas, priority support, and access
-      to the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://aeroapi.flightaware.com/aeroapi
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://aeroapi.flightaware.com/aeroapi
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains:
-          - https://aeroapi.flightaware.com/aeroapi
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: FlightAware AeroAPI
-      - name: FlightAware Firehose
-  - id: flightaware-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom-negotiated tier for FlightAware. Includes dedicated capacity, contractual SLAs,
-      security review, data residency options, and named technical account management.
-    entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: configurable
-        domains:
-          - https://aeroapi.flightaware.com/aeroapi
-        unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://aeroapi.flightaware.com/aeroapi
-        unit: 1
-        price: custom
-        userMultiplied: false
-    elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: FlightAware AeroAPI
-      - name: FlightAware Firehose
+    monthly_minimum: '100.00'
+    free_allowance: Covered by the monthly minimum.
+    rate_limit: 5 result sets/second
+    historical_rate_limit: 500,000 result sets/month
+    historical_access: true
+    foresight_access: false
+    alerts_access: true
+    volume_discount: true
+    sla: null
+    support: email
+    description: >-
+      Production tier. $100/month minimum against metered usage, historical endpoints unlocked,
+      alerts unlocked, volume discounting applies above the first $1,000 of monthly usage.
+  - id: flightaware-aeroapi-premium
+    name: Premium
+    type: paid
+    monthly_minimum: '1000.00'
+    free_allowance: Covered by the monthly minimum.
+    rate_limit: 100 result sets/second
+    historical_rate_limit: 500,000 result sets/month
+    historical_access: true
+    foresight_access: true
+    alerts_access: true
+    volume_discount: true
+    sla: 99.5% uptime
+    support: email and phone
+    description: >-
+      Highest tier. $1,000/month minimum, 100 result sets/second, Foresight predictive endpoints
+      unlocked, a published 99.5% uptime guarantee, and email plus phone support.
+volume_discounts:
+  note: The first $1,000 of usage per month is always billed at list price.
+  bands:
+    - {from: '0', to: '1000', discount: '0%'}
+    - {from: '1000', to: '2000', discount: '30%'}
+    - {from: '2000', to: '4000', discount: '51%'}
+    - {from: '4000', to: '8000', discount: '65%'}
+    - {from: '8000', to: '16000', discount: '76%'}
+    - {from: '16000', to: '32000', discount: '83%'}
+    - {from: '32000', to: '64000', discount: '88%'}
+    - {from: '64000', to: null, discount: '94%'}
+  applies_to: [Standard, Premium]
+unit_prices:
+  unit: result set
+  note: >-
+    Per-call list prices are uniform across tiers; the tier gates ACCESS and RATE, not price.
+    Range published as $0.001 to $0.200 per result set. A representative sample read from the
+    pricing table on 2026-09-10 — the live page remains the source of truth.
+  sample:
+    - {operation: 'GET /flights/search', price: '0.050'}
+    - {operation: 'GET /flights/{ident}', price: '0.005'}
+    - {operation: 'GET /flights/{id}/position', price: '0.010'}
+    - {operation: 'GET /flights/{id}/track', price: '0.012'}
+    - {operation: 'GET /airports', price: '0.005'}
+    - {operation: 'GET /airports/{id}/flights', price: '0.020'}
+    - {operation: 'GET /foresight/flights/{ident}', price: '0.015', tier: Premium}
+    - {operation: 'GET /foresight/flights/search/advanced', price: '0.060', tier: Premium}
+    - {operation: 'GET /history/flights/{ident}', price: '0.020', tier: 'Standard, Premium'}
+    - {operation: 'GET /history/flights/{id}/track', price: '0.060', tier: 'Standard, Premium'}
+    - {operation: 'Alert management calls', price: '0.000', tier: 'Standard, Premium'}
+    - {operation: Push alert delivery, price: '0.020', tier: 'Standard, Premium'}
+related_products:
+  - name: FlightAware Firehose
+    url: https://www.flightaware.com/commercial/firehose/
+    pricing_model: >-
+      Flat monthly rate for unlimited use, dependent on which data layers are enabled and the scope
+      of redistribution. Contact sales; no public price list.
+agent_note: >-
+  The cost-relevant fact for an autonomous consumer: `max_pages` multiplies the number of billed
+  result sets in a single call, and there is no spend cap or budget parameter in the API. Poll
+  GET /account/usage (AeroAPI 4.30.0+) to observe consumption.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

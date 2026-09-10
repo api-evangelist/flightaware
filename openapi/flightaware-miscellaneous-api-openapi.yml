@@ -1,89 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Aero airports miscellaneous API
-  version: 4.17.1
-  description: '# Introduction
-
-    AeroAPI is a simple, query-based API that gives software developers access
-
-    to a variety of FlightAware''s flight data. Users can obtain current or
-
-    historical data. AeroAPI is a RESTful API delivering accurate and
-
-    actionable aviation data. With the introduction of Foresight™, customers
-
-    have access to the data that powers over half of the predictive airline
-
-    ETAs in the US.
-
-
-    ## Categories
-
-    AeroAPI is divided into several categories to make things easier to
-
-    discover.
-
-    - Flights: Summary information, planned routes, positions and more
-
-    - Foresight: Flight positions enhanced with FlightAware Foresight™
-
-    - Airports: Airport information and FIDS style resources
-
-    - Operators: Operator information and fleet activity resources
-
-    - Alerts: Configure flight alerts and delivery destinations
-
-    - History: Historical flight access for various endpoints
-
-    - Miscellaneous: Flight disruption, future schedule information, and aircraft owner information
-
-
-    ## Development Tools
-
-    AeroAPI is defined using the OpenAPI Spec 3.0, which means it can be easily
-
-    imported into tools like Postman. To get started try importing the API
-
-    specification using
-
-    [Postman''s instructions](https://learning.postman.com/docs/integrations/available-integrations/working-with-openAPI/).
-
-    Once imported as a collection only the "Value" field under the collection''s
-
-    Authorization tab needs to be populated and saved before making calls.
-
-
-    The AeroAPI OpenAPI specification is located at:\
-
-    https://flightaware.com/commercial/aeroapi/resources/aeroapi-openapi.yml
-
-
-    Our [open source AeroApps project](/aeroapi/portal/resources)
-
-    provides a small collection of services and sample applications to help
-
-    you get started.
-
-
-    The Flight Information Display System (FIDS) AeroApp is an example of a
-
-    multi-tier application using multiple languages and Docker containers.
-
-    It demonstrates connectivity, data caching, flight presentation, and leveraging flight maps.
-
-
-    The Alerts AeroApp demonstrates the use of AeroAPI to set, edit, and
-
-    receive alerts in a sample application with a Dockerized Python backend
-
-    and a React frontend.
-
-
-    Our AeroAPI push notification [testing interface](/commercial/aeroapi/send.rvt)
-
-    provides a quick and easy way to test the delivery of customized alerts via AeroAPI push.
-
-    '
+  title: Flightaware Miscellaneous API
+  version: 4.30.0
+  description: 'Operations tagged miscellaneous across 2 of this provider''s published API definitions: flightaware-openapi.yml, flightaware-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://{env}.flightaware.com/aeroapi
   variables:
@@ -171,6 +90,13 @@ paths:
                 - reason
                 - detail
                 - status
+    servers:
+    - url: https://{env}.flightaware.com/aeroapi
+      variables:
+        env:
+          default: aeroapi
+          enum:
+          - aeroapi
   /aircraft/{ident}/owner:
     parameters:
     - name: ident
@@ -215,21 +141,25 @@ paths:
                     type: object
                     properties:
                       name:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         description: Name of the registered owner of the aircraft
-                        nullable: true
                       location:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         description: City and state of the registered owner. For Australia, state and country. For New Zealand, city and country.
-                        nullable: true
                       location2:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         description: Street address of the registered owner
-                        nullable: true
                       website:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         description: Website for the owner if available
-                        nullable: true
         '400':
           description: 'Incorrect or missing ident. It should be a flight number or a tail number.
 
@@ -261,6 +191,13 @@ paths:
                 - reason
                 - detail
                 - status
+    servers:
+    - url: https://{env}.flightaware.com/aeroapi
+      variables:
+        env:
+          default: aeroapi
+          enum:
+          - aeroapi
   /aircraft/types/{type}:
     parameters:
     - in: path
@@ -302,12 +239,14 @@ paths:
                     type: string
                     description: A short description of the aircraft
                   engine_count:
-                    type: integer
-                    nullable: true
+                    type:
+                    - integer
+                    - 'null'
                     description: Number of engines
                   engine_type:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: Type of engine
         '400':
           description: 'Incorrect parameters. Type must be an ICAO aircraft type designator string.
@@ -340,6 +279,13 @@ paths:
                 - reason
                 - detail
                 - status
+    servers:
+    - url: https://{env}.flightaware.com/aeroapi
+      variables:
+        env:
+          default: aeroapi
+          enum:
+          - aeroapi
   /schedules/{date_start}/{date_end}:
     parameters:
     - in: path
@@ -490,8 +436,9 @@ paths:
               schema:
                 properties:
                   links:
-                    type: object
-                    nullable: true
+                    type:
+                    - object
+                    - 'null'
                     description: 'Object containing links to related resources.
 
                       '
@@ -524,24 +471,29 @@ paths:
                           type: string
                           description: Flight ident
                         ident_icao:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: Flight ident in ICAO format
                         ident_iata:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: Flight ident in IATA format
                         actual_ident:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: If ident is a codeshare flight, this is the primary identifier used by the operator
                         actual_ident_icao:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: If ident is a codeshare flight, this is the primary identifier used by the operator in ICAO format
                         actual_ident_iata:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: If ident is a codeshare flight, this is the primary identifier used by the operator in IATA format
                         aircraft_type:
                           type: string
@@ -560,35 +512,42 @@ paths:
                           type: string
                           description: The origin airport's identifier code
                         origin_icao:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: The origin airport's ICAO code
                         origin_iata:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: The origin airport's IATA code
                         origin_lid:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: The origin airport's LID
                         destination:
                           type: string
                           description: The destination airport's identifier code
                         destination_icao:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: The destination airport's ICAO code
                         destination_iata:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: The destination airport's IATA code
                         destination_lid:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: The destination airport's LID
                         fa_flight_id:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: 'Unique FlightAware ID for flight. Will be null for flights
 
                             scheduled more than a few days in the future.
@@ -664,6 +623,13 @@ paths:
                 - reason
                 - detail
                 - status
+    servers:
+    - url: https://{env}.flightaware.com/aeroapi
+      variables:
+        env:
+          default: aeroapi
+          enum:
+          - aeroapi
   /disruption_counts/{entity_type}:
     parameters:
     - in: path
@@ -709,9 +675,102 @@ paths:
     get:
       operationId: get_all_disruption_counts
       summary: Get global flight disruption statistics
-      description: 'Returns overall flight cancellation/delay counts in the specified time
+      description: 'Returns overall flight cancellation or delay counts in the specified time period
 
-        period for either all airlines or all airports.
+        for either all airlines or all airports.
+
+
+        #### Cancellation Counts ####
+
+        A cancelled flight will be counted if their `scheduled_out`
+
+        (or `scheduled_off` if `scheduled_out` is missing)
+
+        time falls within the specified time period. Cancellation
+
+        counts are calculated at query time based on airline partner
+
+        data and only count airline-confirmed cancellations.
+
+
+        #### Delay Counts ####
+
+        Delays are calculated based on the timezone
+
+        of the origin airport and per day and are counted based on the specified time period.
+
+        Delay statistics update cycles are re-calculated every 20 minutes and represent gate arrival
+
+        delays (estimated or actual) of 15 minutes or more for flights that are not cancelled.
+
+        If a delayed flight is eventually cancelled, it will be removed from the statistics
+
+        count in the next update cycle.
+
+
+        #### Time Periods ####
+
+        When `yesterday`, `today`, `tomorrow`, `plus2days`, `twoDaysAgo`,
+
+        and `week` are used as the time period, the current day is defined by the user''s
+
+        website timezone setting and starts at 08:00 and ends at 08:00 the next day. For
+
+        example:
+
+
+        * `today` will represent a 24-hour span starting at the current day at 08:00.
+
+
+        * `yesterday` will represent a 24-hour span starting at 08:00 the previous day and ending
+
+        at today''s 08:00.
+
+
+        * `tomorrow` will represent a 24-hour span starting at 08:00 the next
+
+        day and ending at 08:00 two days from today.
+
+
+        * `plus2days` will represent a 24-hour span starting at 08:00 two days from
+
+        today and ending at 08:00 three days from today.
+
+
+        * `twoDaysAgo` will represent a 24-hour span starting at 08:00 two days ago
+
+        from today and ending at 08:00 the previous day.
+
+
+        * `week` will represent the current 2 weeks of data indexed to the most recent Sunday''s
+
+        08:00 ending at Saturday 08:00, right before 2 weeks from that Sunday.
+
+
+        For `minus2plus12hrs` and `next36hrs`, the time period will be centered at the
+
+        current time defined by the user''s website timezone setting:
+
+
+        * `minus2plus12hrs` will start capturing statistics 2 hours ago from the current
+
+        time until 12 hours after the current time.
+
+
+        * `next36hrs` will span from the current time until 36 hours
+
+        from the current time.
+
+
+        For delay counts, when using `minus2plus12hrs` and `next36hrs`
+
+        as the time period, a flight will be counted as delayed within this specified
+
+        time period if any day encompassed by the time span window, centered around
+
+        the user''s website timezone setting, coincides with the
+
+        delayed flight''s origin airport local timezone day of delay.
 
         '
       tags:
@@ -725,8 +784,9 @@ paths:
                 type: object
                 properties:
                   links:
-                    type: object
-                    nullable: true
+                    type:
+                    - object
+                    - 'null'
                     description: 'Object containing links to related resources.
 
                       '
@@ -772,12 +832,14 @@ paths:
 
                             '
                         entity_name:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: The name of the airline or airport.
                         entity_id:
-                          type: string
-                          nullable: true
+                          type:
+                          - string
+                          - 'null'
                           description: Code for the airline or airport.
                       required:
                       - cancellations
@@ -835,6 +897,13 @@ paths:
                 - reason
                 - detail
                 - status
+    servers:
+    - url: https://{env}.flightaware.com/aeroapi
+      variables:
+        env:
+          default: aeroapi
+          enum:
+          - aeroapi
   /disruption_counts/{entity_type}/{id}:
     parameters:
     - in: path
@@ -883,9 +952,100 @@ paths:
     get:
       operationId: get_disruption_counts
       summary: Get flight disruption statistics for a particular entity
-      description: 'Returns flight cancellation/delay counts in the specified time period
+      description: 'Returns flight cancellation or delay counts in the specified time period for a particular airline or airport.
 
-        for a particular airline or airport.
+
+        #### Cancellation Counts ####
+
+        A cancelled flight will be counted if their `scheduled_out`
+
+        (or `scheduled_off` if `scheduled_out` is missing)
+
+        time falls within the specified time period. Cancellation
+
+        counts are calculated at query time based on airline partner
+
+        data and only count airline-confirmed cancellations.
+
+
+        #### Delay Counts ####
+
+        Delays are calculated based on the timezone
+
+        of the origin airport and per day and are counted based on the specified time period.
+
+        Delay statistics update cycles are re-calculated every 20 minutes and represent gate arrival
+
+        delays (estimated or actual) of 15 minutes or more for flights that are not cancelled.
+
+        If a delayed flight is eventually cancelled, it will be removed from the statistics
+
+        count in the next update cycle.
+
+
+        #### Time Periods ####
+
+        When `yesterday`, `today`, `tomorrow`, `plus2days`, `twoDaysAgo`,
+
+        and `week` are used as the time period, the current day is defined by the user''s
+
+        website timezone setting and starts at 08:00 and ends at 08:00 the next day. For
+
+        example:
+
+
+        * `today` will represent a 24-hour span starting at the current day at 08:00.
+
+
+        * `yesterday` will represent a 24-hour span starting at 08:00 the previous day and ending
+
+        at today''s 08:00.
+
+
+        * `tomorrow` will represent a 24-hour span starting at 08:00 the next
+
+        day and ending at 08:00 two days from today.
+
+
+        * `plus2days` will represent a 24-hour span starting at 08:00 two days from
+
+        today and ending at 08:00 three days from today.
+
+
+        * `twoDaysAgo` will represent a 24-hour span starting at 08:00 two days ago
+
+        from today and ending at 08:00 the previous day.
+
+
+        * `week` will represent the current 2 weeks of data indexed to the most recent Sunday''s
+
+        08:00 ending at Saturday 08:00, right before 2 weeks from that Sunday.
+
+
+        For `minus2plus12hrs` and `next36hrs`, the time period will be centered at the
+
+        current time defined by the user''s website timezone setting:
+
+
+        * `minus2plus12hrs` will start capturing statistics 2 hours ago from the current
+
+        time until 12 hours after the current time.
+
+
+        * `next36hrs` will span from the current time until 36 hours
+
+        from the current time.
+
+
+        For delay counts, when using `minus2plus12hrs` and `next36hrs`
+
+        as the time period, a flight will be counted as delayed within this specified
+
+        time period if any day encompassed by the time span window, centered around
+
+        the user''s website timezone setting, coincides with the
+
+        delayed flight''s origin airport local timezone day of delay.
 
         '
       tags:
@@ -919,12 +1079,14 @@ paths:
 
                       '
                   entity_name:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The name of the airline or airport.
                   entity_id:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: Code for the airline or airport.
                 required:
                 - cancellations
@@ -963,6 +1125,13 @@ paths:
                 - reason
                 - detail
                 - status
+    servers:
+    - url: https://{env}.flightaware.com/aeroapi
+      variables:
+        env:
+          default: aeroapi
+          enum:
+          - aeroapi
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -976,3 +1145,6 @@ components:
         FlightAware username is not used when authenticating to the API.
 
         '
+x-refined-from:
+- flightaware-openapi.yml
+- flightaware-openapi.yml

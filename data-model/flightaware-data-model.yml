@@ -1,0 +1,124 @@
+generated: '2026-09-10'
+method: derived
+source: openapi/ (AeroAPI 4.30.0, 8 refined specs) — schema shapes and id-reference field names
+description: >-
+  Entity-relationship graph for AeroAPI, derived from the contract. A CAVEAT THAT SHAPES EVERYTHING
+  BELOW: AeroAPI 4.30.0 declares no `components.schemas` at all — every response body is defined
+  inline on its operation, so there is not a single `$ref` in the document to follow. The graph was
+  therefore derived from repeated inline shapes and from id-reference field names, not from schema
+  reuse. That is also a finding in its own right: a client cannot generate shared model types from
+  this contract, and the same Flight or Airport object is redefined dozens of times.
+schema_reuse:
+  components_schemas: 0
+  refs_in_document: 0
+  note: >-
+    Only `components.securitySchemes` is populated. The airport object alone is redefined more than
+    seventy times across the document.
+identifiers:
+  - id: fa_flight_id
+    entity: Flight
+    description: >-
+      FlightAware's opaque per-flight identifier and the primary key of the flight surface. Every
+      flight-scoped operation (position, track, route, map, and their history equivalents) requires
+      it; passing a bare ident returns 400.
+    obtained_from: [get_flight, get_flights_by_search, get_flights_by_advanced_search, get_airport_flights]
+    occurrences: 172
+  - id: ident
+    entity: Flight
+    description: 'Flight number or aircraft registration/tail. Ambiguous by design — `ident_type` disambiguates (registration vs designator).'
+    occurrences: 254
+  - id: registration
+    entity: Aircraft
+    description: Aircraft tail number. The key for owner lookup and last-flight history.
+    occurrences: 167
+  - id: code_icao / code_iata / code_lid
+    entity: Airport, Operator
+    description: >-
+      Three parallel first-class code schemes, never collapsed. `id_type` on the canonical endpoints
+      takes 'icao', 'iata' or 'lid'. The older conflated `alternate_ident` field is deprecated.
+    occurrences: 224
+  - id: inbound_fa_flight_id
+    entity: Flight
+    description: The fa_flight_id of the aircraft's previous flight — the link that makes aircraft rotation traceable.
+    occurrences: 66
+  - id: atc_ident
+    entity: Flight
+    description: The ATC identifier where it differs from the flight identifier.
+    occurrences: 59
+entities:
+  - name: Flight
+    primary_key: fa_flight_id
+    operations: [get_flight, get_flights_by_search, get_flights_by_advanced_search, get_flights_by_position_search, get_flights_count_by_search, get_flights_canonical, get_flight_with_foresight, get_history_flight]
+    note: The central entity. Foresight variants return the same flight enriched with ML predictions.
+  - name: Position
+    primary_key: null
+    parent: Flight
+    operations: [get_flight_position, get_flight_track, get_flight_position_with_foresight, get_history_flight_track]
+    note: 'A time series belonging to one flight, each point carrying its provenance (ADS-B, MLAT, radar, datalink, estimated).'
+  - name: Route
+    primary_key: null
+    parent: Flight
+    operations: [get_flight_route, get_history_flight_route, get_routes_between_airports]
+  - name: Airport
+    primary_key: 'code (icao | iata | lid)'
+    operations: [get_airport, get_all_airports, get_nearby_airports, get_airports_canonical, get_airports_near_airport]
+  - name: AirportDelay
+    primary_key: null
+    parent: Airport
+    operations: [get_airport_delays, get_delays_for_all_airports]
+  - name: WeatherObservation
+    primary_key: null
+    parent: Airport
+    operations: [get_airport_weather_observations, get_airport_weather_forecast]
+    note: Carries raw METAR / TAF strings alongside decoded members.
+  - name: Operator
+    primary_key: 'code (icao | iata)'
+    operations: [get_operator, get_all_operators, get_operators_canonical]
+  - name: Aircraft
+    primary_key: registration
+    operations: [get_aircraft_owner, get_aircraft_blocked, get_history_aircraft_last_flight]
+  - name: AircraftType
+    primary_key: 'ICAO aircraft type designator'
+    operations: [get_flight_type]
+  - name: Alert
+    primary_key: id
+    operations: [create_alert, get_alert, get_all_alerts, update_alert, delete_alert]
+    note: The only object a consumer creates and stores in AeroAPI.
+  - name: AlertEndpoint
+    primary_key: null
+    cardinality: singleton per account
+    operations: [set_alerts_endpoint, get_alerts_endpoint, delete_alerts_endpoint]
+  - name: Schedule
+    primary_key: null
+    operations: [get_schedules_by_date, get_operator_flights_scheduled, get_airport_flights_scheduled_departures, get_airport_flights_scheduled_arrivals]
+  - name: DisruptionCount
+    primary_key: 'entity_type + id'
+    operations: [get_all_disruption_counts, get_disruption_counts]
+  - name: AccountUsage
+    primary_key: null
+    cardinality: singleton per account
+    operations: [get_account_usage]
+    note: Added in AeroAPI 4.30.0 — the only in-band consumption signal the API offers.
+relationships:
+  - {from: Flight, to: Airport, type: belongs_to, via: origin, note: Embedded airport object, not an id reference.}
+  - {from: Flight, to: Airport, type: belongs_to, via: destination}
+  - {from: Flight, to: Operator, type: belongs_to, via: 'operator / operator_icao / operator_iata'}
+  - {from: Flight, to: Aircraft, type: belongs_to, via: registration}
+  - {from: Flight, to: AircraftType, type: belongs_to, via: aircraft_type}
+  - {from: Flight, to: Flight, type: belongs_to, via: inbound_fa_flight_id, note: 'Self-reference — the previous leg of the same airframe. This is what makes aircraft rotation and downline-delay reasoning possible.'}
+  - {from: Flight, to: Flight, type: has_many, via: codeshares, note: 'Marketing identifiers for the same operating flight; mainline_ident links a regional operation to its mainline carrier in Firehose flifo messages.'}
+  - {from: Flight, to: Position, type: has_many, via: 'GET /flights/{id}/track'}
+  - {from: Flight, to: Route, type: has_one, via: 'GET /flights/{id}/route'}
+  - {from: Airport, to: Flight, type: has_many, via: 'GET /airports/{id}/flights'}
+  - {from: Airport, to: AirportDelay, type: has_one, via: 'GET /airports/{id}/delays'}
+  - {from: Airport, to: WeatherObservation, type: has_many, via: 'GET /airports/{id}/weather/observations'}
+  - {from: Airport, to: Airport, type: has_many, via: 'GET /airports/{id}/nearby'}
+  - {from: Airport, to: Route, type: has_many, via: 'GET /airports/{id}/routes/{dest_id}'}
+  - {from: Operator, to: Flight, type: has_many, via: 'GET /operators/{id}/flights'}
+  - {from: Aircraft, to: Flight, type: has_one, via: 'GET /history/aircraft/{registration}/last_flight'}
+  - {from: Alert, to: Flight, type: matches, via: 'ident / origin / destination / aircraft_type criteria', note: An alert is a standing query over future flights, not a reference to one flight.}
+  - {from: Alert, to: AlertEndpoint, type: belongs_to, via: 'target_url, falling back to the account-wide endpoint'}
+traversal_note: >-
+  The canonical agent path is: resolve an ident or search criteria to an fa_flight_id, then use that
+  id for every flight-scoped call. Airport and operator codes resolve through the /canonical
+  endpoints when the scheme (ICAO / IATA / LID) is uncertain.

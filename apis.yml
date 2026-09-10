@@ -39,7 +39,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/flightawar
 access: 3rd-Party
 position: Consuming
 created: '2025-02-24'
-modified: '2026-04-28'
+modified: '2026-09-10'
 tags:
   - Aviation
   - Flights
@@ -107,6 +107,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/flightaware-airports-api-openapi.yml
+  - type: Overlay
+    url: overlays/flightaware-airports-api-overlay.yaml
 - aid: flightaware:flightaware-alerts-api
   name: FlightAware alerts API
   description: >-
@@ -210,6 +212,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/flightaware-alerts-api-openapi.yml
+  - type: Overlay
+    url: overlays/flightaware-alerts-api-overlay.yaml
 - aid: flightaware:flightaware-flights-api
   name: FlightAware flights API
   description: The flights API from FlightAware — 11 operation(s) for flights.
@@ -222,6 +226,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/flightaware-flights-api-openapi.yml
+  - type: Overlay
+    url: overlays/flightaware-flights-api-overlay.yaml
 - aid: flightaware:flightaware-foresight-api
   name: FlightAware foresight API
   description: >-
@@ -260,6 +266,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/flightaware-foresight-api-openapi.yml
+  - type: Overlay
+    url: overlays/flightaware-foresight-api-overlay.yaml
 - aid: flightaware:flightaware-history-api
   name: FlightAware history API
   description: The history API from FlightAware — 5 operation(s) for history.
@@ -272,6 +280,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/flightaware-history-api-openapi.yml
+  - type: Overlay
+    url: overlays/flightaware-history-api-overlay.yaml
 - aid: flightaware:flightaware-miscellaneous-api
   name: FlightAware miscellaneous API
   description: The miscellaneous API from FlightAware — 6 operation(s) for miscellaneous.
@@ -283,6 +293,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/flightaware-miscellaneous-api-openapi.yml
+  - type: Overlay
+    url: overlays/flightaware-miscellaneous-api-overlay.yaml
 - aid: flightaware:flightaware-operators-api
   name: FlightAware operators API
   description: The operators API from FlightAware — 8 operation(s) for operators.
@@ -295,6 +307,28 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/flightaware-operators-api-openapi.yml
+  - type: Overlay
+    url: overlays/flightaware-operators-api-overlay.yaml
+- aid: flightaware:flightaware-account-api
+  name: FlightAware Account API
+  description: >-
+    The account surface of AeroAPI — GET /account/usage, added in AeroAPI 4.30.0. It reports the
+    calling account's AeroAPI consumption over a requested period, and it is the only in-band
+    signal a consumer has for its own spend: AeroAPI returns no rate-limit response headers and
+    declares no 429, so headroom and cost must be polled from here rather than read off a response.
+  humanURL: https://www.flightaware.com/aeroapi/portal/
+  baseURL: https://aeroapi.flightaware.com/aeroapi
+  tags:
+  - Account
+  - Usage
+  - Metering
+  tags_raw:
+  - account
+  properties:
+  - type: OpenAPI
+    url: openapi/flightaware-account-api-openapi.yml
+  - type: Overlay
+    url: overlays/flightaware-account-api-overlay.yaml
 common:
   - type: AgenticAccess
     url: agentic-access/flightaware-agentic-access.yml
@@ -308,8 +342,6 @@ common:
     url: https://www.flightaware.com/
   - type: CommercialData
     url: https://www.flightaware.com/commercial/data/
-  - type: AeroAPIPortal
-    url: https://www.flightaware.com/aeroapi/portal/
   - type: Documentation
     url: https://www.flightaware.com/aeroapi/portal/documentation
   - type: Pricing
@@ -326,10 +358,59 @@ common:
     url: https://github.com/flightaware
   - type: Integrations
     url: https://www.flightaware.com/apps
+  - type: DeveloperPortal
+    url: https://www.flightaware.com/aeroapi/portal/
+  - type: APIReference
+    url: https://www.flightaware.com/aeroapi/portal/documentation
+  - type: SignUp
+    url: https://www.flightaware.com/account/join/
+  - type: StatusPage
+    url: https://status.flightaware.com/
+  - type: Deprecation
+    url: https://www.flightaware.com/commercial/firehose/documentation/revisionhistory
+  - type: Lifecycle
+    url: lifecycle/flightaware-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/flightaware-changelog.yml
+  - type: Conventions
+    url: conventions/flightaware-conventions.yml
+  - type: ErrorCatalog
+    url: errors/flightaware-problem-types.yml
+  - type: Conformance
+    url: conformance/flightaware-conformance.yml
+  - type: DataModel
+    url: data-model/flightaware-data-model.yml
+  - type: Webhooks
+    url: asyncapi/flightaware-events.yml
+  - type: Packages
+    url: packages/flightaware-packages.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/flightaware-llms.txt
+  - type: X-MCPServerCandidate
+    url: mcp/flightaware-mcp.yml
+  - type: WSDL
+    name: FlightXML 2 (legacy SOAP)
+    url: wsdl/flightaware-flightxml2.wsdl
+  - type: WSDL
+    name: FlightXML 3 (legacy SOAP)
+    url: wsdl/flightaware-flightxml3.wsdl
+  - type: RateLimits
+    url: rate-limits/flightaware-rate-limits.yml
+  - type: Plans
+    url: plans/flightaware-plans-pricing.yml
+  - type: FinOps
+    url: finops/flightaware-finops.yml
 integrations:
   - name: FlightAware
   - name: Small FlightAware airplane
   - name: FlightAware FlightFeeders side-by-side.
+x-enrichment:
+  date: '2026-09-10'
+  status: enriched
+  artifacts_added: 27
+  pass: local-v3
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

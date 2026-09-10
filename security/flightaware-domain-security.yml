@@ -1,11 +1,11 @@
-generated: '2026-07-11'
+generated: '2026-09-10'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
 - host: www.flightaware.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Aug 14 00:51:13 2026 GMT
+  cert_expires: Oct 12 10:22:31 2026 GMT
   hsts: true
   hsts_max_age: 31536000
 - host: aeroapi.flightaware.com
@@ -17,12 +17,12 @@ domains:
 - domain: flightaware.com
   dnssec: true
   caa:
-  - 0 issue "pki.goog; cansignhttpexchanges=yes"
-  - 0 issue "sectigo.com"
-  - 0 issue "ssl.com"
-  - 0 issuewild "digicert.com; cansignhttpexchanges=yes"
-  - 0 issuewild "letsencrypt.org"
   - 0 issuewild "pki.goog; cansignhttpexchanges=yes"
-  spf: true
+  - 0 issuewild "digicert.com; cansignhttpexchanges=yes"
+  - 0 issue "ssl.com"
+  - 0 issue "amazonaws.com"
+  - 0 issue "digicert.com; cansignhttpexchanges=yes"
+  - 0 issue "letsencrypt.org"
+  spf: false
   dmarc: true
   dmarc_policy: quarantine

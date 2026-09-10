@@ -1,0 +1,171 @@
+generated: '2026-09-10'
+method: derived
+source: >-
+  openapi/ (AeroAPI 4.30.0), https://www.flightaware.com/commercial/aeroapi/ (pricing and rate
+  limits), https://www.flightaware.com/commercial/firehose/documentation/*, and one live probe of
+  https://aeroapi.flightaware.com/aeroapi/airports/KIAH on 2026-09-10
+description: >-
+  Cross-cutting request/response semantics for FlightAware's API surface. AeroAPI is a
+  read-dominant REST API — 63 of its 69 operations are GETs — with a very small mutating surface
+  confined to alert configuration. That shape is what drives almost every verdict below.
+authentication:
+  style: api-key
+  transport: request header
+  parameter: x-apikey
+  scopes: none
+  note: >-
+    One key, one account, no scopes and no OAuth. Entitlement is per-account (tier, historical
+    depth, Foresight access, Global membership), not per-token, so two keys on the same account are
+    interchangeable and a key cannot be issued with reduced privilege.
+  cross_reference: authentication/flightaware-authentication.yml
+idempotency:
+  supported: false
+  coverage: none
+  header: null
+  scope: []
+  retention: null
+  evidence: >-
+    No Idempotency-Key header, parameter or equivalent appears anywhere in AeroAPI 4.30.0, and the
+    developer portal documents none. The six mutating operations — create_alert, update_alert,
+    delete_alert, set_alerts_endpoint, delete_alerts_endpoint, post_flights_by_ident — carry no
+    replay protection.
+  practical_note: >-
+    Four of the six mutations are naturally idempotent by construction (PUT and DELETE on a known
+    id or on the singleton /alerts/endpoint), so a retried write is usually harmless. POST /alerts
+    is NOT: a retried create yields a second alert configuration and therefore duplicate alert
+    deliveries, which the contract's own alerts description warns about ("you can avoid duplicate
+    alerts being delivered ... by updating an alert rather than creating an additional one").
+pagination:
+  style: cursor
+  request_params:
+    - {name: cursor, in: query, description: Opaque continuation token taken from the previous response's links.next.}
+    - {name: max_pages, in: query, description: 'Maximum number of pages to fetch and concatenate in a single call; minimum 1.'}
+  response_fields:
+    - {name: links.next, type: uri-reference, description: A link to the next set of records in a collection. Absent on the last page.}
+    - {name: num_pages, type: integer, description: Number of pages returned in this response.}
+  note: >-
+    max_pages is a BILLING-RELEVANT parameter, not just a convenience: AeroAPI meters per result
+    set, so raising max_pages multiplies the cost of one call. Follow links.next deliberately.
+field_expansion:
+  supported: false
+  note: >-
+    No expand / fields / include parameter. Response shape is fixed per operation. Where richer
+    data exists it is a separate endpoint (the /foresight/* mirrors of flights operations add ML
+    predictions), and the plain endpoint carries a `foresight_predictions_available` flag so a
+    client can decide whether the extra, more expensive call is worth making.
+sparse_fields:
+  supported: false
+metadata:
+  supported: false
+  note: No customer-defined metadata on any object. Alerts are the only stored objects and carry no free-form field.
+request_tracing:
+  request_id_header: null
+  note: >-
+    No request-id or correlation-id response header was observed on the live probe. The 401
+    response carried only Date, Content-Type, Content-Length and Connection.
+versioning:
+  style: product-generation
+  current: AeroAPI 4.30.0
+  cross_reference: lifecycle/flightaware-lifecycle.yml
+error_envelope:
+  media_type: application/json; charset=UTF-8
+  shape: '{title, reason, detail, status}'
+  rfc9457: false
+  discriminator: reason
+  cross_reference: errors/flightaware-problem-types.yml
+rate_limit_signaling:
+  response_headers: none observed
+  status_on_exhaustion: undocumented
+  note: >-
+    FlightAware publishes rate limits as commercial tier attributes (result sets per minute or per
+    second) rather than as a runtime signal. No X-RateLimit-*, RateLimit-* or Retry-After header
+    was observed on the unauthenticated probe, no 429 response is declared on any operation in the
+    contract, and no throttling behaviour is documented. AN AGENT THEREFORE CANNOT SEE ITS OWN
+    HEADROOM AT RUNTIME — the only in-band signal is GET /account/usage (added in 4.30.0), which
+    is a polled endpoint, not a per-response header.
+  cross_reference: rate-limits/flightaware-rate-limits.yml
+dry_run_mode:
+  supported: false
+  grade: na
+  note: >-
+    No dry-run, preview or validate-only mode. Given the surface (six mutations, all alert
+    configuration) the omission has limited blast radius, but it is genuinely absent rather than
+    unnecessary — create_alert can be rejected for "alert configured would trigger more than" the
+    permitted volume, which is exactly the class of error a dry run would surface before committing.
+reversibility:
+  grade: documented
+  summary: >-
+    Every stored object AeroAPI creates can be deleted through the API, and the reversal operations
+    are first-class in the contract. NO WINDOW IS STATED anywhere — FlightAware does not publish a
+    retention, grace or undo period for alert configuration — so this grades as `documented`, not
+    `verified`. Do not assume a recovery window exists: a deleted alert appears to be gone
+    immediately and permanently.
+  write_surfaces:
+    - operation: create_alert
+      method: POST
+      path: /alerts
+      reversal: delete_alert
+      reversal_operation: 'DELETE /alerts/{id}'
+      window: null
+      window_source: null
+      note: >-
+        Fully reversible. Recover the id from get_all_alerts if it was not captured at create time.
+        Deleting an alert stops future deliveries; alerts already delivered to your endpoint are not
+        recalled.
+    - operation: update_alert
+      method: PUT
+      path: '/alerts/{id}'
+      reversal: none
+      reversal_operation: null
+      window: null
+      note: >-
+        NOT REVERSIBLE. PUT replaces the alert configuration and the prior configuration is not
+        retained or retrievable. An agent that intends to modify an alert must read it with
+        get_alert and keep the previous body itself if it wants to be able to roll back.
+    - operation: delete_alert
+      method: DELETE
+      path: '/alerts/{id}'
+      reversal: create_alert
+      reversal_operation: POST /alerts
+      window: null
+      note: >-
+        Recreatable but NOT restorable — a new POST /alerts yields a NEW id. Anything keyed on the
+        old alert id will not match. No undelete and no stated retention window.
+    - operation: set_alerts_endpoint
+      method: PUT
+      path: /alerts/endpoint
+      reversal: set_alerts_endpoint
+      reversal_operation: PUT /alerts/endpoint (with the previous URL)
+      window: null
+      note: >-
+        Reversible only if the caller kept the previous value; GET /alerts/endpoint before writing.
+        This is an ACCOUNT-WIDE setting — changing it redirects every alert that does not carry its
+        own target_url, so a careless write silently reroutes an entire account's deliveries.
+    - operation: delete_alerts_endpoint
+      method: DELETE
+      path: /alerts/endpoint
+      reversal: set_alerts_endpoint
+      reversal_operation: PUT /alerts/endpoint
+      window: null
+      note: >-
+        Reversible by setting the endpoint again. While no endpoint is set, alerts without their own
+        target_url have nowhere to go and create_alert returns 400.
+    - operation: post_flights_by_ident
+      method: POST
+      path: '/flights/{ident}/intents'
+      reversal: none
+      reversal_operation: null
+      window: null
+      note: >-
+        NOT REVERSIBLE and no delete exists. Submits a flight intent to FlightAware to improve
+        tracking accuracy. The contract is explicit that it "does not transmit to any ANSP/ATC
+        facility for flight separation or operational services", which bounds the consequence, but
+        there is no way to withdraw a submitted intent through the API. Requires special account
+        authorization plus a FlightAware Global subscription.
+  read_only_surface_note: >-
+    The other 63 operations are GETs with no side effects, for which reversibility is `na`.
+event_surface:
+  cross_reference: asyncapi/flightaware-events.yml
+  note: >-
+    Two distinct event surfaces with different conventions — AeroAPI push alerts (HTTP POST to a
+    URL you configure) and Firehose (a persistent TLS socket you connect to). See the events artifact.

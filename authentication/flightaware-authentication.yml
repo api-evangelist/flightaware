@@ -1,6 +1,9 @@
-generated: '2026-07-11'
+generated: '2026-09-10'
 method: derived
-source: openapi/flightaware-openapi.yml
+source: openapi/flightaware-account-api-openapi.yml, openapi/flightaware-airports-api-openapi.yml,
+  openapi/flightaware-alerts-api-openapi.yml, openapi/flightaware-flights-api-openapi.yml, openapi/flightaware-foresight-api-openapi.yml,
+  openapi/flightaware-history-api-openapi.yml, openapi/flightaware-miscellaneous-api-openapi.yml,
+  openapi/flightaware-operators-api-openapi.yml
 summary:
   types:
   - apiKey
@@ -16,4 +19,11 @@ schemes:
     an API key that must be set in the header ```x-apikey```. Your
     FlightAware username is not used when authenticating to the API.
   sources:
-  - openapi/flightaware-openapi.yml
+  - openapi/flightaware-account-api-openapi.yml
+  - openapi/flightaware-airports-api-openapi.yml
+  - openapi/flightaware-alerts-api-openapi.yml
+  - openapi/flightaware-flights-api-openapi.yml
+  - openapi/flightaware-foresight-api-openapi.yml
+  - openapi/flightaware-history-api-openapi.yml
+  - openapi/flightaware-miscellaneous-api-openapi.yml
+  - openapi/flightaware-operators-api-openapi.yml

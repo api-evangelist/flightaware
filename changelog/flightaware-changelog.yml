@@ -1,0 +1,113 @@
+generated: '2026-09-10'
+method: searched
+source: https://www.flightaware.com/commercial/firehose/documentation/revisionhistory
+description: >-
+  FlightAware publishes ONE dated public changelog: the Firehose revision history. It is genuinely
+  good — every entry names the version, the month, the exact field or message type added, and the
+  earliest replay date the change is available from. AeroAPI's developer portal carries a
+  /revisionhistory route but renders it client-side behind an unauthenticated JavaScript
+  application, so its entries are not machine-readable; the AeroAPI version is instead observable
+  from info.version in the published contract.
+changelogs:
+  - api: Firehose
+    url: https://www.flightaware.com/commercial/firehose/documentation/revisionhistory
+    scheme: integer major release
+    current_version: '37.0'
+    current_released: '2026-02'
+    machine_readable: false
+    format: dated HTML sections, one per major version
+    support_policy: >-
+      Verbatim: "The non-latest versions of major releases are supported for up to 1 year after the
+      date of release."
+  - api: AeroAPI
+    url: https://www.flightaware.com/aeroapi/portal/revisionhistory
+    scheme: semver in the OpenAPI info.version
+    current_version: 4.30.0
+    machine_readable: false
+    note: >-
+      Client-rendered portal route (single-page application); the page returns the same HTML shell
+      for every path, so the entries cannot be harvested. The contract itself is the reliable
+      version signal: https://static.flightaware.com/rsrc/aeroapi/aeroapi-openapi.yml.
+    observed_by_api_evangelist:
+      - {version: 4.30.0, observed: '2026-09-10', change: '69 operations. Adds the account tag and GET /account/usage, per-airport and per-operator cancellation endpoints, and six history endpoints for airport and operator boards.'}
+      - {version: 4.17.1, observed: '2026-07-22', change: '58 operations. The version this repository previously held.'}
+entries:
+  - version: '37.0'
+    date: '2026-02'
+    breaking: false
+    additions: [ground_position.atcident]
+    highlights: >-
+      Added 'atcident' field to ground_position messages, carrying the ATC identifier when it
+      differs from the flight identifier. Unified feed mode only. Available from 2026-02-14; not
+      included in replay requests for dates before then.
+  - version: '36.0'
+    date: '2025-09'
+    breaking: false
+    additions: [flifo.ansp_id]
+    highlights: >-
+      Added 'ansp_id' to flifo messages to make matching against external data sources easier
+      (may be equivalent to the GUFI). Optional; present only when the ANSP provides it. Replay
+      available back to 2016-04-07.
+  - version: '35.0'
+    date: '2025-08'
+    breaking: false
+    additions: [go_around]
+    highlights: New message type 'go_around' for go-around events. Not available in replay requests prior to 2024-09-24.
+  - version: '34.0'
+    date: '2025-06'
+    breaking: false
+    additions: [cancellation.uncancel]
+    highlights: >-
+      New optional field 'uncancel' on cancellation messages, set to 1 when a previously cancelled
+      flight is reinstated. Version 34+ only; not in replay before 2025-05-09.
+  - version: '33.0'
+    date: '2025-05'
+    breaking: false
+    additions: [flifo.mainline_ident, flifo.marketing_codeshares]
+    highlights: >-
+      Regional flights operating on behalf of a mainline operator now carry mainline_ident in all
+      flifo messages, plus marketing_codeshares for codeshare tracking. Not available before 2025-05-01.
+  - version: '32.0'
+    date: '2024-08'
+    breaking: false
+    additions: [hold_entry, hold_exit]
+    highlights: Hold detection introduced as two new message types. Requires flifo data; unavailable in earlier replays.
+  - version: '31.0'
+    date: '2024-06'
+    breaking: false
+    additions: [extended_predictions]
+    highlights: New extended_predictions message type for enhanced Foresight context, including taxi_out_duration_quantiles.
+  - version: '30.0'
+    date: '2024-04'
+    breaking: false
+    additions: [fuel_on_board, fuel_on_board_unit]
+    highlights: Fuel fields added to flifo and position messages, for authorized customers only.
+  - version: '29.0'
+    date: '2023-10'
+    breaking: false
+    additions: [ground_position_unmatched]
+    highlights: >-
+      New ground_position_unmatched message type for surface positions with an unknown hexid or
+      ident. Unavailable before 2023-09-06.
+  - version: '28.0'
+    date: '2023-08'
+    breaking: true
+    additions: []
+    highlights: >-
+      Unified connections now receive near_surface_position messages for positions within proximity
+      thresholds of airports. BEHAVIOURAL CHANGE: Firehose versions 24-27 emitted that same data as
+      a `position` message type, so a client pinned below 28 sees these events under a different
+      type.
+  - version: '27.0'
+    date: '2023-05'
+    breaking: false
+    additions: []
+    highlights: Arrival Runway Predictions — predicted runway identifiers and assignment probabilities for Foresight customers.
+  - version: '26.0'
+    date: '2022-05'
+    breaking: false
+    additions: []
+    highlights: Added support for 'polygon' and 'box' values in the layer field across vehicle and ground position schemas.
+window: >-
+  Most recent 12 major releases, 2022-05 through 2026-02, captured verbatim from the published
+  revision history on 2026-09-10. The live page remains the source of truth.
