@@ -320,8 +320,6 @@ apis:
   baseURL: https://aeroapi.flightaware.com/aeroapi
   tags:
   - Account
-  - Usage
-  - Metering
   tags_raw:
   - account
   properties:
