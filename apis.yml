@@ -46,6 +46,14 @@ tags:
   - Flight Tracking
   - Mapping
   - Radar
+  - Satellite
+  - Traffic Control
+tags_raw:
+  - Aviation
+  - Flights
+  - Flight Tracking
+  - Mapping
+  - Radar
   - Satellites
   - Traffic Control
 url: >-
@@ -61,6 +69,16 @@ apis:
   humanURL: https://www.flightaware.com/aeroapi/portal/
   baseURL: https://aeroapi.flightaware.com/aeroapi
   tags:
+  - Airports
+  - Alerts
+  - Aviation
+  - Flights
+  - Flight Tracking
+  - Foresight
+  - History
+  - Operator
+  - Predictive Analytics
+  tags_raw:
   - Airports
   - Alerts
   - Aviation
@@ -301,7 +319,7 @@ apis:
   humanURL: https://www.flightaware.com/aeroapi/portal/
   baseURL: https://aeroapi.flightaware.com/aeroapi
   tags:
-  - Operators
+  - Operator
   tags_raw:
   - operators
   properties:
