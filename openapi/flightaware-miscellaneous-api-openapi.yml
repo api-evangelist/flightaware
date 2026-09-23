@@ -1,8 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Flightaware Miscellaneous API
+  title: Aero Miscellaneous API
   version: 4.30.0
-  description: 'Operations tagged miscellaneous across 2 of this provider''s published API definitions: flightaware-openapi.yml, flightaware-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: '# Introduction
+
+    AeroAPI is a simple, query-based API that gives software developers access
+
+    to a variety of FlightAware''s flight data.'
 servers:
 - url: https://{env}.flightaware.com/aeroapi
   variables:
@@ -13,7 +17,7 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: miscellaneous
+- name: Miscellaneous
 paths:
   /aircraft/{ident}/blocked:
     parameters:
@@ -41,11 +45,9 @@ paths:
 
         AeroAPI. FlightAware can provide aircraft owner/operators with secure access to
 
-        their blocked flight data by [contacting FlightAware for help](https://www.flightaware.com/about/contact).
-
-        '
+        their blocked flight data by contacting FlightAware for help.'
       tags:
-      - miscellaneous
+      - Miscellaneous
       responses:
         '200':
           description: OK
@@ -90,13 +92,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /aircraft/{ident}/owner:
     parameters:
     - name: ident
@@ -125,11 +120,9 @@ paths:
 
         this information is updated weekly, there may be a lag in upstream data sources
 
-        reflecting a change in ownership.
-
-        '
+        reflecting a change in ownership.'
       tags:
-      - miscellaneous
+      - Miscellaneous
       responses:
         '200':
           description: OK
@@ -191,13 +184,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /aircraft/types/{type}:
     parameters:
     - in: path
@@ -216,11 +202,9 @@ paths:
 
         Data returned includes the description, type, manufacturer, engine type, and engine
 
-        count.
-
-        '
+        count.'
       tags:
-      - miscellaneous
+      - Miscellaneous
       responses:
         '200':
           description: OK
@@ -279,13 +263,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /schedules/{date_start}/{date_end}:
     parameters:
     - in: path
@@ -423,11 +400,9 @@ paths:
 
         schedules are available for up to three months in the past as well as
 
-        one year into the future.
-
-        '
+        one year into the future.'
       tags:
-      - miscellaneous
+      - Miscellaneous
       responses:
         '200':
           description: OK
@@ -623,13 +598,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /disruption_counts/{entity_type}:
     parameters:
     - in: path
@@ -770,11 +738,9 @@ paths:
 
         the user''s website timezone setting, coincides with the
 
-        delayed flight''s origin airport local timezone day of delay.
-
-        '
+        delayed flight''s origin airport local timezone day of delay.'
       tags:
-      - miscellaneous
+      - Miscellaneous
       responses:
         '200':
           description: OK
@@ -897,13 +863,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /disruption_counts/{entity_type}/{id}:
     parameters:
     - in: path
@@ -1045,11 +1004,9 @@ paths:
 
         the user''s website timezone setting, coincides with the
 
-        delayed flight''s origin airport local timezone day of delay.
-
-        '
+        delayed flight''s origin airport local timezone day of delay.'
       tags:
-      - miscellaneous
+      - Miscellaneous
       responses:
         '200':
           description: OK
@@ -1125,13 +1082,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -1145,6 +1095,3 @@ components:
         FlightAware username is not used when authenticating to the API.
 
         '
-x-refined-from:
-- flightaware-openapi.yml
-- flightaware-openapi.yml

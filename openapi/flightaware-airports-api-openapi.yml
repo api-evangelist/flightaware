@@ -1,8 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Flightaware Airports API
+  title: Aero Airports API
   version: 4.30.0
-  description: 'Operations tagged airports across 2 of this provider''s published API definitions: flightaware-openapi.yml, flightaware-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: '# Introduction
+
+    AeroAPI is a simple, query-based API that gives software developers access
+
+    to a variety of FlightAware''s flight data.'
 servers:
 - url: https://{env}.flightaware.com/aeroapi
   variables:
@@ -13,7 +17,7 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: airports
+- name: Airports
 paths:
   /airports:
     parameters:
@@ -38,11 +42,9 @@ paths:
 
         do not have an ICAO identifier, the FAA LID identifier will be used.
 
-        Links for further information about each airport are included.
-
-        '
+        Links for further information about each airport are included.'
       tags:
-      - airports
+      - Airports
       responses:
         '200':
           description: Returns a list of airports
@@ -101,24 +103,15 @@ paths:
                 - links
                 - num_pages
                 - airports
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/nearby:
     get:
       operationId: get_nearby_airports
       summary: Get airports near a location
       description: 'Returns a list of airports located within a given distance from the
 
-        given location.
-
-        '
+        given location.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: latitude
         in: query
@@ -366,13 +359,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/delays:
     parameters:
     - in: query
@@ -398,11 +384,9 @@ paths:
 
         an airport. Note that individual flights can be delayed without there
 
-        being an airport-wide delay returned by this endpoint.
-
-        '
+        being an airport-wide delay returned by this endpoint.'
       tags:
-      - airports
+      - Airports
       responses:
         '200':
           description: OK
@@ -523,13 +507,6 @@ paths:
                 - links
                 - num_pages
                 - delays
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}:
     get:
       operationId: get_airport
@@ -538,11 +515,9 @@ paths:
 
         such as KLAX, KIAH, O07, etc. Data returned includes airport name,
 
-        city, state (when known), latitude, longitude, and timezone.
-
-        '
+        city, state (when known), latitude, longitude, and timezone.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -801,13 +776,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/canonical:
     get:
       operationId: get_airports_canonical
@@ -818,11 +786,9 @@ paths:
 
         code will be returned. If no id_type is specified and there are two possible ICAO codes,
 
-        both will be returned.
-
-        '
+        both will be returned.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -914,24 +880,15 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/nearby:
     get:
       operationId: get_airports_near_airport
       summary: Get airports near an airport
       description: 'Returns a list of airports located within a given distance from the
 
-        specified airport.
-
-        '
+        specified airport.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -1177,13 +1134,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/delays:
     get:
       operationId: get_airport_delays
@@ -1194,11 +1144,9 @@ paths:
 
         reported at an airport. Note that individual flights may be delayed
 
-        without there being an airport delay returned by this endpoint.
-
-        '
+        without there being an airport delay returned by this endpoint.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -1336,13 +1284,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/flights:
     get:
       operationId: get_airport_flights
@@ -1355,11 +1296,9 @@ paths:
 
         `scheduled_arrivals`, `departures`, `arrivals`) match the behavior in
 
-        their corresponding endpoints.
-
-        '
+        their corresponding endpoints.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -3887,13 +3826,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/flights/arrivals:
     get:
       operationId: get_airport_flights_arrived
@@ -3904,11 +3836,9 @@ paths:
 
         before the current time. The end parameter''s default value is the
 
-        current time.
-
-        '
+        current time.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -4652,13 +4582,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/flights/arrivals/cancellations:
     get:
       operationId: get_airport_flights_arrivals_cancellations
@@ -4677,11 +4600,9 @@ paths:
 
         the current time. `start` cannot be more than 10 days in the past and
 
-        `end` cannot be more than 2 days in the future.
-
-        '
+        `end` cannot be more than 2 days in the future.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -5425,13 +5346,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/flights/departures:
     get:
       operationId: get_airport_flights_departed
@@ -5446,11 +5360,9 @@ paths:
 
         before the current time. The end parameter''s default value is the
 
-        current time.
-
-        '
+        current time.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -6194,13 +6106,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/flights/departures/cancellations:
     get:
       operationId: get_airport_flights_departures_cancellations
@@ -6219,11 +6124,9 @@ paths:
 
         the current time. `start` cannot be more than 10 days in the past and
 
-        `end` cannot be more than 2 days in the future.
-
-        '
+        `end` cannot be more than 2 days in the future.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -6967,13 +6870,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/flights/scheduled_departures:
     get:
       operationId: get_airport_flights_scheduled_departures
@@ -6990,11 +6886,9 @@ paths:
 
         the current time. The end parameter''s default value is 24 hours after
 
-        the current time.
-
-        '
+        the current time.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -7738,13 +7632,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/flights/scheduled_arrivals:
     get:
       operationId: get_airport_flights_scheduled_arrivals
@@ -7761,11 +7648,9 @@ paths:
 
         (this accounts for delayed flights). The end parameter''s default value
 
-        is 24 hours after the current time.
-
-        '
+        is 24 hours after the current time.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -8509,13 +8394,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/flights/to/{dest_id}:
     get:
       operationId: get_flights_between_airports
@@ -8532,11 +8410,9 @@ paths:
 
         provided start will default to 1 day in the future, while end will
 
-        default to 7 days in the past relative to the time the query is made.
-
-        '
+        default to 7 days in the past relative to the time the query is made.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -9315,13 +9191,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/flights/counts:
     get:
       operationId: get_airport_flights_count
@@ -9342,11 +9211,9 @@ paths:
 
         schema and documentation for the airport flights endpoints for more
 
-        information.
-
-        '
+        information.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -9435,13 +9302,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/weather/observations:
     get:
       operationId: get_airport_weather_observations
@@ -9452,11 +9312,9 @@ paths:
 
         requested. Data is provided in parsed, human-readable, and raw
 
-        formats.
-
-        '
+        formats.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -9734,24 +9592,15 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/weather/forecast:
     get:
       operationId: get_airport_weather_forecast
       summary: Get weather forecast for given airport
       description: 'Returns the weather forecast for an airport in the form of a decoded TAF
 
-        (Terminal Area Forecast). Only a single result is returned.
-
-        '
+        (Terminal Area Forecast). Only a single result is returned.'
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -10083,22 +9932,13 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /airports/{id}/routes/{dest_id}:
     get:
       operationId: get_routes_between_airports
       summary: Get routes between 2 airports
-      description: 'Returns information about assigned IFR routings between two airports.
-
-        '
+      description: Returns information about assigned IFR routings between two airports.
       tags:
-      - airports
+      - Airports
       parameters:
       - name: id
         in: path
@@ -10275,13 +10115,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -10295,6 +10128,3 @@ components:
         FlightAware username is not used when authenticating to the API.
 
         '
-x-refined-from:
-- flightaware-openapi.yml
-- flightaware-openapi.yml

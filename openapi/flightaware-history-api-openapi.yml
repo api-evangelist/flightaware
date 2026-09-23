@@ -1,8 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Flightaware History API
+  title: Aero History API
   version: 4.30.0
-  description: 'Operations tagged history across 2 of this provider''s published API definitions: flightaware-openapi.yml, flightaware-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: '# Introduction
+
+    AeroAPI is a simple, query-based API that gives software developers access
+
+    to a variety of FlightAware''s flight data.'
 servers:
 - url: https://{env}.flightaware.com/aeroapi
   variables:
@@ -13,7 +17,7 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: history
+- name: History
 paths:
   /history/flights/{ident}:
     get:
@@ -36,11 +40,9 @@ paths:
         at once. Data is available from now back to 2011-01-01 00:00:00 UTC.
 
 
-        The field `inbound_fa_flight_id` will not be populated by this resource.
-
-        '
+        The field `inbound_fa_flight_id` will not be populated by this resource.'
       tags:
-      - history
+      - History
       parameters:
       - name: ident
         in: path
@@ -808,13 +810,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /history/flights/{id}/track:
     get:
       operationId: get_history_flight_track
@@ -827,11 +822,9 @@ paths:
 
         requested using the query-string parameters.
 
-        Data is available from now back to 2011-01-01T00:00:00Z.
-
-        '
+        Data is available from now back to 2011-01-01T00:00:00Z.'
       tags:
-      - history
+      - History
       parameters:
       - name: id
         in: path
@@ -1003,13 +996,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /history/flights/{id}/map:
     get:
       operationId: get_history_flight_map
@@ -1018,11 +1004,9 @@ paths:
 
         variety of additional data layers beyond just the track. Data is available from now back to
 
-        2011-01-01T00:00:00Z.
-
-        '
+        2011-01-01T00:00:00Z.'
       tags:
-      - history
+      - History
       parameters:
       - name: id
         in: path
@@ -1195,20 +1179,13 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /history/flights/{id}/route:
     get:
       operationId: get_history_flight_route
       summary: Get historical flight's filed route
       description: 'Returns information about a historical flight''s filed route including
 
-        coordinates, names, and types of fixes along the route.  Not all flight
+        coordinates, names, and types of fixes along the route. Not all flight
 
         routes can be successfully decoded by this endpoint, particularly if the
 
@@ -1218,11 +1195,9 @@ paths:
 
         missing then the type will be listed as "UNKNOWN". Data is available from now back to
 
-        2011-01-01T00:00:00Z.
-
-        '
+        2011-01-01T00:00:00Z.'
       tags:
-      - history
+      - History
       parameters:
       - name: id
         in: path
@@ -1343,13 +1318,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /history/airports/{id}/flights/arrivals:
     get:
       operationId: get_history_airports_flights_arrived
@@ -1364,11 +1332,9 @@ paths:
 
         available between 2011-01-01 00:00:00 UTC and up to now. The field `inbound_fa_flight_id` will not be
 
-        populated by this resource.
-
-        '
+        populated by this resource.'
       tags:
-      - history
+      - History
       parameters:
       - name: id
         in: path
@@ -2120,13 +2086,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /history/airports/{id}/flights/arrivals/cancellations:
     get:
       operationId: get_history_airports_flights_arrivals_cancellations
@@ -2145,11 +2104,9 @@ paths:
 
         and up to now. The field `inbound_fa_flight_id` will not be populated
 
-        by this resource.
-
-        '
+        by this resource.'
       tags:
-      - history
+      - History
       parameters:
       - name: id
         in: path
@@ -2901,13 +2858,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /history/airports/{id}/flights/departures:
     get:
       operationId: get_history_airports_flights_departed
@@ -2922,11 +2872,9 @@ paths:
 
         available between 2011-01-01 00:00:00 UTC and up to now. The field `inbound_fa_flight_id` will not be
 
-        populated by this resource.
-
-        '
+        populated by this resource.'
       tags:
-      - history
+      - History
       parameters:
       - name: id
         in: path
@@ -3678,13 +3626,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /history/airports/{id}/flights/departures/cancellations:
     get:
       operationId: get_history_airports_flights_departures_cancellations
@@ -3703,11 +3644,9 @@ paths:
 
         and up to now. The field `inbound_fa_flight_id` will not be populated
 
-        by this resource.
-
-        '
+        by this resource.'
       tags:
-      - history
+      - History
       parameters:
       - name: id
         in: path
@@ -4459,13 +4398,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /history/airports/{id}/flights/to/{dest_id}:
     get:
       operationId: get_history_flights_between_airports
@@ -4482,11 +4414,9 @@ paths:
 
         available between 2011-01-01 00:00:00 UTC and up to now. Results only include non-stop flights. The field
 
-        `inbound_fa_flight_id` will not be populated by this resource.
-
-        '
+        `inbound_fa_flight_id` will not be populated by this resource.'
       tags:
-      - history
+      - History
       parameters:
       - name: id
         in: path
@@ -5251,13 +5181,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /history/aircraft/{registration}/last_flight:
     get:
       operationId: get_history_aircraft_last_flight
@@ -5272,11 +5195,9 @@ paths:
 
         it''s last known flight before January 1, 2011, an empty flights array will
 
-        be returned.
-
-        '
+        be returned.'
       tags:
-      - history
+      - History
       parameters:
       - name: registration
         in: path
@@ -5921,13 +5842,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /history/operators/{id}/flights:
     get:
       operationId: get_history_operators_flights
@@ -5944,11 +5858,9 @@ paths:
 
         available between 2011-01-01 00:00:00 UTC and up to now. Results only include non-stop flights. The field
 
-        `inbound_fa_flight_id` will not be populated by this resource.
-
-        '
+        `inbound_fa_flight_id` will not be populated by this resource.'
       tags:
-      - history
+      - History
       parameters:
       - name: id
         in: path
@@ -6686,13 +6598,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /history/operators/{id}/flights/cancellations:
     get:
       operationId: get_history_operators_flights_cancellations
@@ -6709,11 +6614,9 @@ paths:
 
         available between 2011-01-01 00:00:00 UTC and up to now. The field
 
-        `inbound_fa_flight_id` will not be populated by this resource.
-
-        '
+        `inbound_fa_flight_id` will not be populated by this resource.'
       tags:
-      - history
+      - History
       parameters:
       - name: id
         in: path
@@ -7480,13 +7383,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -7500,6 +7396,3 @@ components:
         FlightAware username is not used when authenticating to the API.
 
         '
-x-refined-from:
-- flightaware-openapi.yml
-- flightaware-openapi.yml

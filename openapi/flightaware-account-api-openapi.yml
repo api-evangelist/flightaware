@@ -1,8 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Flightaware Account API
+  title: Aero Account API
   version: 4.30.0
-  description: 'Operations tagged account across 2 of this provider''s published API definitions: flightaware-openapi.yml, flightaware-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: '# Introduction
+
+    AeroAPI is a simple, query-based API that gives software developers access
+
+    to a variety of FlightAware''s flight data.'
 servers:
 - url: https://{env}.flightaware.com/aeroapi
   variables:
@@ -13,7 +17,7 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: account
+- name: Account
 paths:
   /account/usage:
     get:
@@ -21,11 +25,9 @@ paths:
       summary: Get AeroAPI usage statistics for account
       description: 'Returns usage statistics for your AeroAPI account. Can be filtered
 
-        by key and date range. Data per account is updated every 10 minutes.
-
-        '
+        by key and date range. Data per account is updated every 10 minutes.'
       tags:
-      - account
+      - Account
       parameters:
       - in: query
         name: start
@@ -215,13 +217,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -235,6 +230,3 @@ components:
         FlightAware username is not used when authenticating to the API.
 
         '
-x-refined-from:
-- flightaware-openapi.yml
-- flightaware-openapi.yml

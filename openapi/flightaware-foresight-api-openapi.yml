@@ -1,8 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Flightaware Foresight API
+  title: Aero Foresight API
   version: 4.30.0
-  description: 'Operations tagged foresight across 2 of this provider''s published API definitions: flightaware-openapi.yml, flightaware-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: '# Introduction
+
+    AeroAPI is a simple, query-based API that gives software developers access
+
+    to a variety of FlightAware''s flight data.'
 servers:
 - url: https://{env}.flightaware.com/aeroapi
   variables:
@@ -16,32 +20,7 @@ tags:
 - name: foresight
   description: 'Foresight endpoints provide access to FlightAware''s Foresight predictive models and
 
-    predictions for key events. Our advanced machine learning (ML) models identify key
-
-    influencing factors for a flight to forecast future events in real-time, providing
-
-    unprecedented insight to improve operational efficiencies and facilitate better
-
-    decision-making in the air and on the ground. To learn more about the power of Foresight,
-
-    visit https://www.flightaware.com/commercial/foresight/
-
-
-    These endpoints each mirror a non-Foresight equivalent endpoint of similar functionality,
-
-    with the addition of all the ML ''predicted'' values included in the Foresight response. The
-
-    respective non-Foresight endpoint response includes a flag, ''foresight_predictions_available'',
-
-    which can optionally be used as a trigger to obtain and leverage Foresight predictions on an
-
-    as-needed basis and manage cost. Foresight is only available to Premium tier customers.
-
-    Contact integrationsales@flightaware.com for more information, pricing details, and to have
-
-    your account enabled for Foresight.
-
-    '
+    predictions for key events.'
 paths:
   /foresight/flights/{ident}:
     get:
@@ -49,15 +28,13 @@ paths:
       summary: Get information for a flight, including Foresight data
       description: 'Returns the flight info status summary for a registration, ident, or
 
-        fa_flight_id, including all available predicted fields.  If a
+        fa_flight_id, including all available predicted fields. If a
 
         fa_flight_id is specified then a maximum of 1 flight is returned,
 
         unless the flight has been diverted in which case both the original
 
-        flight and any diversions will be returned with a duplicate fa_flight_id.
-
-        '
+        flight and any diversions will be returned with a duplicate fa_flight_id.'
       tags:
       - foresight
       parameters:
@@ -936,13 +913,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /foresight/flights/search/advanced:
     get:
       operationId: get_flights_by_advanced_search_with_foresight
@@ -951,9 +921,7 @@ paths:
 
         search parameters. If available, flights'' predicted OOOI fields will be
 
-        set.
-
-        '
+        set.'
       tags:
       - foresight
       parameters:
@@ -1637,13 +1605,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /foresight/flights/{id}/position:
     get:
       operationId: get_flight_position_with_foresight
@@ -2168,13 +2129,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -2188,6 +2142,3 @@ components:
         FlightAware username is not used when authenticating to the API.
 
         '
-x-refined-from:
-- flightaware-openapi.yml
-- flightaware-openapi.yml

@@ -1,8 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Flightaware Operators API
+  title: Aero Operators API
   version: 4.30.0
-  description: 'Operations tagged operators across 2 of this provider''s published API definitions: flightaware-openapi.yml, flightaware-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: '# Introduction
+
+    AeroAPI is a simple, query-based API that gives software developers access
+
+    to a variety of FlightAware''s flight data.'
 servers:
 - url: https://{env}.flightaware.com/aeroapi
   variables:
@@ -13,7 +17,7 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: operators
+- name: Operators
 paths:
   /operators:
     parameters:
@@ -33,14 +37,12 @@ paths:
         type: string
     get:
       operationId: get_all_operators
-      summary: Get all operators.
+      summary: Get all operators
       description: 'Returns list of operator references (ICAO/IATA codes and URLs to access
 
-        more information).
-
-        '
+        more information).'
       tags:
-      - operators
+      - Operators
       responses:
         '200':
           description: List of operators.
@@ -88,13 +90,6 @@ paths:
                 - links
                 - num_pages
                 - operators
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /operators/{id}:
     parameters:
     - name: id
@@ -112,14 +107,12 @@ paths:
         example: UAL
     get:
       operationId: get_operator
-      summary: Get static information for an operator.
+      summary: Get static information for an operator
       description: 'Returns information for an operator such as their name, ICAO/IATA
 
-        codes, headquarter location, etc.
-
-        '
+        codes, headquarter location, etc.'
       tags:
-      - operators
+      - Operators
       responses:
         '200':
           description: OK
@@ -339,13 +332,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /operators/{id}/canonical:
     parameters:
     - name: id
@@ -371,18 +357,16 @@ paths:
         example: US
     get:
       operationId: get_operators_canonical
-      summary: Get the canonical code of an operator for API usage.
+      summary: Get the canonical code of an operator for API usage
       description: 'Returns all possible matches for a given operator code (ICAO or IATA).
 
         An optional country code can be provided to refine ambiguous IATA codes
 
         to a single result. The country code should represent a country the
 
-        operator operates within.
-
-        '
+        operator operates within.'
       tags:
-      - operators
+      - Operators
       responses:
         '200':
           description: OK
@@ -473,13 +457,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /operators/{id}/flights:
     parameters:
     - name: id
@@ -560,11 +537,9 @@ paths:
 
         optional start and end dates for each type returned (`scheduled`, `arrivals`,
 
-        `enroute`) match the behaviour in their corresponding endpoints.
-
-        '
+        `enroute`) match the behaviour in their corresponding endpoints.'
       tags:
-      - operators
+      - Operators
       responses:
         '200':
           description: Operator's flights.
@@ -2438,13 +2413,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /operators/{id}/flights/scheduled:
     parameters:
     - name: id
@@ -2539,11 +2507,9 @@ paths:
 
         will typically be around 48 hours in the future for commercial flights,
 
-        though).
-
-        '
+        though).'
       tags:
-      - operators
+      - Operators
       responses:
         '200':
           description: OK
@@ -3227,13 +3193,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /operators/{id}/flights/arrivals:
     parameters:
     - name: id
@@ -3318,11 +3277,9 @@ paths:
 
         returned. The start parameter''s default value is 24 hours before the
 
-        current time. The end parameter''s default value is the current time.
-
-        '
+        current time. The end parameter''s default value is the current time.'
       tags:
-      - operators
+      - Operators
       responses:
         '200':
           description: Arrived flights.
@@ -4006,13 +3963,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /operators/{id}/flights/enroute:
     parameters:
     - name: id
@@ -4099,11 +4049,9 @@ paths:
 
         before the current time (this accounts for delayed flights). There is
 
-        no default end bound.
-
-        '
+        no default end bound.'
       tags:
-      - operators
+      - Operators
       responses:
         '200':
           description: En route flights.
@@ -4787,13 +4735,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /operators/{id}/flights/cancellations:
     parameters:
     - name: id
@@ -4884,11 +4825,9 @@ paths:
 
         be more than 10 days in the past and `end` cannot be more than 2 days
 
-        in the future.
-
-        '
+        in the future.'
       tags:
-      - operators
+      - Operators
       responses:
         '200':
           description: Cancelled flights.
@@ -5574,13 +5513,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
   /operators/{id}/flights/counts:
     parameters:
     - name: id
@@ -5601,11 +5533,9 @@ paths:
       summary: Get flight counts for operator
       description: 'Returns counts of both airborne and recently operated flights for
 
-        operator.
-
-        '
+        operator.'
       tags:
-      - operators
+      - Operators
       responses:
         '200':
           description: OK
@@ -5688,13 +5618,6 @@ paths:
                 - reason
                 - detail
                 - status
-    servers:
-    - url: https://{env}.flightaware.com/aeroapi
-      variables:
-        env:
-          default: aeroapi
-          enum:
-          - aeroapi
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -5708,6 +5631,3 @@ components:
         FlightAware username is not used when authenticating to the API.
 
         '
-x-refined-from:
-- flightaware-openapi.yml
-- flightaware-openapi.yml
