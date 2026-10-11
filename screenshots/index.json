@@ -1,0 +1,11 @@
+[
+  {
+    "repo": "flightaware",
+    "captured_at": "2026-10-11T185622",
+    "source_url": "https://www.flightaware.com/aeroapi/portal/",
+    "source_type": "DeveloperPortal",
+    "file": "flightaware-2026-10-11T185622.png",
+    "bytes": 153937,
+    "capture": "playwright-local"
+  }
+]
