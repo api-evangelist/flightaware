@@ -1,4 +1,4 @@
-# FlightAware (flightaware)
+# FlightAware
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,95 +66,164 @@
 
 FlightAware is a global flight tracking and data platform that provides real-time flight tracking, mapping, and predictive technology to both individual users and commercial aviation companies. The platform collects data from a variety of sources including air traffic control systems, radar, ADS-B, and satellite data, and exposes that data to developers and commercial customers through its AeroAPI query-based REST API and its Firehose streaming feed.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/flightaware/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/flightaware/refs/heads/main/apis.yml)
+**Areas:** Aviation · Flights · Flight Tracking · Mapping · Radar · Satellite · Traffic Control
 
-## Scope
+## FlightAware on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for FlightAware is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/flightaware/](https://apis.io/providers/flightaware/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (10)
 
-- Aviation
-- Flights
-- Flight Tracking
-- Mapping
-- Radar
-- Satellites
-- Traffic Control
+- [FlightAware AeroAPI](https://apis.io/apis/flightaware/aeroapi/) — AeroAPI is FlightAware's query-based REST API for accessing aviation data on demand. It exposes 60+ endpoints across flights, airports, operators, alerts,…
+- [FlightAware Firehose](https://apis.io/apis/flightaware/firehose/) — Firehose is FlightAware's real-time streaming feed of global flight data, delivering ADS-B, radar, and ATC-derived position, status, and event messages over…
+- [FlightAware Airports API](https://apis.io/apis/flightaware/flightaware-airports-api/) — The airports API from FlightAware — 17 operation(s) for airports.
+- [FlightAware Alerts API](https://apis.io/apis/flightaware/flightaware-alerts-api/) — AeroAPI alerting can be used to configure and receive real-time alerts on key flight events. With customizable alerting offered by our alert endpoints,…
+- [FlightAware Flights API](https://apis.io/apis/flightaware/flightaware-flights-api/) — The flights API from FlightAware — 11 operation(s) for flights.
+- [FlightAware Foresight API](https://apis.io/apis/flightaware/flightaware-foresight-api/) — Foresight endpoints provide access to FlightAware's Foresight predictive models and predictions for key events. Our advanced machine learning (ML) models…
+- [FlightAware History API](https://apis.io/apis/flightaware/flightaware-history-api/) — The history API from FlightAware — 5 operation(s) for history.
+- [FlightAware Miscellaneous API](https://apis.io/apis/flightaware/flightaware-miscellaneous-api/) — The miscellaneous API from FlightAware — 6 operation(s) for miscellaneous.
+- [FlightAware Operators API](https://apis.io/apis/flightaware/flightaware-operators-api/) — The operators API from FlightAware — 8 operation(s) for operators.
+- [FlightAware Account API](https://apis.io/apis/flightaware/flightaware-account-api/) — The account surface of AeroAPI — GET /account/usage, added in AeroAPI 4.30.0. It reports the calling account's AeroAPI consumption over a requested period,…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-02-24
-- **Modified:** 2026-04-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### FlightAware AeroAPI
+Event-driven and webhook contracts.
 
-AeroAPI is FlightAware's query-based REST API for accessing aviation data on demand. It exposes 60+ endpoints across flights, airports, operators, alerts, history, and Foresight predictive analytics, and supports both real-time and historical flight tracking, status, positions, routes, and notifications.
+- [Flightaware Events](https://apis.io/asyncapis/flightaware/flightaware-events/)
 
-- **Human URL:** [https://www.flightaware.com/aeroapi/portal/](https://www.flightaware.com/aeroapi/portal/)
-- **Base URL:** `https://aeroapi.flightaware.com/aeroapi`
+#### MCP servers (1)
 
-#### Tags
+Model Context Protocol servers that expose the API to agents.
 
-- Airports
-- Alerts
-- Aviation
-- Flights
-- Flight Tracking
-- Foresight
-- History
-- Operators
-- Predictive Analytics
+- [flightaware-aeroapi](https://apis.io/servers/flightaware/flightaware-aeroapi/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://www.flightaware.com/aeroapi/portal/documentation)
-- [Portal](https://www.flightaware.com/aeroapi/portal/)
-- [Pricing](https://www.flightaware.com/commercial/aeroapi/)
-- [Postman Collection](collections/flightaware.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/flightaware.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### FlightAware Firehose
+- [Flightaware Agentic Access](https://apis.io/agentic-access/flightaware/flightaware-agentic-access/)
 
-Firehose is FlightAware's real-time streaming feed of global flight data, delivering ADS-B, radar, and ATC-derived position, status, and event messages over a persistent TLS connection for enterprise-grade flight tracking, situational awareness, and operations analytics.
+#### Collections (8)
 
-- **Human URL:** [https://www.flightaware.com/commercial/firehose/](https://www.flightaware.com/commercial/firehose/)
+Postman and Open Collection request collections.
 
-#### Tags
+- [AeroAPI](https://apis.io/collections/flightaware/open-flightaware/)
+- [Aero airports API](https://apis.io/collections/flightaware/open-flightaware-airports-api/)
+- [Aero airports alerts API](https://apis.io/collections/flightaware/open-flightaware-alerts-api/)
+- [Aero airports flights API](https://apis.io/collections/flightaware/open-flightaware-flights-api/)
+- [Aero airports foresight API](https://apis.io/collections/flightaware/open-flightaware-foresight-api/)
+- [Aero airports history API](https://apis.io/collections/flightaware/open-flightaware-history-api/)
+- [Aero airports miscellaneous API](https://apis.io/collections/flightaware/open-flightaware-miscellaneous-api/)
+- [Aero airports operators API](https://apis.io/collections/flightaware/open-flightaware-operators-api/)
 
-- ADS-B
-- Aviation
-- Flight Tracking
-- Real-Time
-- Streaming
+#### Overlays (8)
 
-#### Properties
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- [Documentation](https://www.flightaware.com/commercial/firehose/documentation)
-- [Product Page](https://www.flightaware.com/commercial/firehose/)
-- [Postman Collection](collections/flightaware.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/flightaware.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Flightaware Account Api Overlay](https://apis.io/overlays/flightaware/flightaware-account-api-overlay/)
+- [Flightaware Airports Api Overlay](https://apis.io/overlays/flightaware/flightaware-airports-api-overlay/)
+- [Flightaware Alerts Api Overlay](https://apis.io/overlays/flightaware/flightaware-alerts-api-overlay/)
+- [Flightaware Flights Api Overlay](https://apis.io/overlays/flightaware/flightaware-flights-api-overlay/)
+- [Flightaware Foresight Api Overlay](https://apis.io/overlays/flightaware/flightaware-foresight-api-overlay/)
+- [Flightaware History Api Overlay](https://apis.io/overlays/flightaware/flightaware-history-api-overlay/)
+- [Flightaware Miscellaneous Api Overlay](https://apis.io/overlays/flightaware/flightaware-miscellaneous-api-overlay/)
+- [Flightaware Operators Api Overlay](https://apis.io/overlays/flightaware/flightaware-operators-api-overlay/)
 
-## Common Properties
+#### Security (2)
 
-- [LinkedIn](https://www.linkedin.com/company/flightaware)
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Flightaware Authentication](https://apis.io/security/flightaware/flightaware-authentication/)
+- [Flightaware Domain Security](https://apis.io/security/flightaware/flightaware-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Flightaware Plans Pricing](https://apis.io/plans/flightaware/flightaware-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Flightaware Rate Limits](https://apis.io/rate-limits/flightaware/flightaware-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Flightaware Finops](https://apis.io/finops/flightaware/flightaware-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.flightaware.com/)
-- [Commercial Data](https://www.flightaware.com/commercial/data/)
-- [Aero A P I Portal](https://www.flightaware.com/aeroapi/portal/)
 - [Documentation](https://www.flightaware.com/aeroapi/portal/documentation)
+- [API reference](https://www.flightaware.com/aeroapi/portal/documentation)
 - [Pricing](https://www.flightaware.com/commercial/aeroapi/)
-- [Blog](https://blog.flightaware.com/)
+- [Sign up](https://www.flightaware.com/account/join/)
 - [Support](https://www.flightaware.com/about/contact/)
-- [Privacy Policy](https://www.flightaware.com/about/privacy)
-- [Terms of Service](https://www.flightaware.com/about/termsofuse)
-- [Git Hub](https://github.com/flightaware)
-- [Integrations](https://www.flightaware.com/apps)
+- [Blog](https://blog.flightaware.com/)
+- [Terms of service](https://www.flightaware.com/about/termsofuse)
+- [Privacy policy](https://www.flightaware.com/about/privacy)
+- [Status](https://status.flightaware.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 56.7** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 60.5 |
+| Contract governance | 4.5 |
+| Operational transparency | 76.3 |
+| Developer ergonomics | 47.0 |
+| Access clarity | 76.3 |
+
+**Agent readiness 36.4** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | verified |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/flightaware/](https://apis.io/providers/flightaware/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for FlightAware: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/flightaware/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
