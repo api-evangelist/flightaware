@@ -1,0 +1,116 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://www.flightaware.com/commercial/aeroapi/
+sources:
+- https://www.flightaware.com/commercial/aeroapi/
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T141238
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: per-call
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-28'
+  managed_tier: Standard
+published: true
+note: Usage-based per-result-set API pricing with three tiers and monthly minimums; volume discount table
+  from 30% ($1,000-$2,000) up to 94% (above $64,000).
+plan_count: 5
+currency: USD
+plans:
+- name: Personal
+  price_text: No minimum
+  currency: USD
+  period: month
+  unit: per result set
+  included_quota: Per-query usage fees (up to $5 free per month, or $10 free per month for ADS-B feeders
+    )
+  overage: Per-query usage fees
+- name: Standard
+  price_text: $100/month
+  price: 100
+  currency: USD
+  period: month
+  unit: monthly minimum fee
+  included_quota: Per-query usage fees (subject to monthly minimum); Historical data access; Flight Alerting;
+    Email support
+  overage: Per-query usage fees with volume discounting
+- name: Premium
+  price_text: $1,000/month
+  price: 1000
+  currency: USD
+  period: month
+  unit: monthly minimum fee
+  included_quota: Per-query usage fees (subject to monthly minimum); Foresight; Aireon Space-Based ADS-B;
+    99.5% up-time guarantee
+  overage: Per-query usage fees with volume discounting
+- name: 'Per-query example: GET /flights/{ident}'
+  price_text: $0.005/result set
+  price: 0.005
+  currency: USD
+  period: per-use
+  unit: result set (15 records)
+- name: 'Per-query example: GET /history/aircraft/{registration}/last_flight'
+  price_text: $0.200/result set
+  price: 0.2
+  currency: USD
+  period: per-use
+  unit: result set
+rate_limit_statements:
+- 'Personal includes: 10 result sets/minute'
+- 'Standard includes: 5 result sets/second'
+- 'Premium includes: 100 result sets/second'
+- 'Standard includes: 500,000 result sets/month'
+- 'Premium includes: 500,000 result sets/month'
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - metered
+  - subscription
+  units: []
+  plans:
+  - name: Personal
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Standard
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Premium
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: 'Per-query example: GET /flights/{ident}'
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: 'Per-query example: GET /history/aircraft/{registration}/last_flight'
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
