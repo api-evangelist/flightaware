@@ -66,13 +66,14 @@ rate_limit_statements:
 - 'Standard includes: 500,000 result sets/month'
 - 'Premium includes: 500,000 result sets/month'
 x-canonical:
-  generated: '2026-11-02'
+  generated: '2026-11-06'
   vocabulary: engine/economics/plans-canonical.yml
   models:
   - hybrid
   - metered
   - subscription
-  units: []
+  units:
+  - period
   plans:
   - name: Personal
     access: other
@@ -87,7 +88,7 @@ x-canonical:
     model: hybrid
     model_how: derived
     units:
-    - other
+    - period
     periods:
     - month
   - name: Premium
@@ -95,7 +96,7 @@ x-canonical:
     model: hybrid
     model_how: derived
     units:
-    - other
+    - period
     periods:
     - month
   - name: 'Per-query example: GET /flights/{ident}'
