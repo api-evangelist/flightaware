@@ -5,6 +5,9 @@ artifacts:
   agentic-access/flightaware-agentic-access.yml:
     method: generated
     evidence: declared in the artifact
+  ai-preferences/flightaware-ai-preferences.yml:
+    method: harvested
+    evidence: declared in the artifact
   asyncapi/flightaware-events.yml:
     method: searched
     evidence: declared in the artifact
@@ -12,6 +15,12 @@ artifacts:
     method: derived
     evidence: declared in the artifact
   capabilities/flightaware-capability-edges.yml:
+    method: unknown
+    evidence: no authorship recorded
+  certification/observations-2026-11-11.jsonl:
+    method: unknown
+    evidence: no authorship recorded
+  certification/status.yml:
     method: unknown
     evidence: no authorship recorded
   changelog/flightaware-changelog.yml:
@@ -71,8 +80,17 @@ artifacts:
   conventions/flightaware-conventions.yml:
     method: derived
     evidence: declared in the artifact
+  data-license/flightaware-data-license.yml:
+    method: harvested
+    evidence: declared in the artifact
   data-model/flightaware-data-model.yml:
     method: derived
+    evidence: declared in the artifact
+  deprecation/flightaware-deprecation-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
+  eligibility/flightaware-eligibility.yml:
+    method: harvested
     evidence: declared in the artifact
   errors/flightaware-problem-types.yml:
     method: derived
@@ -89,10 +107,13 @@ artifacts:
   heartbeat/2026-11-06.yml:
     method: unknown
     evidence: no authorship recorded
+  heartbeat/2026-11-13.yml:
+    method: unknown
+    evidence: no authorship recorded
   kin/checks-2026-10-23T222754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  kin/checks-2026-11-02T082323.yml:
+  kin/checks-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-23T000603.yml:
@@ -156,6 +177,9 @@ artifacts:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-11-02T082323.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   lifecycle/flightaware-lifecycle.yml:
@@ -231,6 +255,9 @@ artifacts:
   plans/flightaware-price-estimates.yml:
     method: unknown
     evidence: no authorship recorded
+  privacy/flightaware-privacy-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
   rate-limits/flightaware-rate-limits.yml:
     method: searched
     evidence: declared in the artifact
@@ -257,6 +284,9 @@ artifacts:
     evidence: declared in the artifact
   sla/flightaware-sla.yml:
     method: generated
+    evidence: declared in the artifact
+  terms/flightaware-terms-of-service.yml:
+    method: harvested
     evidence: declared in the artifact
   well-known/flightaware-well-known.yml:
     method: unknown
